@@ -10,6 +10,12 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
+
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="0b44a7d1c0f6f9dffab345b815de9769879472dc" />
+
     </application>
 
 </manifest>
