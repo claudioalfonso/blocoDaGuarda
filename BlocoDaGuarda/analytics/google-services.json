@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:178139630359:android:9d74d27e9a84cb2a",
+        "mobilesdk_app_id": "1:178139630359:android:e76aba8870dde93c",
         "android_client_info": {
-          "package_name": "com.generonumero.blocodaguarda"
+          "package_name": "com.generonumero.blocodaguarda.analytics"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "178139630359-uvd44m3063v2s71a16vvi62dqf9cgmpu.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.generonumero.blocodaguarda",
-            "certificate_hash": "CAC7819262DF2A0BDCE4E5DE8DACF71962775184"
-          }
-        },
         {
           "client_id": "178139630359-7lf9uql2jfqsuhjjr5ct8ekif7osckrf.apps.googleusercontent.com",
           "client_type": 3
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "178139630359-7lf9uql2jfqsuhjjr5ct8ekif7osckrf.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
