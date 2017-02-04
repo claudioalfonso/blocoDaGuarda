@@ -34,6 +34,8 @@ dependencies {
 
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
 
+    compile "com.facebook.android:facebook-android-sdk:$rootProject.ext.facebookVersion"
+
     compile project(':analytics')
     testCompile 'junit:junit:4.12'
 }

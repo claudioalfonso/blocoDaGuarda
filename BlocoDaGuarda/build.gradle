@@ -41,5 +41,6 @@ ext {
 
     supportLibrary = '25.1.0'
     butterknifeVersion = '7.0.1'
+    facebookVersion = '4.5.0'
 
 }
