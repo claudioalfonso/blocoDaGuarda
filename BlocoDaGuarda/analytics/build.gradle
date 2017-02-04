@@ -27,9 +27,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.google.firebase:firebase-core:10.0.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibrary"
+    compile "com.google.firebase:firebase-core:$rootProject.ext.firebaseVersion"
+    compile("com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlytcsVersion") {
         transitive = true;
     }
 
