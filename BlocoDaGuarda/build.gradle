@@ -40,7 +40,6 @@ ext {
     firebaseVersion = '10.0.1'
 
     supportLibrary = '25.1.0'
-    ormLite = '4.48'
-    okHttp = '2.0.0'
+    butterknifeVersion = '7.0.1'
 
 }

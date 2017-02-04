@@ -32,8 +32,6 @@ dependencies {
     compile("com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlytcsVersion") {
         transitive = true;
     }
-
-
     testCompile 'junit:junit:4.12'
 }
 

@@ -32,6 +32,8 @@ dependencies {
     compile "com.android.support:cardview-v7:$rootProject.ext.supportLibrary"
     compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibrary"
 
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+
     compile project(':analytics')
     testCompile 'junit:junit:4.12'
 }
