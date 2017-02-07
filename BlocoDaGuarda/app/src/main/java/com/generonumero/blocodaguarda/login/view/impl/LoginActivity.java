@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -22,7 +23,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private LoginButton loginButton;
 
     private LoginPresenter loginPresenter;
-
     private CallbackManager callbackManager;
 
 
@@ -49,7 +49,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             }
 
             @Override
-            public void onCancel() {}
+            public void onCancel() {
+            }
 
             @Override
             public void onError(FacebookException error) {
@@ -65,5 +66,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onLoginSuccessful() {
+        finish();
+        Toast.makeText(this, "Bem vindo", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLoginError() {
+        Toast.makeText(this, "Ocorreu um erro ao logar, tente novamente.", Toast.LENGTH_SHORT).show();
+    }
 }
 

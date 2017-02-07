@@ -46,6 +46,6 @@ public class BDGApplication extends Application {
     }
 
     public LoginPresenter getLoginPresenter(LoginView loginView) {
-        return new LoginPresenterImpl(loginView);
+        return new LoginPresenterImpl(loginView, getFacebookLoginService());
     }
 }
