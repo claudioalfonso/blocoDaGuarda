@@ -36,7 +36,7 @@ public class FacebookLoginService {
     }
 
     public void trackUserData() {
-        if(isLogged()) {
+        if (isLogged()) {
             GraphRequest request = GraphRequest.newMeRequest(
                     AccessToken.getCurrentAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback() {
@@ -48,7 +48,7 @@ public class FacebookLoginService {
                         }
                     });
             Bundle parameters = new Bundle();
-            parameters.putString("fields", "id,name,link");
+            parameters.putString("fields", "id,name,link,email");
             request.setParameters(parameters);
             request.executeAsync();
         }
