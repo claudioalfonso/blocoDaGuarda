@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">BlocoDaGuarda</string>
+
+
+    <string name="bdg_menu_main">Início</string>
+    <string name="bdg_menu_network">Minha Rede</string>
+    <string name="bdg_menu_sos">SOS</string>
+    <string name="bdg_menu_configuration">Configurações</string>
+    <string name="bdg_menu_about">Gênero e número </string>
+
+
 </resources>
