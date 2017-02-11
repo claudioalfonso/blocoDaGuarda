@@ -3,6 +3,7 @@ package com.generonumero.blocodaguarda.menu.view.impl;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,10 @@ import com.generonumero.blocodaguarda.R;
 import com.generonumero.blocodaguarda.login.view.impl.LoginActivity;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.view.MainView;
+import com.generonumero.blocodaguarda.network.view.impl.NetworkFragment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     MainPresenter mainPresenter;
 
+    private Map<Integer, Fragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +83,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void onNavDrawerItemSelected(MenuItem menuItem) {
+
+
+
+
         switch (menuItem.getItemId()) {
             case MENU_MAIN:
                 Log.i("teste", "MENU_MAIN");
@@ -88,14 +98,26 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 Log.i("teste", "MENU_CONFIGURATION");
                 break;
             case MENU_NETWORK:
+                if(getFragments().get(MENU_NETWORK) == null) {
+                    getFragments().put(MENU_NETWORK, new NetworkFragment());
+                }
                 Log.i("teste", "MENU_NETWORK");
                 break;
             case MENU_SOS:
                 Log.i("teste", "MENU_SOS");
                 break;
-
-
         }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, getFragments().get(menuItem.getItemId()))
+                .commit();
     }
 
+    public Map<Integer, Fragment> getFragments() {
+        if(fragments == null) {
+            fragments = new HashMap<>();
+        }
+        return fragments;
+    }
 }
