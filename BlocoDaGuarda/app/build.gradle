@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -35,6 +36,11 @@ dependencies {
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
 
     compile "com.facebook.android:facebook-android-sdk:$rootProject.ext.facebookVersion"
+
+    //Dagger 2 dependency
+    compile 'com.google.dagger:dagger:2.4'
+    apt 'com.google.dagger:dagger-compiler:2.4'
+
 
     compile project(':analytics')
     testCompile 'junit:junit:4.12'
