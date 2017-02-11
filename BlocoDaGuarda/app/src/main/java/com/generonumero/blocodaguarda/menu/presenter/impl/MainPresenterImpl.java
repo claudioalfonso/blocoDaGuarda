@@ -21,6 +21,8 @@ public class MainPresenterImpl implements MainPresenter {
     public void initView() {
         if(!facebookLoginService.isLogged()) {
             mainView.goToLoginView();
+        } else {
+            mainView.loadViews();
         }
     }
 }
