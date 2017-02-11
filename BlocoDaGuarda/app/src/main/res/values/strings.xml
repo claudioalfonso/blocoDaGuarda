@@ -11,6 +11,7 @@
     <string name="bdg_network_header">Os contatos cadastrados recebem um SMS caso você ative o modo de segurança.
         <br/> Verifique se os números estão corretos e se eles podem receber mensagens de texto.
     </string>
+    <string name="bdg_network_save">Salvar contatos</string>
 
 
 </resources>
