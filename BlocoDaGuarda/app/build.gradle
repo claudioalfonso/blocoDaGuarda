@@ -36,6 +36,8 @@ dependencies {
 
     compile "com.facebook.android:facebook-android-sdk:$rootProject.ext.facebookVersion"
 
+    compile "com.squareup:otto:$rootProject.ext.ottoVersion"
+
     compile project(':analytics')
     testCompile 'junit:junit:4.12'
 }

@@ -11,12 +11,15 @@ import com.generonumero.blocodaguarda.login.view.LoginView;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.presenter.impl.MainPresenterImpl;
 import com.generonumero.blocodaguarda.menu.view.MainView;
+import com.squareup.otto.Bus;
 
 public class BDGApplication extends Application {
 
     private static BDGApplication instance;
 
     private FacebookLoginService facebookLoginService;
+
+    private Bus bus;
 
 
     @Override
@@ -40,12 +43,21 @@ public class BDGApplication extends Application {
 
     public FacebookLoginService getFacebookLoginService() {
         if(facebookLoginService == null) {
-            facebookLoginService = new FacebookLoginService(getApplicationContext());
+            facebookLoginService = new FacebookLoginService(getApplicationContext(), getBus());
         }
         return facebookLoginService;
     }
 
     public LoginPresenter getLoginPresenter(LoginView loginView) {
-        return new LoginPresenterImpl(loginView, getFacebookLoginService());
+        return new LoginPresenterImpl(loginView, getFacebookLoginService(), getBus());
     }
+
+
+    public Bus getBus() {
+        if(bus == null) {
+            bus = new Bus();
+        }
+        return bus;
+    }
+
 }
