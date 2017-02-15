@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void goToLoginView() {
         LoginActivity.start(this);
+        finish();
     }
 
     @Override
@@ -83,9 +84,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void onNavDrawerItemSelected(MenuItem menuItem) {
-
-
-
 
         switch (menuItem.getItemId()) {
             case MENU_MAIN:
