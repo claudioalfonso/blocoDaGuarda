@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    MainPresenter mainPresenter;
+    private MainPresenter mainPresenter;
 
     private Map<Integer, Fragment> fragments;
 

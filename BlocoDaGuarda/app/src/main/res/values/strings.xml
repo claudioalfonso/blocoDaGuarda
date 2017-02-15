@@ -16,6 +16,9 @@
     <string name="bdg_login_warning">Não se preocupe, seus dados são totalmente sigilosos.</string>
     <string name="bdg_login_no_face">Não quero usar meu facebook</string>
     <string name="bdg_login_top" >Aqui você vai poder cadastrar uma rede de confiança e avisá-los quando estiver passando algum aperto.</string>
+    <string name="bdg_network_contact_name">Apelido</string>
+    <string name="bdg_network_contact_phone">Telefone</string>
+    <string name="bdg_network_contact_label">Contato</string>
 
 
 </resources>
