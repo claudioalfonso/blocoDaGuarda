@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -17,6 +16,9 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.generonumero.blocodaguarda.login.event.LoginFailed;
+import com.generonumero.blocodaguarda.login.event.LoginSuccessful;
+import com.squareup.otto.Bus;
 
 import org.json.JSONObject;
 
@@ -25,10 +27,14 @@ import java.util.Collection;
 
 public class FacebookLoginService {
 
+    private final Context mContext;
+    private final Bus bus;
     CallbackManager callbackManager;
     Collection<String> permissions;
 
-    public FacebookLoginService(Context context) {
+    public FacebookLoginService(Context context, Bus bus) {
+        mContext = context;
+        this.bus = bus;
         initialize(context);
 
         if (callbackManager == null) {
@@ -52,17 +58,19 @@ public class FacebookLoginService {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 getUserGraphData();
-                Log.i("teste","logou");
-                Log.i("teste",loginResult.toString());
+
+                bus.post(new LoginSuccessful());
+
             }
 
             @Override
             public void onCancel() {
+                bus.post(new LoginFailed(true));
             }
 
             @Override
             public void onError(FacebookException e) {
-
+                bus.post(new LoginFailed(false));
             }
         });
         loginManager.logInWithReadPermissions(activity, getPermissions());

@@ -37,6 +37,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        loginPresenter.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        loginPresenter.onStop();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         loginPresenter.onActivityResult(requestCode, resultCode,  data);
