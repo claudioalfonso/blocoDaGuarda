@@ -1,5 +1,7 @@
 package com.generonumero.blocodaguarda.menu.view.impl;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -43,6 +45,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private Map<Integer, Fragment> fragments;
 
+
+    public static void start(Activity activity) {
+        Intent i = new Intent(activity.getApplicationContext(), MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(i);
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +74,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void loadViews() {
-
         setupDrawerContent(navigationView);
-
     }
 
 

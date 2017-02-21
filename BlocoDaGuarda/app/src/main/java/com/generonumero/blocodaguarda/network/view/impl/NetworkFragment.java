@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
+import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
 
 import butterknife.Bind;
@@ -21,15 +23,27 @@ public class NetworkFragment extends Fragment implements NetworkView {
     @Bind(R.id.bdg_network_recycler)
     RecyclerView mRecyclerView;
 
+    NetworkPresenter networkPresenter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        networkPresenter = BDGApplication.getInstance().getNetworkPresenter(this);
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.network_frag, null);
         ButterKnife.bind(this, view);
+        networkPresenter.loadViews();
         return view;
     }
+
+
 
 
     @OnClick(R.id.bdg_network_save)

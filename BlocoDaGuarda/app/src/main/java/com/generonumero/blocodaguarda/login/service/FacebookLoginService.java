@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -101,7 +102,7 @@ public class FacebookLoginService {
                         public void onCompleted(
                                 JSONObject object,
                                 GraphResponse response) {
-
+                            Log.i("teste", "logou");
                             //save User
 
                         }

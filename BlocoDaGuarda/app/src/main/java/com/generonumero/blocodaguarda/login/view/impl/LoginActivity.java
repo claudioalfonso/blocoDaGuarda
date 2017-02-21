@@ -11,6 +11,7 @@ import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
 import com.generonumero.blocodaguarda.login.presenter.LoginPresenter;
 import com.generonumero.blocodaguarda.login.view.LoginView;
+import com.generonumero.blocodaguarda.menu.view.impl.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void onLoginSuccessful() {
         finish();
+        MainActivity.start(this);
         Toast.makeText(this, "Bem vindo", Toast.LENGTH_SHORT).show();
     }
 

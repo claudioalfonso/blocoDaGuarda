@@ -11,6 +11,9 @@ import com.generonumero.blocodaguarda.login.view.LoginView;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.presenter.impl.MainPresenterImpl;
 import com.generonumero.blocodaguarda.menu.view.MainView;
+import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
+import com.generonumero.blocodaguarda.network.presenter.impl.NetworkPresenterImpl;
+import com.generonumero.blocodaguarda.network.view.NetworkView;
 import com.squareup.otto.Bus;
 
 public class BDGApplication extends Application {
@@ -50,6 +53,10 @@ public class BDGApplication extends Application {
 
     public LoginPresenter getLoginPresenter(LoginView loginView) {
         return new LoginPresenterImpl(loginView, getFacebookLoginService(), getBus());
+    }
+
+    public NetworkPresenter getNetworkPresenter(NetworkView networkView) {
+        return new NetworkPresenterImpl();
     }
 
 
