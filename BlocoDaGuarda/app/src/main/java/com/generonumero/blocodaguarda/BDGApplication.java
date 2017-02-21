@@ -56,7 +56,7 @@ public class BDGApplication extends Application {
     }
 
     public NetworkPresenter getNetworkPresenter(NetworkView networkView) {
-        return new NetworkPresenterImpl();
+        return new NetworkPresenterImpl(networkView);
     }
 
 
