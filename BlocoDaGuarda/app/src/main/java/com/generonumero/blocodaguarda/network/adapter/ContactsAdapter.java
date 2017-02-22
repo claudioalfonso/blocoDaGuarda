@@ -20,6 +20,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
 
     private List<Contact> contacts;
+    private View.OnClickListener onClickListener;
 
     public ContactsAdapter(List<Contact> contacts) {
         this.contacts = contacts;
@@ -29,7 +30,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.network_contact, parent, false);
-        return new ContactViewHolder(view);
+        return new ContactViewHolder(view, getOnClickListener());
     }
 
     @Override
@@ -52,7 +53,20 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     }
 
 
+    public View.OnClickListener getOnClickListener() {
+        if (onClickListener == null) {
+            onClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            };
+        }
+        return onClickListener;
+    }
+
     static class ContactViewHolder extends RecyclerView.ViewHolder {
+
 
 
         @Bind(R.id.bdg_network_phone)
@@ -64,9 +78,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         @Bind(R.id.bdg_network_contact_label)
         public TextView contactLabel;
 
-        public ContactViewHolder(View itemView) {
+        public ContactViewHolder(View itemView, View.OnClickListener onClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(onClickListener);
         }
 
 
