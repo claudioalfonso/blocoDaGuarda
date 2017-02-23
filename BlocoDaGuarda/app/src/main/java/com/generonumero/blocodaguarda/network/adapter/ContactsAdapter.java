@@ -20,17 +20,19 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
 
     private List<Contact> contacts;
+    private PickContacts pickContacts;
     private View.OnClickListener onClickListener;
 
-    public ContactsAdapter(List<Contact> contacts) {
+    public ContactsAdapter(List<Contact> contacts, PickContacts pickContacts) {
         this.contacts = contacts;
+        this.pickContacts = pickContacts;
     }
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.network_contact, parent, false);
-        return new ContactViewHolder(view, getOnClickListener());
+        return new ContactViewHolder(view);
     }
 
     @Override
@@ -40,10 +42,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
         holder.contactLabel.setText(holder.itemView.getContext().getString(R.string.bdg_network_contact_label) + " " + (++position));
 
-        if(contact == null) return;
+        if (contact == null) return;
 
         holder.name.setText(contact.getName());
         holder.phone.setText(contact.getPhone());
+        holder.addressBook.setOnClickListener(getOnClickListener(position));
 
     }
 
@@ -52,13 +55,12 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         return contacts.size();
     }
 
-
-    public View.OnClickListener getOnClickListener() {
+    private View.OnClickListener getOnClickListener(final int id) {
         if (onClickListener == null) {
             onClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    pickContacts.onClickPickContacts(id);
                 }
             };
         }
@@ -67,25 +69,19 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     static class ContactViewHolder extends RecyclerView.ViewHolder {
 
-
-
         @Bind(R.id.bdg_network_phone)
-        public EditText phone;
+        EditText phone;
         @Bind(R.id.bdg_network_contact_name)
-        public EditText name;
+        EditText name;
         @Bind(R.id.bdg_network_contact_address_book)
-        public ImageButton addressBook;
+        ImageButton addressBook;
         @Bind(R.id.bdg_network_contact_label)
-        public TextView contactLabel;
+        TextView contactLabel;
 
-        public ContactViewHolder(View itemView, View.OnClickListener onClickListener) {
+        ContactViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-            itemView.setOnClickListener(onClickListener);
         }
-
-
     }
 
 }

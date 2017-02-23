@@ -11,7 +11,4 @@ import java.util.List;
 public interface NetworkRepository {
 
     List<Contact> getAllContacts();
-
-
-
 }

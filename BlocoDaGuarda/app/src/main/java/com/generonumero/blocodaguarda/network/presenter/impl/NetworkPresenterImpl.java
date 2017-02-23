@@ -14,7 +14,6 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
     @Override
     public void loadViews() {
-
-
+        networkView.OnLoadViews();
     }
 }

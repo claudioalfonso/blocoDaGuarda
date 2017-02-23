@@ -5,4 +5,6 @@ package com.generonumero.blocodaguarda.network.view;
  */
 
 public interface NetworkView {
+
+    void OnLoadViews();
 }
