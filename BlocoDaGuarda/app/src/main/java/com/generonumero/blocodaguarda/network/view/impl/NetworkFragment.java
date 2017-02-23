@@ -25,8 +25,8 @@ import com.generonumero.blocodaguarda.network.adapter.PickContacts;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
+import com.generonumero.blocodaguarda.permission.PermissionService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -39,6 +39,7 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
     private static final String CONTACT_BUNDLE = "contact_id";
     private static final int RESULT_CODE_PICK = 34;
     private static final int RESULT_CODE_PERMISSION = 123;
+
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
 
     @Bind(R.id.bdg_network_recycler)
@@ -67,32 +68,16 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-
-            case RESULT_CODE_PERMISSION:
-                break;
             case RESULT_CODE_PICK:
-                break;
 
+                break;
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-
-            case RESULT_CODE_PERMISSION:
-                if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    if (getPermissionStatus(getActivity(), PERMISSION) == BLOCKED_OR_NEVER_ASKED) {
-                        Toast.makeText(getContext(), "Pedido de permissão para acessar a agenda negado. Vá em configurações e habilite-o para poder usar a agenda e pegar os seus contatos.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getContext(), "Precisamos dessa permissão para lhe ajudar a pegar os contatos da agenda.", Toast.LENGTH_LONG).show();
-                    }
-
-                }
-                break;
-
-        }
+        networkPresenter.onRequestPermissionsResult(getActivity(), requestCode, grantResults, PERMISSION);
     }
 
     @OnClick(R.id.bdg_network_save)
@@ -102,12 +87,7 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
 
 
     @Override
-    public void OnLoadViews() {
-
-        Contact contact = new Contact("Pedro", "21984417774");
-
-        List<Contact> contacts = new ArrayList<>();
-        contacts.add(contact);
+    public void OnLoadViews(List<Contact> contacts) {
 
         ContactsAdapter contactsAdapter = new ContactsAdapter(contacts, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -116,10 +96,19 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
     }
 
     @Override
+    public void showAlertPermissionDenied() {
+        Toast.makeText(getContext(), "Precisamos dessa permissão para lhe ajudar a pegar os contatos da agenda.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showAlertPermissionDesable() {
+        Toast.makeText(getContext(), "Pedido de permissão para acessar a agenda negado. Vá em configurações e habilite-o para poder usar a agenda e pegar os seus contatos.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void onClickPickContacts(int idContactList) {
 
-        if (hasPermissionsNeeded()) {
-            askPermission();
+        if (networkPresenter.askPermissionIfNeed(this, PERMISSION)) {
             return;
         }
 
@@ -128,27 +117,5 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
         startActivityForResult(intent, RESULT_CODE_PICK);
     }
 
-    private boolean hasPermissionsNeeded() {
-        return ContextCompat.checkSelfPermission(getActivity(), PERMISSION) != PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void askPermission() {
-        requestPermissions(new String[]{PERMISSION}, RESULT_CODE_PERMISSION);
-    }
-
-    public static final int GRANTED = 0;
-    public static final int DENIED = 1;
-    public static final int BLOCKED_OR_NEVER_ASKED = 2;
-
-
-    public static int getPermissionStatus(Activity activity, String androidPermissionName) {
-        if (ContextCompat.checkSelfPermission(activity, androidPermissionName) != PackageManager.PERMISSION_GRANTED) {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, androidPermissionName)) {
-                return BLOCKED_OR_NEVER_ASKED;
-            }
-            return DENIED;
-        }
-        return GRANTED;
-    }
 
 }

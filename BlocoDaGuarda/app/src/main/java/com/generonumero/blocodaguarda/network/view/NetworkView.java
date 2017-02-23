@@ -1,10 +1,15 @@
 package com.generonumero.blocodaguarda.network.view;
 
-/**
- * Created by pedrocortez on 11/02/17.
- */
+import com.generonumero.blocodaguarda.network.model.Contact;
+
+import java.util.List;
 
 public interface NetworkView {
 
-    void OnLoadViews();
+    void OnLoadViews(List<Contact> contacts);
+
+
+    void showAlertPermissionDenied();
+
+    void showAlertPermissionDesable();
 }

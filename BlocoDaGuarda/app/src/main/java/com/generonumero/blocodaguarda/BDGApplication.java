@@ -13,6 +13,7 @@ import com.generonumero.blocodaguarda.menu.presenter.impl.MainPresenterImpl;
 import com.generonumero.blocodaguarda.menu.view.MainView;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.presenter.impl.NetworkPresenterImpl;
+import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
 import com.squareup.otto.Bus;
 
@@ -24,6 +25,7 @@ public class BDGApplication extends Application {
 
     private Bus bus;
 
+    private NetworkRepository networkRepository;
 
     @Override
     public void onCreate() {
@@ -45,7 +47,7 @@ public class BDGApplication extends Application {
     }
 
     public FacebookLoginService getFacebookLoginService() {
-        if(facebookLoginService == null) {
+        if (facebookLoginService == null) {
             facebookLoginService = new FacebookLoginService(getApplicationContext(), getBus());
         }
         return facebookLoginService;
@@ -56,12 +58,16 @@ public class BDGApplication extends Application {
     }
 
     public NetworkPresenter getNetworkPresenter(NetworkView networkView) {
-        return new NetworkPresenterImpl(networkView);
+        return new NetworkPresenterImpl(networkView, getNetworkRepository());
+    }
+
+    public NetworkRepository getNetworkRepository() {
+        return networkRepository;
     }
 
 
     public Bus getBus() {
-        if(bus == null) {
+        if (bus == null) {
             bus = new Bus();
         }
         return bus;
