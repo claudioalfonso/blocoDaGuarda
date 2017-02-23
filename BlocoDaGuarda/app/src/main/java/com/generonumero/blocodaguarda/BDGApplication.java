@@ -14,7 +14,10 @@ import com.generonumero.blocodaguarda.menu.view.MainView;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.presenter.impl.NetworkPresenterImpl;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
+import com.generonumero.blocodaguarda.network.repository.impl.NetworkRepositoryImpl;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
+import com.generonumero.blocodaguarda.permission.PermissionService;
+import com.generonumero.blocodaguarda.permission.impl.PermissionServiceImpl;
 import com.squareup.otto.Bus;
 
 public class BDGApplication extends Application {
@@ -26,6 +29,8 @@ public class BDGApplication extends Application {
     private Bus bus;
 
     private NetworkRepository networkRepository;
+
+    private PermissionService permissionService;
 
     @Override
     public void onCreate() {
@@ -58,10 +63,13 @@ public class BDGApplication extends Application {
     }
 
     public NetworkPresenter getNetworkPresenter(NetworkView networkView) {
-        return new NetworkPresenterImpl(networkView, getNetworkRepository());
+        return new NetworkPresenterImpl(networkView, getNetworkRepository(), getPermissionService());
     }
 
     public NetworkRepository getNetworkRepository() {
+        if (networkRepository == null) {
+            networkRepository = new NetworkRepositoryImpl();
+        }
         return networkRepository;
     }
 
@@ -73,4 +81,10 @@ public class BDGApplication extends Application {
         return bus;
     }
 
+    public PermissionService getPermissionService() {
+        if (permissionService == null) {
+            permissionService = new PermissionServiceImpl();
+        }
+        return permissionService;
+    }
 }
