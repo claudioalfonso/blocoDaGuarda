@@ -68,7 +68,7 @@ public class BDGApplication extends Application {
 
     public NetworkRepository getNetworkRepository() {
         if (networkRepository == null) {
-            networkRepository = new NetworkRepositoryImpl();
+            networkRepository = new NetworkRepositoryImpl(getApplicationContext());
         }
         return networkRepository;
     }

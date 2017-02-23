@@ -7,4 +7,6 @@ import java.util.List;
 public interface NetworkRepository {
 
     List<Contact> getAllContacts();
+
+    void update(String id, Contact contact);
 }
