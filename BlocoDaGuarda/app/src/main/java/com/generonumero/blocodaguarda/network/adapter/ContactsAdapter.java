@@ -36,17 +36,22 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     }
 
     @Override
-    public void onBindViewHolder(ContactViewHolder holder, int position) {
+    public void onBindViewHolder(ContactViewHolder holder, final int position) {
         Contact contact = this.contacts.get(position);
 
 
-        holder.contactLabel.setText(holder.itemView.getContext().getString(R.string.bdg_network_contact_label) + " " + (++position));
+        holder.contactLabel.setText(holder.itemView.getContext().getString(R.string.bdg_network_contact_label) + " " + (position+1));
 
         if (contact == null) return;
 
         holder.name.setText(contact.getName());
         holder.phone.setText(contact.getPhone());
-        holder.addressBook.setOnClickListener(getOnClickListener(position));
+        holder.addressBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickContacts.onClickPickContacts(position);
+            }
+        });
 
     }
 
@@ -54,17 +59,25 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     public int getItemCount() {
         return contacts.size();
     }
+//
+//    private View.OnClickListener getOnClickListener(final int id) {
+//        if (onClickListener == null) {
+//            onClickListener = new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    pickContacts.onClickPickContacts(id);
+//                }
+//            };
+//        }
+//        return onClickListener;
+//    }
 
-    private View.OnClickListener getOnClickListener(final int id) {
-        if (onClickListener == null) {
-            onClickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pickContacts.onClickPickContacts(id);
-                }
-            };
-        }
-        return onClickListener;
+    public void updateContact(int position, Contact contact) {
+        Contact contact1 = contacts.get(position);
+        contact1.setName(contact.getName());
+        contact1.setPhone(contact.getPhone());
+
+        notifyDataSetChanged();
     }
 
     static class ContactViewHolder extends RecyclerView.ViewHolder {

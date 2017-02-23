@@ -8,8 +8,11 @@ public interface NetworkView {
 
     void OnLoadViews(List<Contact> contacts);
 
-
     void showAlertPermissionDenied();
 
     void showAlertPermissionDesable();
+
+    void showContactWithoutNumber();
+
+    void updateList(int position, Contact contact);
 }
