@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
@@ -24,7 +22,6 @@ import java.util.List;
 public class NetworkPresenterImpl implements NetworkPresenter {
 
     private static final int RESULT_CODE_PERMISSION = 123;
-    private static final String CONTACT_BUNDLE = "contact_id";
     private static final int RESULT_CODE_PICK = 34;
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
 
@@ -75,17 +72,14 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
     @Override
     public void onReceiveDataFromContact(Fragment fragment, int requestCode, int resultCode, Intent data) {
-
         switch (requestCode) {
             case RESULT_CODE_PICK:
                 if (resultCode == Activity.RESULT_OK) {
 
                     Contact contact = getContact(fragment, data);
-
                     if (this.idContactList == null) {
                         this.idContactList = "0";
                     }
-
                     if (contact != null) {
                         networkRepository.update(idContactList, contact);
                         networkView.updateList(Integer.parseInt(idContactList), contact);
@@ -93,10 +87,8 @@ public class NetworkPresenterImpl implements NetworkPresenter {
                         networkView.showContactWithoutNumber();
                     }
                 }
-
                 break;
         }
-
     }
 
     @Override
@@ -116,11 +108,12 @@ public class NetworkPresenterImpl implements NetworkPresenter {
             if (hasPhone.equalsIgnoreCase("1")) {
                 Cursor phones = fragment.getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-                phones.moveToFirst();
-                String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                String cNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                Log.i("teste", "Name: " + name + " - numero: " + cNumber);
-                return new Contact(name, cNumber);
+                if (phones != null) {
+                    phones.moveToFirst();
+                    String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    String cNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    return new Contact(name, cNumber);
+                }
             }
         }
         return null;

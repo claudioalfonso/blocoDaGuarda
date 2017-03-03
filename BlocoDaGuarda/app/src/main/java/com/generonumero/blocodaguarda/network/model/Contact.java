@@ -30,6 +30,17 @@ public class Contact {
         this.phone = phone;
     }
 
+
+    public boolean isValid() {
+        if(this.getName() == null || this.getName().equals("")) {
+            return false;
+        }
+        if(this.getPhone() == null || this.getPhone().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

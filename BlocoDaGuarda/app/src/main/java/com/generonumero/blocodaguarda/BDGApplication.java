@@ -3,6 +3,11 @@ package com.generonumero.blocodaguarda;
 import android.app.Application;
 
 import com.facebook.FacebookSdk;
+import com.generonumero.blocodaguarda.alert.presenter.AlertPresenter;
+import com.generonumero.blocodaguarda.alert.presenter.impl.AlertPresenterImpl;
+import com.generonumero.blocodaguarda.alert.service.AlertService;
+import com.generonumero.blocodaguarda.alert.service.impl.AlertServiceImpl;
+import com.generonumero.blocodaguarda.alert.view.AlertView;
 import com.generonumero.blocodaguarda.analytics.BDGTracking;
 import com.generonumero.blocodaguarda.login.presenter.LoginPresenter;
 import com.generonumero.blocodaguarda.login.presenter.impl.LoginPresenterImpl;
@@ -32,6 +37,9 @@ public class BDGApplication extends Application {
 
     private PermissionService permissionService;
 
+    private AlertPresenter alertPresenter;
+
+    private AlertService alertService;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -66,25 +74,35 @@ public class BDGApplication extends Application {
         return new NetworkPresenterImpl(networkView, getNetworkRepository(), getPermissionService());
     }
 
-    public NetworkRepository getNetworkRepository() {
+    public AlertPresenter getAlertPresenter(AlertView alertView) {
+        return new AlertPresenterImpl(alertView, getAlertService());
+    }
+
+    private NetworkRepository getNetworkRepository() {
         if (networkRepository == null) {
             networkRepository = new NetworkRepositoryImpl(getApplicationContext());
         }
         return networkRepository;
     }
 
-
-    public Bus getBus() {
+    private Bus getBus() {
         if (bus == null) {
             bus = new Bus();
         }
         return bus;
     }
 
-    public PermissionService getPermissionService() {
+    private PermissionService getPermissionService() {
         if (permissionService == null) {
             permissionService = new PermissionServiceImpl();
         }
         return permissionService;
+    }
+
+    public AlertService getAlertService() {
+        if(alertService == null ) {
+            alertService = new AlertServiceImpl(getNetworkRepository());
+        }
+        return alertService;
     }
 }

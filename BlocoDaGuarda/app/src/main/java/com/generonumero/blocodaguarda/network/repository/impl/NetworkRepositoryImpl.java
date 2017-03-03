@@ -14,7 +14,7 @@ import java.util.Map;
 public class NetworkRepositoryImpl implements NetworkRepository {
 
     private Context context;
-    private static final String sharedName = "NetworkRepositoryImpl";
+    private static final String sharedName = "NetworkRepositoryImpl2";
     private SharedPreferences sharedPreferences;
 
     public NetworkRepositoryImpl(Context context) {
