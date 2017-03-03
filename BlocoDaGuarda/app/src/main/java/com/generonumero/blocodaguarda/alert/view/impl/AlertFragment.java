@@ -3,6 +3,7 @@ package com.generonumero.blocodaguarda.alert.view.impl;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,11 @@ import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
 import com.generonumero.blocodaguarda.alert.presenter.AlertPresenter;
 import com.generonumero.blocodaguarda.alert.view.AlertView;
+import com.generonumero.blocodaguarda.menu.view.impl.MainActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AlertFragment extends Fragment implements AlertView {
 
@@ -38,6 +41,13 @@ public class AlertFragment extends Fragment implements AlertView {
         alertPresenter.loadViews();
         return view;
     }
+
+    @OnClick(R.id.alert_create_network)
+    public void onClickNetworkButton(View v) {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.goToNetworkView();
+    }
+
 
     @Override
     public void showNetworkButton() {

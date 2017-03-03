@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
+import com.generonumero.blocodaguarda.menu.view.impl.MainActivity;
 import com.generonumero.blocodaguarda.network.adapter.ContactsAdapter;
 import com.generonumero.blocodaguarda.network.adapter.PickContacts;
 import com.generonumero.blocodaguarda.network.model.Contact;
@@ -72,7 +74,9 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
         contactsAdapter.notifyDataSetChanged();
         List<Contact> contacts = contactsAdapter.getContacts();
         networkPresenter.saveAllContacts(contacts);
-        Toast.makeText(getContext(), "Salvou", Toast.LENGTH_LONG).show();
+
+        MainActivity activity = (MainActivity) getActivity();
+        activity.goToHome();
     }
 
 

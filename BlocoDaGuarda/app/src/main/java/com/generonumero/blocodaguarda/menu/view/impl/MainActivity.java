@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         ButterKnife.bind(this);
 
         mainPresenter = BDGApplication.getInstance().getMainPresenter(this);
-
         mainPresenter.initView();
     }
 
@@ -97,33 +95,42 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void onNavDrawerItemSelected(MenuItem menuItem) {
+        Fragment fragment = getFragment(menuItem.getItemId());
+        changeFragment(fragment);
+    }
 
-        switch (menuItem.getItemId()) {
+    private Fragment getFragment(int id) {
+        switch (id) {
             case MENU_MAIN:
-                if(getFragments().get(MENU_MAIN) == null) {
+                if (getFragments().get(MENU_MAIN) == null) {
                     getFragments().put(MENU_MAIN, new AlertFragment());
                 }
                 Log.i("teste", "MENU_MAIN");
                 break;
             case MENU_ABOUT:
                 Log.i("teste", "MENU_ABOUT");
-                return;
             case MENU_CONFIGURATION:
                 Log.i("teste", "MENU_CONFIGURATION");
-                return;
             case MENU_NETWORK:
-                if(getFragments().get(MENU_NETWORK) == null) {
+                if (getFragments().get(MENU_NETWORK) == null) {
                     getFragments().put(MENU_NETWORK, new NetworkFragment());
                 }
                 break;
             case MENU_SOS:
                 Log.i("teste", "MENU_SOS");
-                return;
         }
-
-        changeFragment(getFragments().get(menuItem.getItemId()));
-
+        return getFragments().get(id);
     }
+
+
+    public void goToNetworkView() {
+        changeFragment(getFragment(MENU_NETWORK));
+    }
+
+    public void goToHome() {
+        changeFragment(getFragment(MENU_MAIN));
+    }
+
 
     private void changeFragment(Fragment fragment) {
         getSupportFragmentManager()
@@ -133,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private Map<Integer, Fragment> getFragments() {
-        if(fragments == null) {
+        if (fragments == null) {
             fragments = new HashMap<>();
         }
         return fragments;
