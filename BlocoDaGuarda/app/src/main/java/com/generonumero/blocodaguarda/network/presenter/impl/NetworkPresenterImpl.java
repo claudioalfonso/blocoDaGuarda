@@ -18,6 +18,8 @@ import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
 import com.generonumero.blocodaguarda.permission.PermissionService;
 
+import java.util.List;
+
 
 public class NetworkPresenterImpl implements NetworkPresenter {
 
@@ -95,6 +97,11 @@ public class NetworkPresenterImpl implements NetworkPresenter {
                 break;
         }
 
+    }
+
+    @Override
+    public void saveAllContacts(List<Contact> contacts) {
+        networkRepository.saveAll(contacts);
     }
 
     private Contact getContact(Fragment fragment, Intent data) {

@@ -21,7 +21,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     private List<Contact> contacts;
     private PickContacts pickContacts;
-    private View.OnClickListener onClickListener;
 
     public ContactsAdapter(List<Contact> contacts, PickContacts pickContacts) {
         this.contacts = contacts;
@@ -59,18 +58,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     public int getItemCount() {
         return contacts.size();
     }
-//
-//    private View.OnClickListener getOnClickListener(final int id) {
-//        if (onClickListener == null) {
-//            onClickListener = new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    pickContacts.onClickPickContacts(id);
-//                }
-//            };
-//        }
-//        return onClickListener;
-//    }
 
     public void updateContact(int position, Contact contact) {
         Contact contact1 = contacts.get(position);
@@ -80,12 +67,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         notifyDataSetChanged();
     }
 
+    public List<Contact> getContacts() {
+
+        return contacts;
+    }
+
     static class ContactViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.bdg_network_phone)
-        EditText phone;
+        TextView phone;
         @Bind(R.id.bdg_network_contact_name)
-        EditText name;
+        TextView name;
         @Bind(R.id.bdg_network_contact_address_book)
         ImageButton addressBook;
         @Bind(R.id.bdg_network_contact_label)

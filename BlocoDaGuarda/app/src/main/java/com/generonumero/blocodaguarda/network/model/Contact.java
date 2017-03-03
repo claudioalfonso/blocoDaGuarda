@@ -48,4 +48,12 @@ public class Contact {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

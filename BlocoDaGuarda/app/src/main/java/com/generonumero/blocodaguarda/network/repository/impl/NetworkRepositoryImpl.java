@@ -45,8 +45,19 @@ public class NetworkRepositoryImpl implements NetworkRepository {
         getSharedPreferences().edit().putString(id, new Gson().toJson(contact)).apply();
     }
 
+    @Override
+    public void saveAll(List<Contact> contacts) {
+        SharedPreferences.Editor edit = getSharedPreferences().edit();
 
-    public SharedPreferences getSharedPreferences() {
+        for (int i = 0; i < contacts.size(); i++) {
+            edit.putString(Integer.toString(i), new Gson().toJson(contacts.get(i)));
+        }
+
+        edit.apply();
+    }
+
+
+    private SharedPreferences getSharedPreferences() {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(sharedName, Context.MODE_PRIVATE);
         }
