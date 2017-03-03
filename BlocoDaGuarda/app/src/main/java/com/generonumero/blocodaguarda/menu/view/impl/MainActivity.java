@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
+import com.generonumero.blocodaguarda.alert.view.impl.AlertFragment;
 import com.generonumero.blocodaguarda.login.view.impl.LoginActivity;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.view.MainView;
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         mainPresenter = BDGApplication.getInstance().getMainPresenter(this);
 
         mainPresenter.initView();
-
     }
 
     @Override
@@ -75,8 +75,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void loadViews() {
         setupDrawerContent(navigationView);
+        setFirstItemNavigationView();
     }
 
+    private void setFirstItemNavigationView() {
+        navigationView.setCheckedItem(MENU_MAIN);
+        navigationView.getMenu().performIdentifierAction(MENU_MAIN, 0);
+    }
 
     private void setupDrawerContent(NavigationView navigationView) {
 
@@ -85,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 item.setChecked(true);
                 drawerLayout.closeDrawers();
-
                 onNavDrawerItemSelected(item);
                 return false;
             }
@@ -96,32 +100,39 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         switch (menuItem.getItemId()) {
             case MENU_MAIN:
+                if(getFragments().get(MENU_MAIN) == null) {
+                    getFragments().put(MENU_MAIN, new AlertFragment());
+                }
                 Log.i("teste", "MENU_MAIN");
                 break;
             case MENU_ABOUT:
                 Log.i("teste", "MENU_ABOUT");
-                break;
+                return;
             case MENU_CONFIGURATION:
                 Log.i("teste", "MENU_CONFIGURATION");
-                break;
+                return;
             case MENU_NETWORK:
                 if(getFragments().get(MENU_NETWORK) == null) {
                     getFragments().put(MENU_NETWORK, new NetworkFragment());
                 }
-                Log.i("teste", "MENU_NETWORK");
                 break;
             case MENU_SOS:
                 Log.i("teste", "MENU_SOS");
-                break;
+                return;
         }
 
+        changeFragment(getFragments().get(menuItem.getItemId()));
+
+    }
+
+    private void changeFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_frame, getFragments().get(menuItem.getItemId()))
+                .replace(R.id.content_frame, fragment)
                 .commit();
     }
 
-    public Map<Integer, Fragment> getFragments() {
+    private Map<Integer, Fragment> getFragments() {
         if(fragments == null) {
             fragments = new HashMap<>();
         }

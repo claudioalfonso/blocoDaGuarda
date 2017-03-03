@@ -19,6 +19,7 @@
     <string name="bdg_network_contact_name">Apelido</string>
     <string name="bdg_network_contact_phone">Telefone</string>
     <string name="bdg_network_contact_label">Contato</string>
+    <string name="alert_create_network_msg">Você ainda não cadastrou sua rede de confiaça!</string>
 
 
 </resources>
