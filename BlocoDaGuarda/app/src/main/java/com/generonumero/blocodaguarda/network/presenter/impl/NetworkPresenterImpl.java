@@ -60,7 +60,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
             case RESULT_CODE_PERMISSION:
                 if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     if (permissionService.getPermissionStatus(activity, permission) == PermissionService.BLOCKED_OR_NEVER_ASKED) {
-                        networkView.showAlertPermissionDesable();
+                        networkView.showAlertPermissionDisable();
                     } else {
                         networkView.showAlertPermissionDenied();
                     }

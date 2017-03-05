@@ -95,7 +95,7 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
     }
 
     @Override
-    public void showAlertPermissionDesable() {
+    public void showAlertPermissionDisable() {
         Toast.makeText(getContext(), "Pedido de permissão para acessar a agenda negado. Vá em configurações e habilite-o para poder usar a agenda e pegar os seus contatos.", Toast.LENGTH_LONG).show();
     }
 

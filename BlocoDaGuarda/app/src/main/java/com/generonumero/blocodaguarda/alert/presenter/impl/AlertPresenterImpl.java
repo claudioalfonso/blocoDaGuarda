@@ -20,6 +20,9 @@ public class AlertPresenterImpl implements AlertPresenter {
 
     private static final int RESULT_CODE_PERMISSION_FROM_HELPME = 42;
     private static final int RESULT_CODE_PERMISSION_FROM_SAVEME = 41;
+    private static final String PERMISSION_SMS = Manifest.permission.SEND_SMS;
+    private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String PERMISSION_LOCATION_COARSE = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final String PERMISSION = Manifest.permission.SEND_SMS;
 
     private AlertView alertView;
@@ -51,10 +54,12 @@ public class AlertPresenterImpl implements AlertPresenter {
     public void onClickSaveMe(Fragment fragment) {
         if (alertService.isContactsRegistered()) {
 
-            if (permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION) == PermissionService.GRANTED) {
+            if (permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION) == PermissionService.GRANTED
+                    && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_FINE) == PermissionService.GRANTED
+                    && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_COARSE) == PermissionService.GRANTED) {
                 saveme();
             } else {
-                permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION}, RESULT_CODE_PERMISSION_FROM_SAVEME);
+                permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION, PERMISSION_LOCATION_FINE, PERMISSION_LOCATION_COARSE}, RESULT_CODE_PERMISSION_FROM_SAVEME);
             }
 
         } else {
@@ -66,10 +71,12 @@ public class AlertPresenterImpl implements AlertPresenter {
     public void onClickHelpMe(Fragment fragment) {
         if (alertService.isContactsRegistered()) {
 
-            if (permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION) == PermissionService.GRANTED) {
+            if (permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION) == PermissionService.GRANTED
+                    && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_FINE) == PermissionService.GRANTED
+                    && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_COARSE) == PermissionService.GRANTED) {
                 helpme();
             } else {
-                permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION}, RESULT_CODE_PERMISSION_FROM_HELPME);
+                permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION, PERMISSION_LOCATION_FINE, PERMISSION_LOCATION_COARSE}, RESULT_CODE_PERMISSION_FROM_HELPME);
             }
 
         } else {
@@ -108,9 +115,9 @@ public class AlertPresenterImpl implements AlertPresenter {
     public void onRequestPermissionsResult(Activity activity, int requestCode, @NonNull int[] grantResults, String permission) {
         if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             if (permissionService.getPermissionStatus(activity, permission) == PermissionService.BLOCKED_OR_NEVER_ASKED) {
-
+                alertView.showAlertPermissionDisable();
             } else {
-
+                alertView.showAlertPermissionDenied();
             }
         } else {
             switch (requestCode) {

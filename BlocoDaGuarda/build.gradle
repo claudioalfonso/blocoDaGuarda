@@ -37,7 +37,7 @@ ext {
     androidSupportVersion = '25.0.0'
 
     crashlytcsVersion = '2.6.6@aar'
-    firebaseVersion = '10.0.1'
+    firebaseVersion = '10.2.0'
 
     supportLibrary = '25.1.0'
     butterknifeVersion = '7.0.1'

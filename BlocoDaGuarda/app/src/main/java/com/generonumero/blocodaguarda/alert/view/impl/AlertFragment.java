@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
@@ -102,7 +103,6 @@ public class AlertFragment extends Fragment implements AlertView {
                 dialog.dismiss();
             }
         });
-        // Create the AlertDialog object and return it
         alertDialog = builder.create();
         alertDialog.show();
     }
@@ -131,5 +131,21 @@ public class AlertFragment extends Fragment implements AlertView {
         if (alertDialog != null) {
             alertDialog.dismiss();
         }
+    }
+
+    @Override
+    public void disclaimerSMS() {
+
+    }
+
+    @Override
+    public void showAlertPermissionDenied() {
+        Toast.makeText(getContext(), "Precisamos da permissão de enviar sms, para poder contactar sua rede quando for avisar que você está em uma situação de risco.",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showAlertPermissionDisable() {
+        Toast.makeText(getContext(), "Precisamos da permissão de enviar sms, para poder contactar sua rede quando for avisar que você está em uma situação de risco. " +
+                "\nPor favor, vá em configurações e habilite para conseguir enviar o alerta. ",Toast.LENGTH_LONG).show();
     }
 }

@@ -1,16 +1,13 @@
 package com.generonumero.blocodaguarda.network.view;
 
 import com.generonumero.blocodaguarda.network.model.Contact;
+import com.generonumero.blocodaguarda.permission.view.PermissionView;
 
 import java.util.List;
 
-public interface NetworkView {
+public interface NetworkView extends PermissionView {
 
     void OnLoadViews(List<Contact> contacts);
-
-    void showAlertPermissionDenied();
-
-    void showAlertPermissionDesable();
 
     void showContactWithoutNumber();
 
