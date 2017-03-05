@@ -1,9 +1,12 @@
 package com.generonumero.blocodaguarda.alert.service.impl;
 
+import android.content.Context;
 import android.os.CountDownTimer;
+import android.telephony.SmsManager;
 import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
+import com.generonumero.blocodaguarda.alert.event.CountDownFinished;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
@@ -28,7 +31,7 @@ public class AlertServiceImpl implements AlertService {
 
             @Override
             public void onFinish() {
-                sendSMS();
+                BDGApplication.getInstance().getBus().post(new CountDownFinished());
             }
         };
     }
@@ -54,7 +57,20 @@ public class AlertServiceImpl implements AlertService {
         countDownTimer.cancel();
     }
 
-    private void sendSMS() {
-        Toast.makeText(BDGApplication.getInstance(), "teste", Toast.LENGTH_LONG).show();
+    public void sendSMS() {
+        Context applicationContext = BDGApplication.getInstance().getApplicationContext();
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+
+            String phoneAdress = "021988252951";
+            String msg = "Foi mal pertubar, mas to testando um app que fiz";
+
+            smsManager.sendTextMessage(phoneAdress, null, msg, null, null);
+            Toast.makeText(applicationContext, "Message Sent",  Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(applicationContext, ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
     }
 }

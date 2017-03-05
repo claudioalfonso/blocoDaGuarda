@@ -1,4 +1,4 @@
-package com.generonumero.blocodaguarda.permission.impl;
+package com.generonumero.blocodaguarda.permission.service.impl;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
-import com.generonumero.blocodaguarda.permission.PermissionService;
+import com.generonumero.blocodaguarda.permission.service.PermissionService;
 
 /**
  * Created by Pedro on 2/22/17.

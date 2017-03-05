@@ -21,8 +21,8 @@ import com.generonumero.blocodaguarda.network.presenter.impl.NetworkPresenterImp
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.generonumero.blocodaguarda.network.repository.impl.NetworkRepositoryImpl;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
-import com.generonumero.blocodaguarda.permission.PermissionService;
-import com.generonumero.blocodaguarda.permission.impl.PermissionServiceImpl;
+import com.generonumero.blocodaguarda.permission.service.PermissionService;
+import com.generonumero.blocodaguarda.permission.service.impl.PermissionServiceImpl;
 import com.squareup.otto.Bus;
 
 public class BDGApplication extends Application {
@@ -37,9 +37,8 @@ public class BDGApplication extends Application {
 
     private PermissionService permissionService;
 
-    private AlertPresenter alertPresenter;
-
     private AlertService alertService;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -75,7 +74,7 @@ public class BDGApplication extends Application {
     }
 
     public AlertPresenter getAlertPresenter(AlertView alertView) {
-        return new AlertPresenterImpl(alertView, getAlertService());
+        return new AlertPresenterImpl(alertView, getAlertService(), getBus(), getPermissionService());
     }
 
     private NetworkRepository getNetworkRepository() {
@@ -85,7 +84,7 @@ public class BDGApplication extends Application {
         return networkRepository;
     }
 
-    private Bus getBus() {
+    public Bus getBus() {
         if (bus == null) {
             bus = new Bus();
         }
@@ -100,7 +99,7 @@ public class BDGApplication extends Application {
     }
 
     public AlertService getAlertService() {
-        if(alertService == null ) {
+        if (alertService == null) {
             alertService = new AlertServiceImpl(getNetworkRepository());
         }
         return alertService;

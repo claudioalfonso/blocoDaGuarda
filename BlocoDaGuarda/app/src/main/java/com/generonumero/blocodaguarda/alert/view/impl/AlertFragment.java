@@ -1,8 +1,10 @@
 package com.generonumero.blocodaguarda.alert.view.impl;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -23,18 +25,30 @@ import butterknife.OnClick;
 
 public class AlertFragment extends Fragment implements AlertView {
 
-
+    private static final String PERMISSION = Manifest.permission.SEND_SMS;
     @Bind(R.id.alert_create_network)
     Button networkBt;
 
     private AlertPresenter alertPresenter;
 
-    private AlertDialog alertDialog;
+    private Dialog alertDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.alertPresenter = BDGApplication.getInstance().getAlertPresenter(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        alertPresenter.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        alertPresenter.onStop();
     }
 
     @Nullable
@@ -53,11 +67,11 @@ public class AlertFragment extends Fragment implements AlertView {
 
     @OnClick(R.id.alert_bt_save_me)
     public void onClickSaveMeButton(View v) {
-        alertPresenter.onClickSaveMe();
+        alertPresenter.onClickSaveMe(this);
     }
 
     public void onClickHelpMeButton(View v) {
-        alertPresenter.onClickHelpMe();
+        alertPresenter.onClickHelpMe(this);
     }
 
 
@@ -94,15 +108,28 @@ public class AlertFragment extends Fragment implements AlertView {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        alertPresenter.onRequestPermissionsResult(getActivity(), requestCode, grantResults, PERMISSION);
+    }
+
+    @Override
     public void showSafeScreen() {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View inflate = inflater.inflate(R.layout.alert_dialog_activate, null);
 
-        Dialog dialog = new Dialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
-        dialog.setContentView(inflate);
+        alertDialog = new Dialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        alertDialog.setContentView(inflate);
 
-        dialog.show();
+        alertDialog.show();
 
+    }
+
+    @Override
+    public void dismissSafeScreen() {
+        if (alertDialog != null) {
+            alertDialog.dismiss();
+        }
     }
 }

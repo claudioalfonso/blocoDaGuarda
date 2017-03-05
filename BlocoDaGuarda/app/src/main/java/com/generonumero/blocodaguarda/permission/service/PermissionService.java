@@ -1,4 +1,4 @@
-package com.generonumero.blocodaguarda.permission;
+package com.generonumero.blocodaguarda.permission.service;
 
 
 import android.app.Activity;

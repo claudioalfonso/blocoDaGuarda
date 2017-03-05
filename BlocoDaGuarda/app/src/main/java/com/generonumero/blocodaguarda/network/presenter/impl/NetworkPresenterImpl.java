@@ -14,7 +14,7 @@ import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
-import com.generonumero.blocodaguarda.permission.PermissionService;
+import com.generonumero.blocodaguarda.permission.service.PermissionService;
 
 import java.util.List;
 

@@ -11,4 +11,6 @@ public interface AlertService {
     void startCountDown();
 
     void stopCountDown();
+
+    void sendSMS();
 }

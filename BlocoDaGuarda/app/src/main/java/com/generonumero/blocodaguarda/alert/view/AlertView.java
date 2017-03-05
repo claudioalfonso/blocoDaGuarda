@@ -9,4 +9,6 @@ public interface AlertView {
     void showNetworkPopup();
 
     void showSafeScreen();
+
+    void dismissSafeScreen();
 }
