@@ -1,5 +1,6 @@
 package com.generonumero.blocodaguarda.alert.view.impl;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
@@ -27,7 +27,9 @@ public class AlertFragment extends Fragment implements AlertView {
     @Bind(R.id.alert_create_network)
     Button networkBt;
 
-    AlertPresenter alertPresenter;
+    private AlertPresenter alertPresenter;
+
+    private AlertDialog alertDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,23 +78,31 @@ public class AlertFragment extends Fragment implements AlertView {
         builder.setTitle(getString(R.string.bdg_alert_network_dialog_title));
         builder.setMessage(getString(R.string.bdg_alert_network_dialog_message));
         builder.setPositiveButton(getString(R.string.bdg_alert_network_dialog_positive_button), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        goToNetworkScreen();
-                    }
-                })
-                .setNegativeButton(getString(R.string.bdg_alert_network_dialog_negative_button), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
+            public void onClick(DialogInterface dialog, int id) {
+                alertPresenter.onClickNetwork();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.bdg_alert_network_dialog_negative_button), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
         // Create the AlertDialog object and return it
-        AlertDialog alertDialog = builder.create();
+        alertDialog = builder.create();
         alertDialog.show();
     }
 
     @Override
     public void showSafeScreen() {
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View inflate = inflater.inflate(R.layout.alert_dialog_activate, null);
+
+        Dialog dialog = new Dialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog.setContentView(inflate);
+
+        dialog.show();
 
     }
 }

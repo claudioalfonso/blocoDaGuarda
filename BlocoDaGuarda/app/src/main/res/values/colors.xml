@@ -6,7 +6,7 @@
 
     <color name="bdg_background_login">#d3d3d3</color>
 
-
+    <color name="background_saveme">#66FF4081</color>
     <color name="default_circle_color">#534d89</color>
     <color name="default_progress_color">#d7d4ef</color>
 

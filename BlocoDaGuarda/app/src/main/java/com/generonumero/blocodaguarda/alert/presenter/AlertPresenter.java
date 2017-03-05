@@ -11,6 +11,4 @@ public interface AlertPresenter {
 
     void onClickHelpMe();
 
-
-
 }
