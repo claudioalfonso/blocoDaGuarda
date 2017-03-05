@@ -1,13 +1,15 @@
 package com.generonumero.blocodaguarda.alert.view.impl;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
@@ -44,13 +46,54 @@ public class AlertFragment extends Fragment implements AlertView {
 
     @OnClick(R.id.alert_create_network)
     public void onClickNetworkButton(View v) {
-        MainActivity activity = (MainActivity) getActivity();
-        activity.goToNetworkView();
+        alertPresenter.onClickNetwork();
+    }
+
+    @OnClick(R.id.alert_bt_save_me)
+    public void onClickSaveMeButton(View v) {
+        alertPresenter.onClickSaveMe();
+    }
+
+    public void onClickHelpMeButton(View v) {
+        alertPresenter.onClickHelpMe();
     }
 
 
     @Override
     public void showNetworkButton() {
         networkBt.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void goToNetworkScreen() {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.goToNetworkView();
+    }
+
+    @Override
+    public void showNetworkPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.bdg_alert_network_dialog_title));
+        builder.setMessage(getString(R.string.bdg_alert_network_dialog_message));
+        builder.setPositiveButton(getString(R.string.bdg_alert_network_dialog_positive_button), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(getContext(), "She said YES!!!", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(getString(R.string.bdg_alert_network_dialog_negative_button), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(getContext(), "She said NOOO!!!", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                });
+        // Create the AlertDialog object and return it
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public void showSafeScreen() {
+
     }
 }

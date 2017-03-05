@@ -18,9 +18,33 @@ public class AlertPresenterImpl implements AlertPresenter {
 
     @Override
     public void loadViews() {
-       if(!alertService.isContactsRegistered()) {
-           alertView.showNetworkButton();
-       }
+        if (!alertService.isContactsRegistered()) {
+            alertView.showNetworkButton();
+        }
 
+    }
+
+    @Override
+    public void onClickNetwork() {
+        alertView.goToNetworkScreen();
+    }
+
+    @Override
+    public void onClickSaveMe() {
+        if (alertService.isContactsRegistered()) {
+            alertService.startCountDown();
+            alertView.showSafeScreen();
+        } else {
+            alertView.showNetworkPopup();
+        }
+    }
+
+    @Override
+    public void onClickHelpMe() {
+        if (alertService.isContactsRegistered()) {
+            alertView.showSafeScreen();
+        } else {
+            alertView.showNetworkPopup();
+        }
     }
 }

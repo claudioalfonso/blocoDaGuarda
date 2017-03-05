@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:visibility="gone"
-        android:text="@string/alert_create_network_msg" />
+        android:text="@string/bdg_alert_create_network_msg" />
 
 
     <Button

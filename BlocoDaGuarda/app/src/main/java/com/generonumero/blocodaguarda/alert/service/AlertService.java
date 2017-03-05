@@ -7,4 +7,8 @@ package com.generonumero.blocodaguarda.alert.service;
 public interface AlertService {
 
     boolean isContactsRegistered();
+
+    void startCountDown();
+
+    void stopCountDown();
 }
