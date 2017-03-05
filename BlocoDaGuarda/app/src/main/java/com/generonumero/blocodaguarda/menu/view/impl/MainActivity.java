@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private void onNavDrawerItemSelected(MenuItem menuItem) {
         Fragment fragment = getFragment(menuItem.getItemId());
-        changeFragment(fragment);
+        changeFragmentWithoutBackStack(fragment);
     }
 
     private Fragment getFragment(int id) {
@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         return getFragments().get(id);
     }
 
-
     public void goToNetworkView() {
         changeFragment(getFragment(MENU_NETWORK));
     }
@@ -133,6 +132,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
 
     private void changeFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(fragment.toString())
+                .commit();
+    }
+    private void changeFragmentWithoutBackStack(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, fragment)

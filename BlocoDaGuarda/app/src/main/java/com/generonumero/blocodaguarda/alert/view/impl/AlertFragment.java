@@ -77,13 +77,12 @@ public class AlertFragment extends Fragment implements AlertView {
         builder.setMessage(getString(R.string.bdg_alert_network_dialog_message));
         builder.setPositiveButton(getString(R.string.bdg_alert_network_dialog_positive_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), "She said YES!!!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
+                        goToNetworkScreen();
                     }
                 })
                 .setNegativeButton(getString(R.string.bdg_alert_network_dialog_negative_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), "She said NOOO!!!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
