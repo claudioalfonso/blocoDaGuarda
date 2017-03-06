@@ -1,7 +1,18 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-
     <dimen name="spinner_progress_size">124dp</dimen>
+
+    <dimen name="bdg_textSize_micro">12sp</dimen>
+    <dimen name="bdg_textSize_small">14sp</dimen>
+    <dimen name="bdg_textSize_medium">18sp</dimen>
+    <dimen name="bdg_textSize_large">20sp</dimen>
+
+
+    <!-- Spacingsbdg -->
+    <dimen name="bdg_base_spacing_micro">4dp</dimen>
+    <dimen name="bdg_base_spacing_small">8dp</dimen>
+    <dimen name="bdg_base_spacing_default">16dp</dimen>
+    <dimen name="bdg_base_spacing_large">24dp</dimen>
+
+
 </resources>

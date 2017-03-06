@@ -12,10 +12,12 @@
         <br/> Verifique se os números estão corretos e se eles podem receber mensagens de texto.
     </string>
     <string name="bdg_network_save">Salvar contatos</string>
+
     <string name="bdg_login_explanation_login">Para começar, nós vamos precisar de algumas informações para te conhecer melhor, tá?</string>
-    <string name="bdg_login_warning">Não se preocupe, seus dados são totalmente sigilosos.</string>
-    <string name="bdg_login_no_face">Não quero usar meu facebook</string>
-    <string name="bdg_login_top" >Aqui você vai poder cadastrar uma rede de confiança e avisá-los quando estiver passando algum aperto.</string>
+    <string name="bdg_login_warning">Não se preocupe, seus dados são \ntotalmente sigilosos.</string>
+    <string name="bdg_login_no_face">Conectar com Facebook</string>
+    <string name="bdg_login_top" >Em situações de risco, Braços Dados permite que você envie alertas de socorro para contatos \ncadastrados que receberão sua localização e uma mensagem pedindo ajuda.</string>
+
     <string name="bdg_network_contact_name">Apelido</string>
     <string name="bdg_network_contact_phone">Telefone</string>
     <string name="bdg_network_contact_label">Contato</string>
