@@ -8,7 +8,7 @@
         android:text="@string/bdg_alert_help_dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/bdg_alert_help_dialog_button"
         android:layout_marginBottom="100dp"
         android:id="@+id/textView3" />
 
@@ -17,13 +17,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/button2" />
+        android:id="@+id/bdg_alert_help_dialog_button" />
 
     <TextView
         android:text="@string/bdg_alert_help_dialog_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/bdg_alert_help_dialog_button"
         android:layout_marginTop="100dp"
         android:id="@+id/textView4" />
 </RelativeLayout>

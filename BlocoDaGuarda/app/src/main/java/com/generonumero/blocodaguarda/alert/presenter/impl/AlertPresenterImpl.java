@@ -102,6 +102,12 @@ public class AlertPresenterImpl implements AlertPresenter {
     }
 
     @Override
+    public void onCancelClick() {
+        alertService.stopCountDown();
+        alertView.dismissSafeScreen();
+    }
+
+    @Override
     public void onStart() {
         bus.register(this);
     }

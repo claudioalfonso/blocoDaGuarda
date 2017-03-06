@@ -119,6 +119,15 @@ public class AlertFragment extends Fragment implements AlertView {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View inflate = inflater.inflate(R.layout.alert_dialog_activate, null);
 
+        View viewById = inflate.findViewById(R.id.bdg_alert_help_dialog_button);
+        viewById.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Cancelou",Toast.LENGTH_LONG).show();
+                alertPresenter.onCancelClick();
+            }
+        });
+
         alertDialog = new Dialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         alertDialog.setContentView(inflate);
 

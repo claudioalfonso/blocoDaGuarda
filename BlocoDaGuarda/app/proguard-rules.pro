@@ -77,6 +77,8 @@
 
 ########################################### Keep Our Class ###########################################
 -keep class com.generonumero.** { *; }
+-keep class com.generonumero.blocodaguarda.** { *; }
+-keep class com.generonumero.blocodaguarda.alert.service.impl.AlertServiceImpl { *; }
 
 ######################################### Support library #############################
 

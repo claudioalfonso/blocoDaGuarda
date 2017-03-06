@@ -1,6 +1,7 @@
 package com.generonumero.blocodaguarda;
 
 import android.app.Application;
+import android.support.multidex.MultiDex;
 
 import com.facebook.FacebookSdk;
 import com.generonumero.blocodaguarda.alert.presenter.AlertPresenter;
@@ -42,12 +43,11 @@ public class BDGApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         instance = this;
 
         BDGTracking.initialize(getApplicationContext());
-
         FacebookSdk.sdkInitialize(getApplicationContext());
-
     }
 
     public static BDGApplication getInstance() {

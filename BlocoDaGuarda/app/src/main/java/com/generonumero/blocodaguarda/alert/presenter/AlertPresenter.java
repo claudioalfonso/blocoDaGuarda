@@ -19,4 +19,6 @@ public interface AlertPresenter extends BasePresenter, PermissionPresenter {
 
     void onCountDownFinished(CountDownFinished countDownFinished);
 
+    void onCancelClick();
+
 }

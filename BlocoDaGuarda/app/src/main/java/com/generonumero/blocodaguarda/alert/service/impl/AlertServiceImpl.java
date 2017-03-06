@@ -1,11 +1,14 @@
 package com.generonumero.blocodaguarda.alert.service.impl;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
@@ -16,11 +19,13 @@ import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.List;
 
-public class AlertServiceImpl implements AlertService, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class AlertServiceImpl implements AlertService, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private NetworkRepository networkRepository;
     private CountDownTimer countDownTimer;
@@ -28,7 +33,8 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     private final int TIME_TO_COUNT_DEFAULT = 15 * SECOND_IN_MILLIS;
 
     private GoogleApiClient googleApiClient;
-
+    private LocationRequest locationRequest;
+    private Location location;
 
     public AlertServiceImpl(NetworkRepository networkRepository) {
         this.networkRepository = networkRepository;
@@ -43,6 +49,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
                 BDGApplication.getInstance().getBus().post(new CountDownFinished());
             }
         };
+        locationRequest = new LocationRequest();
     }
 
     @Override
@@ -76,36 +83,39 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
         }
     }
 
+    @Override
     public void sendSMS() {
         Context applicationContext = BDGApplication.getInstance().getApplicationContext();
-        try {
+        StringBuffer buffer = new StringBuffer("");
 
-            Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-
-            StringBuffer buffer = new StringBuffer("");
-            buffer.append("Foi mal pertubar, mas to testando um app que fiz");
-            buffer.append("\n");
-            buffer.append("http://maps.google.com?q=");
-            buffer.append(lastLocation.getLatitude());
-            buffer.append(",");
-            buffer.append(lastLocation.getLongitude());
-
-            SmsManager smsManager = SmsManager.getDefault();
-
-            String phoneAdress = "021984417774";
-
-            smsManager.sendTextMessage(phoneAdress, null, buffer.toString(), null, null);
-            Toast.makeText(applicationContext, "Message Sent", Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            Toast.makeText(applicationContext, ex.getMessage().toString(),
-                    Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
+//        buffer.append("Foi mal pertubar, mas to testando um app que fiz");
+        if(location == null) {
+            location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         }
+        if (location != null) {
+            String a = "https://maps.google.com?q=" + location.getLatitude() + "," + location.getLongitude();
+            buffer.append(a);
+        }
+
+        SmsManager smsManager = SmsManager.getDefault();
+
+        List<Contact> allContacts = networkRepository.getAllContacts();
+        for (Contact contact : allContacts) {
+            String phone = contact.getPhone().replaceAll("[^\\d.]", "");
+
+            smsManager.sendTextMessage("4234234", null, buffer.toString(), null, null);
+            break;
+        }
+        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        try {
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        } catch (Exception e) {
 
+        }
     }
 
     @Override
@@ -116,5 +126,10 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.location = location;
     }
 }
