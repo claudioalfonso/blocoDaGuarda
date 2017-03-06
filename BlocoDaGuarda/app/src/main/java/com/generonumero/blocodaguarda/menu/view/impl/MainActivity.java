@@ -7,10 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public final int MENU_ABOUT = R.id.action_menu_about;
     public final int MENU_CONFIGURATION = R.id.action_menu_configuration;
     public final int MENU_NETWORK = R.id.action_menu_network;
-    public final int MENU_SOS = R.id.action_menu_sos;
 
     @Bind(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(i);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +76,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setFirstItemNavigationView();
     }
 
+    public void goToNetworkView() {
+        changeFragment(getFragment(MENU_NETWORK));
+    }
+
+    public void goToHome() {
+        changeFragment(getFragment(MENU_MAIN));
+    }
+
+
     private void setFirstItemNavigationView() {
         navigationView.setCheckedItem(MENU_MAIN);
         navigationView.getMenu().performIdentifierAction(MENU_MAIN, 0);
@@ -92,6 +101,28 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 return false;
             }
         });
+
+        // Initializing Drawer Layout and ActionBarToggle
+        ActionBarDrawerToggle actionBarDrawerToggle = getActionBarDrawerToggle(toolbar);
+        //Setting the actionbarToggle to drawer layout
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        //calling sync state is necessay or else your hamburger icon wont show up
+        actionBarDrawerToggle.syncState();
+    }
+
+    private ActionBarDrawerToggle getActionBarDrawerToggle(Toolbar toolbar) {
+        return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close) {
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
     }
 
     private void onNavDrawerItemSelected(MenuItem menuItem) {
@@ -105,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 if (getFragments().get(MENU_MAIN) == null) {
                     getFragments().put(MENU_MAIN, new AlertFragment());
                 }
-                Log.i("teste", "MENU_MAIN");
+                toolbar.setTitle("Braços dados");
                 break;
             case MENU_ABOUT:
                 Log.i("teste", "MENU_ABOUT");
@@ -115,19 +146,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 if (getFragments().get(MENU_NETWORK) == null) {
                     getFragments().put(MENU_NETWORK, new NetworkFragment());
                 }
+                toolbar.setTitle("Rede de confiança");
                 break;
-            case MENU_SOS:
-                Log.i("teste", "MENU_SOS");
         }
         return getFragments().get(id);
-    }
-
-    public void goToNetworkView() {
-        changeFragment(getFragment(MENU_NETWORK));
-    }
-
-    public void goToHome() {
-        changeFragment(getFragment(MENU_MAIN));
     }
 
 
@@ -138,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 .addToBackStack(fragment.toString())
                 .commit();
     }
+
     private void changeFragmentWithoutBackStack(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()

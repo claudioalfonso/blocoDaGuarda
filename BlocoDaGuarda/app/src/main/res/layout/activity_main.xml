@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        app:titleTextColor="@color/colorAccent"
         android:minHeight="?attr/actionBarSize" />
 
     <android.support.v4.widget.DrawerLayout
@@ -26,9 +27,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#ffffff"
-            app:itemIconTint="#003300"
-            app:itemTextColor="#003300"
+            android:background="#e9e9e9"
+            app:itemIconTint="@color/colorAccent"
+            app:itemTextColor="@color/bdg_black"
+            app:itemTextAppearance="@style/menu_text"
+            app:paddingStart="20dp"
             app:menu="@menu/main_drawer"
             />
     </android.support.v4.widget.DrawerLayout>

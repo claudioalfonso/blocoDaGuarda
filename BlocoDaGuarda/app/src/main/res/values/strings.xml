@@ -29,6 +29,8 @@
     <string name="bdg_alert_help_dialog_title">Você está bem?</string>
     <string name="bdg_alert_help_dialog_time">Sua rede de confiança será acionada caso você não responda em 15s.</string>
     <string name="bdg_alert_help_dialog_button">Sim</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 
 
 </resources>
