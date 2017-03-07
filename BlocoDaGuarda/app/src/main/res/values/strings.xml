@@ -32,5 +32,14 @@
     <string name="open">open</string>
     <string name="close">close</string>
 
+    <string name="bdg_about">
+        A Gênero e Número é a primeira web revista brasileira que apresenta narrativas jornalísticas guiados por dados sobre as assimetrias de gênero.
+    </string>
+
+     <string name="bdg_about_link">
+        Para conhecer mais do nosso trabalho, acesse nosso site www.generonumero.media
+    </string>
+
+
 
 </resources>

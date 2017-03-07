@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
+import com.generonumero.blocodaguarda.about.view.AboutFragment;
 import com.generonumero.blocodaguarda.alert.view.impl.AlertFragment;
 import com.generonumero.blocodaguarda.login.view.impl.LoginActivity;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
@@ -139,7 +140,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 toolbar.setTitle("Braços dados");
                 break;
             case MENU_ABOUT:
-                Log.i("teste", "MENU_ABOUT");
+                if (getFragments().get(MENU_ABOUT) == null) {
+                    getFragments().put(MENU_ABOUT, new AboutFragment());
+                }
+                toolbar.setTitle("gênero e número");
+                break;
             case MENU_CONFIGURATION:
                 Log.i("teste", "MENU_CONFIGURATION");
             case MENU_NETWORK:

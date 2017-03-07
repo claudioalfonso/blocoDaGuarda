@@ -5,7 +5,8 @@
     <color name="colorAccent">#3ecda5</color>
 
     <color name="bdg_background_login_top">#6f4982</color>
-    <color name="bdg_background_login_bottom">#f5f1ff</color>
+    <color name="bdg_background_login_bottom">@color/bdg_background_default</color>
+    <color name="bdg_background_default">#f5f1ff</color>
 
 
     <color name="bdg_white">#FFFFFF</color>

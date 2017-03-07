@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/bdg_base_spacing_default"
+    android:background="@color/bdg_background_default"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:src="@drawable/logo_gn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/imageView3" />
+
+    <TextView
+        android:text="@string/bdg_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        style="@style/about_text"
+        />
+
+    <TextView
+        android:text="@string/bdg_about_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        style="@style/about_text"
+        android:id="@+id/bdg_about_link" />
+
+
+</LinearLayout>
