@@ -146,6 +146,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 toolbar.setTitle("gênero e número");
                 break;
             case MENU_CONFIGURATION:
+                if (getFragments().get(MENU_CONFIGURATION) == null) {
+                    getFragments().put(MENU_CONFIGURATION, new AboutFragment());
+                }
+                toolbar.setTitle("Configurações");
                 Log.i("teste", "MENU_CONFIGURATION");
             case MENU_NETWORK:
                 if (getFragments().get(MENU_NETWORK) == null) {

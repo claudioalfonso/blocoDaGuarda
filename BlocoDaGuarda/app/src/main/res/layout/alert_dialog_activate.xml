@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="@dimen/bdg_base_spacing_default"
     android:background="@color/background_saveme"
     android:layout_height="match_parent">
 
@@ -9,14 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bdg_alert_help_dialog_button"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="60dp"
+        style="@style/alert_dialog_title"
         android:id="@+id/textView3" />
 
     <Button
         android:text="@string/bdg_alert_help_dialog_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerInParent="true"
+        style="@style/bdg_alert_ok_button"
         android:id="@+id/bdg_alert_help_dialog_button" />
 
     <TextView
@@ -24,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bdg_alert_help_dialog_button"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
+        style="@style/contact_text"
         android:id="@+id/textView4" />
 </RelativeLayout>

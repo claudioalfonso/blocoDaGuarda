@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#674877</color>
     <color name="colorAccent">#3ecda5</color>
 
+
     <color name="bdg_background_login_top">#6f4982</color>
     <color name="bdg_background_login_bottom">@color/bdg_background_default</color>
     <color name="bdg_background_default">#f5f1ff</color>
@@ -13,7 +14,7 @@
     <color name="bdg_black">#000000</color>
     <color name="bdg_separator">#93a8ac</color>
 
-    <color name="background_saveme">#66FF4081</color>
+    <color name="background_saveme">#666f4982</color>
     <color name="default_circle_color">#534d89</color>
     <color name="default_progress_color">#d7d4ef</color>
 
