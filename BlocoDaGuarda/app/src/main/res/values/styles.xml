@@ -55,8 +55,19 @@
     </style>
 
     <style name="login_button" parent="MyButton">
-        <item name="android:textColor">@color/bdg_white</item>
         <item name="android:textSize">@dimen/bdg_textSize_medium</item>
+    </style>
+
+    <style name="bdg_network_button" parent="MyButton">
+        <item name="android:textSize">@dimen/bdg_textSize_medium</item>
+        <item name="android:textColor">@color/bdg_white</item>
+        <item name="android:background">@drawable/bdg_network_rounded_button</item>
+
+    </style>
+
+    <style name="contact_text" parent="primaryText">
+    <item name="android:textColor">@color/bdg_white</item>
+    <item name="android:textSize">@dimen/bdg_textSize_medium</item>
     </style>
 
     <style name="menu_text">
