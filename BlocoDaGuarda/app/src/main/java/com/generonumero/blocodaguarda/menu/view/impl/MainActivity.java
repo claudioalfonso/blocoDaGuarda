@@ -93,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private void setupDrawerContent(NavigationView navigationView) {
 
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setIcon(R.drawable.logo_small);
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -137,25 +142,24 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 if (getFragments().get(MENU_MAIN) == null) {
                     getFragments().put(MENU_MAIN, new AlertFragment());
                 }
-                toolbar.setTitle("Braços dados");
+                toolbar.setTitle("  Braços dados");
                 break;
             case MENU_ABOUT:
                 if (getFragments().get(MENU_ABOUT) == null) {
                     getFragments().put(MENU_ABOUT, new AboutFragment());
                 }
-                toolbar.setTitle("gênero e número");
+                toolbar.setTitle("  Gênero e número");
                 break;
             case MENU_CONFIGURATION:
                 if (getFragments().get(MENU_CONFIGURATION) == null) {
                     getFragments().put(MENU_CONFIGURATION, new AboutFragment());
                 }
-                toolbar.setTitle("Configurações");
-                Log.i("teste", "MENU_CONFIGURATION");
+                toolbar.setTitle("  Configurações");
             case MENU_NETWORK:
                 if (getFragments().get(MENU_NETWORK) == null) {
                     getFragments().put(MENU_NETWORK, new NetworkFragment());
                 }
-                toolbar.setTitle("Rede de confiança");
+                toolbar.setTitle("  Rede de confiança");
                 break;
         }
         return getFragments().get(id);

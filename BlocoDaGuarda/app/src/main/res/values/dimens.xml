@@ -12,6 +12,7 @@
     <!-- Spacingsbdg -->
     <dimen name="bdg_base_spacing_micro">4dp</dimen>
     <dimen name="bdg_base_spacing_small">8dp</dimen>
+    <dimen name="bdg_base_spacing_medium">10dp</dimen>
     <dimen name="bdg_base_spacing_default">16dp</dimen>
     <dimen name="bdg_base_spacing_large">24dp</dimen>
 
