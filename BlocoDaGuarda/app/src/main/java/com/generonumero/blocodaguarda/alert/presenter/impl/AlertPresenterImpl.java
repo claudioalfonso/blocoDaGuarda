@@ -41,6 +41,8 @@ public class AlertPresenterImpl implements AlertPresenter {
     public void loadViews() {
         if (!alertService.isContactsRegistered()) {
             alertView.showNetworkButton();
+        } else {
+
         }
 
     }

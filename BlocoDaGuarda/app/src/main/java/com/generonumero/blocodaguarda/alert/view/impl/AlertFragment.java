@@ -82,6 +82,11 @@ public class AlertFragment extends Fragment implements AlertView {
     }
 
     @Override
+    public void hideNetworkButton() {
+        networkBt.setVisibility(View.GONE);
+    }
+
+    @Override
     public void goToNetworkScreen() {
         MainActivity activity = (MainActivity) getActivity();
         activity.goToNetworkView();

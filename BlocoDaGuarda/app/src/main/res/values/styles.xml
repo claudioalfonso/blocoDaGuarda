@@ -71,6 +71,20 @@
 
     </style>
 
+
+    <style name="bdg_alert_network_button" parent="MyButton">
+        <item name="android:drawableLeft">@drawable/ico_alert</item>
+        <item name="android:drawableStart">@drawable/ico_alert</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/bdg_white</item>
+        <item name="android:background">@drawable/bdg_rounded_button</item>
+
+    </style>
+
+
+
+
     <style name="contact_text" parent="primaryText">
         <item name="android:textColor">@color/bdg_white</item>
         <item name="android:textSize">@dimen/bdg_textSize_medium</item>

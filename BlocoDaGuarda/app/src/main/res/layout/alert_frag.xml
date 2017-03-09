@@ -10,10 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:drawableLeft="@drawable/ico_alert"
-        android:background="@drawable/bdg_rounded_button"
-        android:textSize="@dimen/bdg_base_spacing_default"
-        android:gravity="center"
+        style="@style/bdg_alert_network_button"
+        android:visibility="gone"
         android:text="@string/bdg_alert_create_network_msg" />
 
 

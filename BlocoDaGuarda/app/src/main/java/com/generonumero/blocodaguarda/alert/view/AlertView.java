@@ -6,6 +6,8 @@ public interface AlertView extends PermissionView {
 
     void showNetworkButton();
 
+    void hideNetworkButton();
+
     void goToNetworkScreen();
 
     void showNetworkPopup();
