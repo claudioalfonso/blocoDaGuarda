@@ -3,7 +3,6 @@ package com.generonumero.blocodaguarda.configuration.view.impl;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,7 @@ import org.florescu.android.rangeseekbar.RangeSeekBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import static com.generonumero.blocodaguarda.configuration.repository.TypeOfForm.*;
+import butterknife.OnClick;
 
 
 public class ConfigurationFragment extends Fragment implements ConfigurationView {
@@ -33,10 +31,10 @@ public class ConfigurationFragment extends Fragment implements ConfigurationView
     @Bind(R.id.bdg_conf_radio_push)
     RadioButton radioPush;
     @Bind(R.id.bdg_conf_radio_email)
+    RadioButton radioEmail;
+    @Bind(R.id.bdg_conf_radiogroup)
     RadioGroup radioGroup;
 
-    @Bind(R.id.bdg_conf_radiogroup)
-    AppCompatRadioButton radioEmail;
 
     private ConfigurationPresenter configurationPresenter;
 
@@ -58,6 +56,17 @@ public class ConfigurationFragment extends Fragment implements ConfigurationView
         return view;
     }
 
+    @OnClick(R.id.bdg_config_save)
+    public void onClickSave() {
+        int type = TypeOfForm.FORM_BY_EMAIL;
+        if (radioGroup.getCheckedRadioButtonId() == radioPush.getId()) {
+            type = TypeOfForm.FORM_BY_PUSH;
+        }
+
+        configurationPresenter.clickSaveConfigs(rangeSeekBar.getSelectedMaxValue(), type);
+    }
+
+
     @Override
     public void onSaveData() {
         MainActivity activity = (MainActivity) getActivity();
@@ -72,8 +81,8 @@ public class ConfigurationFragment extends Fragment implements ConfigurationView
             case TypeOfForm.FORM_BY_PUSH:
                 radioGroup.check(radioPush.getId());
                 break;
-            case FORM_BY_EMAIL:
-                radioGroup.check(radioPush.getId());
+            case TypeOfForm.FORM_BY_EMAIL:
+                radioGroup.check(radioEmail.getId());
                 break;
         }
 

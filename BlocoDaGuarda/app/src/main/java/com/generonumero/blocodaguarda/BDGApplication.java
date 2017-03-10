@@ -115,7 +115,7 @@ public class BDGApplication extends Application {
 
     public ConfigurationRepository getConfigurationRepository() {
         if(configurationRepository == null) {
-            configurationRepository = new ConfigurationRepositoryImpl();
+            configurationRepository = new ConfigurationRepositoryImpl(getApplicationContext());
         }
         return configurationRepository;
     }

@@ -24,11 +24,14 @@ public class ConfigurationPresenterImpl implements ConfigurationPresenter{
 
     @Override
     public void clickSaveConfigs(int time, int typeOfForm) {
+        configurationRepository.saveFormSender(typeOfForm);
+        configurationRepository.saveTime(time);
 
+        onConfigsSave();
     }
 
     @Override
     public void onConfigsSave() {
-
+        configurationView.onSaveData();
     }
 }

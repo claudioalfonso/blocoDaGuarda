@@ -109,7 +109,7 @@
 
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/bdg_config_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/bdg_network_button"
