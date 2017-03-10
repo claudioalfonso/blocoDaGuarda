@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -18,7 +17,7 @@ import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
 import com.generonumero.blocodaguarda.about.view.AboutFragment;
 import com.generonumero.blocodaguarda.alert.view.impl.AlertFragment;
-import com.generonumero.blocodaguarda.configuration.ConfigurationFragment;
+import com.generonumero.blocodaguarda.configuration.view.impl.ConfigurationFragment;
 import com.generonumero.blocodaguarda.login.view.impl.LoginActivity;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.view.MainView;
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     public void goToHome() {
-        changeFragment(getFragment(MENU_MAIN));
+        changeFragmentWithoutBackStack(getFragment(MENU_MAIN));
     }
 
 
@@ -95,9 +94,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private void setupDrawerContent(NavigationView navigationView) {
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setIcon(R.drawable.logo_small);
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setIcon(R.drawable.logo_small);
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

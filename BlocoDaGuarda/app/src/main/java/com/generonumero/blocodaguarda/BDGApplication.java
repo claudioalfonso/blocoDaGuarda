@@ -10,6 +10,12 @@ import com.generonumero.blocodaguarda.alert.service.AlertService;
 import com.generonumero.blocodaguarda.alert.service.impl.AlertServiceImpl;
 import com.generonumero.blocodaguarda.alert.view.AlertView;
 import com.generonumero.blocodaguarda.analytics.BDGTracking;
+import com.generonumero.blocodaguarda.configuration.presenter.ConfigurationPresenter;
+import com.generonumero.blocodaguarda.configuration.presenter.impl.ConfigurationPresenterImpl;
+import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepository;
+import com.generonumero.blocodaguarda.configuration.repository.impl.ConfigurationRepositoryImpl;
+import com.generonumero.blocodaguarda.configuration.view.ConfigurationView;
+import com.generonumero.blocodaguarda.configuration.view.impl.ConfigurationFragment;
 import com.generonumero.blocodaguarda.login.presenter.LoginPresenter;
 import com.generonumero.blocodaguarda.login.presenter.impl.LoginPresenterImpl;
 import com.generonumero.blocodaguarda.login.service.FacebookLoginService;
@@ -39,6 +45,8 @@ public class BDGApplication extends Application {
     private PermissionService permissionService;
 
     private AlertService alertService;
+
+    private ConfigurationRepository configurationRepository;
 
     @Override
     public void onCreate() {
@@ -103,5 +111,16 @@ public class BDGApplication extends Application {
             alertService = new AlertServiceImpl(getNetworkRepository());
         }
         return alertService;
+    }
+
+    public ConfigurationRepository getConfigurationRepository() {
+        if(configurationRepository == null) {
+            configurationRepository = new ConfigurationRepositoryImpl();
+        }
+        return configurationRepository;
+    }
+
+    public ConfigurationPresenter getConfigurationPresenter(ConfigurationView configurationView) {
+        return new ConfigurationPresenterImpl(configurationView, getConfigurationRepository());
     }
 }
