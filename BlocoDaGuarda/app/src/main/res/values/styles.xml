@@ -83,7 +83,17 @@
     </style>
 
 
+    <style name="config_title" parent="primaryText">
+        <item name="android:textSize">@dimen/bdg_textSize_medium</item>
+        <item name="android:textColor">@color/bdg_black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
+    <style name="config_text" parent="primaryText">
+        <item name="android:textColor">@color/bdg_black</item>
+        <item name="android:textSize">@dimen/bdg_textSize_medium</item>
+        <item name="android:gravity">left</item>
+    </style>
 
     <style name="contact_text" parent="primaryText">
         <item name="android:textColor">@color/bdg_white</item>

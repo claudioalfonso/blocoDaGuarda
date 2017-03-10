@@ -18,6 +18,7 @@ import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
 import com.generonumero.blocodaguarda.about.view.AboutFragment;
 import com.generonumero.blocodaguarda.alert.view.impl.AlertFragment;
+import com.generonumero.blocodaguarda.configuration.ConfigurationFragment;
 import com.generonumero.blocodaguarda.login.view.impl.LoginActivity;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.view.MainView;
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 break;
             case MENU_CONFIGURATION:
                 if (getFragments().get(MENU_CONFIGURATION) == null) {
-                    getFragments().put(MENU_CONFIGURATION, new AboutFragment());
+                    getFragments().put(MENU_CONFIGURATION, new ConfigurationFragment());
                 }
                 toolbar.setTitle("  Configurações");
             case MENU_NETWORK:

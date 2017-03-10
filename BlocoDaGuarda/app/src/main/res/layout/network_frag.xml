@@ -24,7 +24,7 @@
         android:id="@+id/bdg_network_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bdg_network_rounded_button"
+
         style="@style/bdg_network_button"
         android:text="@string/bdg_network_save" />
 </LinearLayout>

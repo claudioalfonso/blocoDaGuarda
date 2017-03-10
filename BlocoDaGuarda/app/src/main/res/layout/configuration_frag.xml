@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bdg_background_default"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/bdg_base_spacing_default">
+
+
+            <TextView
+                style="@style/config_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/bdg_config_time_title" />
+
+            <TextView
+                style="@style/config_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="left"
+                android:text="@string/bdg_config_time_text" />
+
+
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:id="@+id/teste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                rsb:absoluteMaxValue="60"
+                rsb:absoluteMinValue="10"
+                rsb:activateOnDefaultValues="true"
+                rsb:activeColor="@color/colorAccent"
+                rsb:defaultColor="@color/bdg_black"
+                rsb:singleThumb="true"
+                rsb:textAboveThumbsColor="@color/bdg_black"
+                rsb:thumbShadowColor="#344444"
+                rsb:valuesAboveThumbs="true" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/bdg_separator" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:padding="@dimen/bdg_base_spacing_default">
+
+            <TextView
+                style="@style/config_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/bdg_config_form_title" />
+
+            <TextView
+                style="@style/config_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="left"
+                android:text="@string/bdg_config_form_text" />
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radio_pirates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bdg_config_radio_email"
+                    android:textAppearance="@style/about_text" />
+
+                <RadioButton
+                    android:id="@+id/radio_ninjas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/bdg_config_radio_push"
+                    android:textAppearance="@style/about_text" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/bdg_separator" />
+
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/bdg_network_button"
+            android:layout_margin="@dimen/bdg_base_spacing_default"
+            android:text="Salvar configurações" />
+
+
+
+    </LinearLayout>
+
+</ScrollView>
