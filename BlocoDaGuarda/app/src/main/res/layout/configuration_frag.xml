@@ -2,12 +2,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bdg_background_default">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bdg_background_default"
         android:orientation="vertical">
 
 
@@ -78,10 +78,10 @@
                 android:text="@string/bdg_config_form_text" />
 
             <RadioGroup
+                android:id="@+id/bdg_conf_radiogroup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:id="@+id/bdg_conf_radiogroup"
                 android:orientation="vertical">
 
                 <RadioButton
@@ -110,12 +110,11 @@
 
         <Button
             android:id="@+id/bdg_config_save"
+            style="@style/bdg_network_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/bdg_network_button"
             android:layout_margin="@dimen/bdg_base_spacing_default"
             android:text="Salvar configurações" />
-
 
 
     </LinearLayout>

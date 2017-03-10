@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/bdg_base_spacing_default"
-    android:orientation="vertical">
+    android:background="@color/colorPrimary"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/bdg_base_spacing_default">
 
     <Button
         android:id="@+id/alert_create_network"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         style="@style/bdg_alert_network_button"
-        android:visibility="gone"
-        android:text="@string/bdg_alert_create_network_msg" />
-
-
-    <Button
-        android:id="@+id/alert_bt_save_me"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/view"
-        android:text="Coração" />
+        android:text="@string/bdg_alert_create_network_msg"
+        android:visibility="gone" />
 
-    <Button
-        android:id="@+id/alert_bt_help_me"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/bdg_alert_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:text="Interrogação" />
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/bdg_alert_msg" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/alert_bt_save_me"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/alert_button_saveme_selector"
+            android:text="Coração" />
+    </RelativeLayout>
+
+
+</LinearLayout>

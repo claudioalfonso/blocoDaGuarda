@@ -54,6 +54,13 @@
         <item name="android:textColor">@color/bdg_black</item>
     </style>
 
+    <style name="bdg_alert_text" parent="primaryText">
+        <item name="android:textSize">@dimen/bdg_textSize_medium</item>
+        <item name="android:textColor">@color/bdg_white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
 
     <style name="about_text" parent="primaryText">
         <item name="android:textSize">@dimen/bdg_textSize_medium</item>
