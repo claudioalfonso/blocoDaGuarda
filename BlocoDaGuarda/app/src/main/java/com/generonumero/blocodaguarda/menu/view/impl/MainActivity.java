@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -137,6 +139,17 @@ public class MainActivity extends AppCompatActivity implements MainView {
         changeFragmentWithoutBackStack(fragment);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
     private Fragment getFragment(int id) {
         switch (id) {
             case MENU_MAIN:
@@ -171,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, fragment)
-                .addToBackStack(fragment.toString())
+                .addToBackStack(null)
                 .commit();
     }
 
