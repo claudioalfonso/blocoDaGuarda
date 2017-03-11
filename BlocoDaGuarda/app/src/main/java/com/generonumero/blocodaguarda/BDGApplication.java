@@ -28,7 +28,7 @@ import com.generonumero.blocodaguarda.network.repository.impl.NetworkRepositoryI
 import com.generonumero.blocodaguarda.network.view.NetworkView;
 import com.generonumero.blocodaguarda.permission.service.PermissionService;
 import com.generonumero.blocodaguarda.permission.service.impl.PermissionServiceImpl;
-import com.generonumero.blocodaguarda.tracking.TrackerInitializer;
+import com.generonumero.blocodaguarda.tracking.TrackerBDG;
 import com.squareup.otto.Bus;
 
 public class BDGApplication extends Application {
@@ -54,7 +54,7 @@ public class BDGApplication extends Application {
         MultiDex.install(this);
         instance = this;
 
-        TrackerInitializer.initialize(getApplicationContext());
+        TrackerBDG.initialize(getApplicationContext());
         FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
@@ -106,14 +106,14 @@ public class BDGApplication extends Application {
         return permissionService;
     }
 
-    public AlertService getAlertService() {
+    private AlertService getAlertService() {
         if (alertService == null) {
             alertService = new AlertServiceImpl(getNetworkRepository());
         }
         return alertService;
     }
 
-    public ConfigurationRepository getConfigurationRepository() {
+    private ConfigurationRepository getConfigurationRepository() {
         if(configurationRepository == null) {
             configurationRepository = new ConfigurationRepositoryImpl(getApplicationContext());
         }

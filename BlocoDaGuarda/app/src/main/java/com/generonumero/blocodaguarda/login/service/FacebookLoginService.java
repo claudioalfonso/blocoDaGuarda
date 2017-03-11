@@ -17,10 +17,12 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.generonumero.blocodaguarda.login.event.LoginData;
 import com.generonumero.blocodaguarda.login.event.LoginFailed;
 import com.generonumero.blocodaguarda.login.event.LoginSuccessful;
 import com.squareup.otto.Bus;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,8 +32,8 @@ public class FacebookLoginService {
 
     private final Context mContext;
     private final Bus bus;
-    CallbackManager callbackManager;
-    Collection<String> permissions;
+    private CallbackManager callbackManager;
+    private Collection<String> permissions;
 
     public FacebookLoginService(Context context, Bus bus) {
         mContext = context;
@@ -102,13 +104,31 @@ public class FacebookLoginService {
                         public void onCompleted(
                                 JSONObject object,
                                 GraphResponse response) {
+
+                            try {
+                                if (object != null) {
+                                    String name = object.getString("name");
+                                    String email = object.getString("email");
+                                    String gender = object.getString("gender");
+
+                                    LoginData loginData = new LoginData(name, email, gender);
+                                    bus.post(loginData);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+
+
                             Log.i("teste", "logou");
                             //save User
 
                         }
                     });
             Bundle parameters = new Bundle();
-            parameters.putString("fields", "id, birthday, email, gender, name, age ");
+            parameters.putString("fields", "id, birthday, email, gender, name");
             request.setParameters(parameters);
             request.executeAsync();
         }

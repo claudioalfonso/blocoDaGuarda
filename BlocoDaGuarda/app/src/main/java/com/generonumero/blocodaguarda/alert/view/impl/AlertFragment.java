@@ -62,12 +62,12 @@ public class AlertFragment extends Fragment implements AlertView {
     }
 
     @OnClick(R.id.alert_create_network)
-    public void onClickNetworkButton(View v) {
+    void onClickNetworkButton(View v) {
         alertPresenter.onClickNetwork();
     }
 
     @OnClick(R.id.alert_bt_save_me)
-    public void onClickSaveMeButton(View v) {
+    void onClickSaveMeButton(View v) {
         alertPresenter.onClickSaveMe(this);
     }
 
@@ -128,7 +128,7 @@ public class AlertFragment extends Fragment implements AlertView {
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Cancelou",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Envio cancelado. Que bom que você está a salvo.",Toast.LENGTH_LONG).show();
                 alertPresenter.onCancelClick();
             }
         });
