@@ -62,7 +62,6 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
         countDownTimer = new CountDownTimer(time, SECOND_IN_MILLIS) {
             @Override
             public void onTick(long l) {
-                Log.i("teste", "Tic tac:" + l);
             }
 
             @Override
