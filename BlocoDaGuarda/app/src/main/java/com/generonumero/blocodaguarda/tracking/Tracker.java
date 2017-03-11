@@ -1,4 +1,4 @@
-package com.generonumero.blocodaguarda.analytics.tracking;
+package com.generonumero.blocodaguarda.tracking;
 
 
 import android.os.Bundle;

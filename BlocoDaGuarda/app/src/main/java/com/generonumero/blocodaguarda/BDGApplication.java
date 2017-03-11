@@ -9,13 +9,11 @@ import com.generonumero.blocodaguarda.alert.presenter.impl.AlertPresenterImpl;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
 import com.generonumero.blocodaguarda.alert.service.impl.AlertServiceImpl;
 import com.generonumero.blocodaguarda.alert.view.AlertView;
-import com.generonumero.blocodaguarda.analytics.BDGTracking;
 import com.generonumero.blocodaguarda.configuration.presenter.ConfigurationPresenter;
 import com.generonumero.blocodaguarda.configuration.presenter.impl.ConfigurationPresenterImpl;
 import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepository;
 import com.generonumero.blocodaguarda.configuration.repository.impl.ConfigurationRepositoryImpl;
 import com.generonumero.blocodaguarda.configuration.view.ConfigurationView;
-import com.generonumero.blocodaguarda.configuration.view.impl.ConfigurationFragment;
 import com.generonumero.blocodaguarda.login.presenter.LoginPresenter;
 import com.generonumero.blocodaguarda.login.presenter.impl.LoginPresenterImpl;
 import com.generonumero.blocodaguarda.login.service.FacebookLoginService;
@@ -30,6 +28,7 @@ import com.generonumero.blocodaguarda.network.repository.impl.NetworkRepositoryI
 import com.generonumero.blocodaguarda.network.view.NetworkView;
 import com.generonumero.blocodaguarda.permission.service.PermissionService;
 import com.generonumero.blocodaguarda.permission.service.impl.PermissionServiceImpl;
+import com.generonumero.blocodaguarda.tracking.TrackerInitializer;
 import com.squareup.otto.Bus;
 
 public class BDGApplication extends Application {
@@ -51,10 +50,11 @@ public class BDGApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         MultiDex.install(this);
         instance = this;
 
-        BDGTracking.initialize(getApplicationContext());
+        TrackerInitializer.initialize(getApplicationContext());
         FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
