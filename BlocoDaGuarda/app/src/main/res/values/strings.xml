@@ -37,7 +37,7 @@
     </string>
 
      <string name="bdg_about_link">
-        Para conhecer mais do nosso trabalho, acesse nosso site www.generonumero.media
+        Para conhecer mais do nosso trabalho, acesse nosso site <u>www.generonumero.media</u>
     </string>
     <string name="bdg_config_time_title">Tempo</string>
     <string name="bdg_config_time_text">Defina o tempo de espera até que o app dispare o SMS para a sua rede de contatos</string>
