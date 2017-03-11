@@ -10,11 +10,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.alert.event.CountDownFinished;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
+import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepository;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.google.android.gms.common.ConnectionResult;
@@ -28,27 +30,17 @@ import java.util.List;
 public class AlertServiceImpl implements AlertService, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private NetworkRepository networkRepository;
+    private ConfigurationRepository configurationRepository;
     private CountDownTimer countDownTimer;
     private final int SECOND_IN_MILLIS = 1000;
-    private final int TIME_TO_COUNT_DEFAULT = 15 * SECOND_IN_MILLIS;
 
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private Location location;
 
-    public AlertServiceImpl(NetworkRepository networkRepository) {
+    public AlertServiceImpl(NetworkRepository networkRepository, ConfigurationRepository configurationRepository) {
         this.networkRepository = networkRepository;
-        countDownTimer = new CountDownTimer(TIME_TO_COUNT_DEFAULT, SECOND_IN_MILLIS) {
-            @Override
-            public void onTick(long l) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                BDGApplication.getInstance().getBus().post(new CountDownFinished());
-            }
-        };
+        this.configurationRepository = configurationRepository;
         locationRequest = new LocationRequest();
     }
 
@@ -65,6 +57,19 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
     @Override
     public void startCountDown() {
+        int time = configurationRepository.getTime() * SECOND_IN_MILLIS;
+
+        countDownTimer = new CountDownTimer(time, SECOND_IN_MILLIS) {
+            @Override
+            public void onTick(long l) {
+                Log.i("teste", "Tic tac:" + l);
+            }
+
+            @Override
+            public void onFinish() {
+                BDGApplication.getInstance().getBus().post(new CountDownFinished());
+            }
+        };
         countDownTimer.start();
         googleApiClient = new GoogleApiClient.Builder(BDGApplication.getInstance())
                 .addConnectionCallbacks(this)
@@ -85,8 +90,11 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
     @Override
     public void sendSMS() {
-        Context applicationContext = BDGApplication.getInstance().getApplicationContext();
         StringBuffer buffer = new StringBuffer("");
+
+        Log.i("teste", "send sms");
+
+
 
 //        buffer.append("Foi mal pertubar, mas to testando um app que fiz");
         if(location == null) {

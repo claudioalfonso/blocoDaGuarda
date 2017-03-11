@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
@@ -71,11 +72,6 @@ public class AlertFragment extends Fragment implements AlertView {
         alertPresenter.onClickSaveMe(this);
     }
 
-    public void onClickHelpMeButton(View v) {
-        alertPresenter.onClickHelpMe(this);
-    }
-
-
     @Override
     public void showNetworkButton() {
         networkBt.setVisibility(View.VISIBLE);
@@ -119,22 +115,27 @@ public class AlertFragment extends Fragment implements AlertView {
     }
 
     @Override
-    public void showSafeScreen() {
+    public void showSafeScreen(int time) {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View inflate = inflater.inflate(R.layout.alert_dialog_activate, null);
+        View view = inflater.inflate(R.layout.alert_dialog_activate, null);
 
-        View viewById = inflate.findViewById(R.id.bdg_alert_help_dialog_button);
-        viewById.setOnClickListener(new View.OnClickListener() {
+        View dialogButton = view.findViewById(R.id.bdg_alert_help_dialog_button);
+        TextView textView = (TextView) view.findViewById(R.id.bdg_alert_save_me);
+
+
+        textView.setText(getString(R.string.bdg_alert_help_dialog_time, Integer.toString(time)));
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Envio cancelado. Que bom que você está a salvo.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Envio cancelado. Que bom que você está a salvo.", Toast.LENGTH_LONG).show();
                 alertPresenter.onCancelClick();
             }
         });
 
         alertDialog = new Dialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
-        alertDialog.setContentView(inflate);
+        alertDialog.setContentView(view);
 
         alertDialog.show();
 
@@ -154,12 +155,12 @@ public class AlertFragment extends Fragment implements AlertView {
 
     @Override
     public void showAlertPermissionDenied() {
-        Toast.makeText(getContext(), "Precisamos da permissão de enviar sms, para poder contactar sua rede quando for avisar que você está em uma situação de risco.",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Precisamos da permissão de enviar sms, para poder contactar sua rede quando for avisar que você está em uma situação de risco.", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showAlertPermissionDisable() {
         Toast.makeText(getContext(), "Precisamos da permissão de enviar sms, para poder contactar sua rede quando for avisar que você está em uma situação de risco. " +
-                "\nPor favor, vá em configurações e habilite para conseguir enviar o alerta. ",Toast.LENGTH_LONG).show();
+                "\nPor favor, vá em configurações e habilite para conseguir enviar o alerta. ", Toast.LENGTH_LONG).show();
     }
 }

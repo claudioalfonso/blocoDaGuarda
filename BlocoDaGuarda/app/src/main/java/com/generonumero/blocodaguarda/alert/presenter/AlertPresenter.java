@@ -15,8 +15,6 @@ public interface AlertPresenter extends BasePresenter, PermissionPresenter {
 
     void onClickSaveMe(Fragment fragment);
 
-    void onClickHelpMe(Fragment fragment);
-
     void onCountDownFinished(CountDownFinished countDownFinished);
 
     void onCancelClick();

@@ -82,7 +82,7 @@ public class BDGApplication extends Application {
     }
 
     public AlertPresenter getAlertPresenter(AlertView alertView) {
-        return new AlertPresenterImpl(alertView, getAlertService(), getBus(), getPermissionService());
+        return new AlertPresenterImpl(alertView, getAlertService(), getBus(), getPermissionService(), getConfigurationRepository());
     }
 
     private NetworkRepository getNetworkRepository() {
@@ -108,7 +108,7 @@ public class BDGApplication extends Application {
 
     private AlertService getAlertService() {
         if (alertService == null) {
-            alertService = new AlertServiceImpl(getNetworkRepository());
+            alertService = new AlertServiceImpl(getNetworkRepository(), getConfigurationRepository());
         }
         return alertService;
     }

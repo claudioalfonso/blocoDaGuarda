@@ -12,7 +12,7 @@ public interface AlertView extends PermissionView {
 
     void showNetworkPopup();
 
-    void showSafeScreen();
+    void showSafeScreen(int time);
 
     void dismissSafeScreen();
 

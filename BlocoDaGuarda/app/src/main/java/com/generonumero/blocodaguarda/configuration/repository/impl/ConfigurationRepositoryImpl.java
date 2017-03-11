@@ -8,9 +8,8 @@ import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepo
 public class ConfigurationRepositoryImpl implements ConfigurationRepository {
 
 
-    SharedPreferences sharedPreferences;
-    Context context;
-
+    private SharedPreferences sharedPreferences;
+    private final int TIME_TO_COUNT_DEFAULT = 15;
 
     public ConfigurationRepositoryImpl(Context context) {
         this.sharedPreferences = context.getSharedPreferences("ConfigurationRepositoryImpl", Context.MODE_PRIVATE);
@@ -27,7 +26,7 @@ public class ConfigurationRepositoryImpl implements ConfigurationRepository {
 
     @Override
     public int getTime() {
-        return sharedPreferences.getInt("time", 15);
+        return sharedPreferences.getInt("time", TIME_TO_COUNT_DEFAULT);
     }
 
     @Override
