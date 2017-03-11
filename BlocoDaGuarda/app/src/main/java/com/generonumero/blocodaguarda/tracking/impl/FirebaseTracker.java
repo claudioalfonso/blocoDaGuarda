@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.generonumero.blocodaguarda.tracking.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class FirebaseTracker implements Tracker {
 
@@ -15,17 +16,17 @@ public class FirebaseTracker implements Tracker {
 
     @Override
     public void sendEvent(String name, Bundle bundle) {
-//        FirebaseAnalytics instance = FirebaseAnalytics.getInstance(mContext);
-//        instance.logEvent(name, bundle);
+        FirebaseAnalytics instance = FirebaseAnalytics.getInstance(mContext);
+        instance.logEvent(name, bundle);
 
     }
 
     @Override
     public void sendError(String name, String error) {
-//        FirebaseAnalytics instance = FirebaseAnalytics.getInstance(mContext);
+        FirebaseAnalytics instance = FirebaseAnalytics.getInstance(mContext);
 
         Bundle bundle = new Bundle();
         bundle.putString(name, error);
-//        instance.logEvent("error", bundle);
+        instance.logEvent("error", bundle);
     }
 }
