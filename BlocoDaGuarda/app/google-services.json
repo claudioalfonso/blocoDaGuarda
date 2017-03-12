@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "625676217176",
-    "firebase_url": "https://blocodaguarda-4b366.firebaseio.com",
-    "project_id": "blocodaguarda-4b366",
-    "storage_bucket": "blocodaguarda-4b366.appspot.com"
+    "project_number": "178139630359",
+    "firebase_url": "https://blocodaguarda.firebaseio.com",
+    "project_id": "blocodaguarda",
+    "storage_bucket": "blocodaguarda.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:625676217176:android:9d74d27e9a84cb2a",
+        "mobilesdk_app_id": "1:178139630359:android:9d74d27e9a84cb2a",
         "android_client_info": {
           "package_name": "com.generonumero.blocodaguarda"
         }
       },
       "oauth_client": [
         {
-          "client_id": "625676217176-dcgjdji9u78jvokm8o87cocouqv3r3c0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.generonumero.blocodaguarda",
-            "certificate_hash": "b64187f2c41da1d4e53a09e5cdfdf5282336c1a0"
-          }
-        },
-        {
-          "client_id": "625676217176-5qtip3hj0at4q3iqnsh0ppqptmgofvri.apps.googleusercontent.com",
+          "client_id": "178139630359-7lf9uql2jfqsuhjjr5ct8ekif7osckrf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAWjN7XmDrfDBHTK6_1ul-5nzxg0dbywu4"
+          "current_key": "AIzaSyD3AqyCJgsBlG2i8TlqdKz2dVGxMqMfjG4"
         }
       ],
       "services": {
@@ -40,7 +32,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "625676217176-5qtip3hj0at4q3iqnsh0ppqptmgofvri.apps.googleusercontent.com",
+              "client_id": "178139630359-7lf9uql2jfqsuhjjr5ct8ekif7osckrf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
