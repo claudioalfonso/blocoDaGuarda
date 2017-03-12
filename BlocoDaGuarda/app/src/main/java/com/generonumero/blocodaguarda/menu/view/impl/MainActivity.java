@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -63,8 +62,29 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        verifyDeepLink();
+
         mainPresenter = BDGApplication.getInstance().getMainPresenter(this);
         mainPresenter.initView();
+    }
+
+    private void verifyDeepLink() {
+        Log.i("teste", "verifyDeepLink");
+        Intent intent = getIntent();
+        if (intent != null) {
+            Log.i("teste", "intent != null");
+            if (intent.getExtras() != null) {
+                Log.i("teste", intent.getExtras().toString());
+                Bundle extras = intent.getExtras();
+                for (String key : extras.keySet()) {
+                    Log.i("teste", "key: " + key + " - value:  " + extras.get(key));
+                }
+            } else {
+                Log.i("teste", "no extras");
+
+            }
+
+        }
     }
 
     @Override
@@ -142,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().getBackStackEntryCount() == 1) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             finish();
         } else {
             super.onBackPressed();
