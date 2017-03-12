@@ -78,7 +78,7 @@ public class BDGApplication extends Application {
     }
 
     public NetworkPresenter getNetworkPresenter(NetworkView networkView) {
-        return new NetworkPresenterImpl(networkView, getNetworkRepository(), getPermissionService());
+        return new NetworkPresenterImpl(networkView, getNetworkRepository(), getPermissionService(), getFacebookLoginService());
     }
 
     public AlertPresenter getAlertPresenter(AlertView alertView) {

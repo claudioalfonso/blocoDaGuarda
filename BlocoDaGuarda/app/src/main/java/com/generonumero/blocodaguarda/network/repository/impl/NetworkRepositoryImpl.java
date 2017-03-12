@@ -56,7 +56,6 @@ public class NetworkRepositoryImpl implements NetworkRepository {
         edit.apply();
     }
 
-
     private SharedPreferences getSharedPreferences() {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(sharedName, Context.MODE_PRIVATE);

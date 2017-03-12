@@ -70,7 +70,7 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
     }
 
     @OnClick(R.id.bdg_network_save)
-    public void onClickSave(View v) {
+    void onClickSave(View v) {
         contactsAdapter.notifyDataSetChanged();
         List<Contact> contacts = contactsAdapter.getContacts();
         networkPresenter.saveAllContacts(contacts);

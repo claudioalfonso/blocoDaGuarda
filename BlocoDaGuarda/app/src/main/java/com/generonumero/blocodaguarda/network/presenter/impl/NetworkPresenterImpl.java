@@ -9,7 +9,12 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsManager;
 
+import com.facebook.Profile;
+import com.generonumero.blocodaguarda.BDGApplication;
+import com.generonumero.blocodaguarda.R;
+import com.generonumero.blocodaguarda.login.service.FacebookLoginService;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
@@ -28,12 +33,14 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     private NetworkView networkView;
     private NetworkRepository networkRepository;
     private PermissionService permissionService;
+    private FacebookLoginService facebookLoginService;
     private String idContactList;
 
-    public NetworkPresenterImpl(NetworkView networkView, NetworkRepository networkRepository, PermissionService permissionService) {
+    public NetworkPresenterImpl(NetworkView networkView, NetworkRepository networkRepository, PermissionService permissionService, FacebookLoginService facebookLoginService) {
         this.networkView = networkView;
         this.networkRepository = networkRepository;
         this.permissionService = permissionService;
+        this.facebookLoginService = facebookLoginService;
     }
 
     @Override
@@ -94,6 +101,28 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     @Override
     public void saveAllContacts(List<Contact> contacts) {
         networkRepository.saveAll(contacts);
+        sendSMS(contacts);
+    }
+
+
+    private void sendSMS(List<Contact> contacts) {
+
+
+        if(contacts.size() < 3) {
+            return;
+        }
+
+        SmsManager smsManager = SmsManager.getDefault();
+
+        Profile userProfile = facebookLoginService.getUserProfile();
+
+        String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, userProfile.getName());
+
+        for (Contact contact : contacts) {
+            String phone = contact.getPhone().replaceAll("[^\\d.]", "");
+
+//            smsManager.sendTextMessage(phone, null, msg, null, null);
+        }
     }
 
     private Contact getContact(Fragment fragment, Intent data) {
