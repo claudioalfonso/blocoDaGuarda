@@ -1,6 +1,8 @@
 package com.generonumero.blocodaguarda.menu.view.impl;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -97,6 +100,33 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void loadViews() {
         setupDrawerContent(navigationView);
         setFirstItemNavigationView();
+    }
+
+    @Override
+    public void showFirstOpenAppDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.bdg_menu_firstopen_dialog_title));
+        builder.setMessage(getString(R.string.bdg_menu_firstopen_dialog_text));
+        builder.setPositiveButton(getString(R.string.bdg_menu_firstopen_dialog_positive), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                mainPresenter.clickDialogAddContacts();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.bdg_menu_firstopen_dialog_negative), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.bdg_separator));
+            }
+        });
+        alertDialog.show();
     }
 
     public void goToNetworkView() {

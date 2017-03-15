@@ -20,6 +20,8 @@ import com.generonumero.blocodaguarda.login.service.FacebookLoginService;
 import com.generonumero.blocodaguarda.login.view.LoginView;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.presenter.impl.MainPresenterImpl;
+import com.generonumero.blocodaguarda.menu.repository.MenuRepository;
+import com.generonumero.blocodaguarda.menu.repository.MenuRepositoryImpl;
 import com.generonumero.blocodaguarda.menu.view.MainView;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.presenter.impl.NetworkPresenterImpl;
@@ -47,6 +49,8 @@ public class BDGApplication extends Application {
 
     private ConfigurationRepository configurationRepository;
 
+    private MenuRepository menuRepository;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -63,7 +67,15 @@ public class BDGApplication extends Application {
     }
 
     public MainPresenter getMainPresenter(MainView mainView) {
-        return new MainPresenterImpl(mainView);
+        return new MainPresenterImpl(mainView, getMenuRepository());
+    }
+
+
+    public MenuRepository getMenuRepository() {
+        if(menuRepository == null) {
+            menuRepository = new MenuRepositoryImpl(getApplicationContext());
+        }
+        return menuRepository;
     }
 
     public FacebookLoginService getFacebookLoginService() {

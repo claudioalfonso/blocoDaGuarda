@@ -8,6 +8,16 @@
     <string name="bdg_menu_configuration">Configurações</string>
     <string name="bdg_menu_about">Gênero e número </string>
 
+    <string name="bdg_menu_firstopen_dialog_title">Atenção</string>
+    <string name="bdg_menu_firstopen_dialog_text">
+        Para usar o aplicativo, é necessário escolher de três pessoas de sua rede de confiança e preencher seus números de telefone.
+        \n\n
+        Deseja cadastrar sua rede agora?
+    </string>
+    <string name="bdg_menu_firstopen_dialog_positive">Cadastrar contatos</string>
+    <string name="bdg_menu_firstopen_dialog_negative">Agora não</string>
+
+
     <string name="bdg_network_header">Os contatos cadastrados recebem um SMS caso você ative o modo de segurança.
         <br/> Verifique se os números estão corretos e se eles podem receber mensagens de texto.
     </string>
@@ -21,6 +31,7 @@
     <string name="bdg_network_contact_name">Apelido</string>
     <string name="bdg_network_contact_phone">Telefone</string>
     <string name="bdg_network_contact_label">Contato</string>
+
     <string name="bdg_alert_create_network_msg">Você ainda não cadastrou sua rede de confiaça!</string>
     <string name="bdg_alert_network_dialog_title">Atenção</string>
     <string name="bdg_alert_network_dialog_message">Para ativar o modo de segurança, você precisa cadastrar contatos de confiança que receberão um SMS com a sua localização caso você esteja em perigo. \nDeseja cadastrar agora?</string>
@@ -32,6 +43,7 @@
     <string name="bdg_alert_help_dialog_title">Você está bem?</string>
     <string name="bdg_alert_help_dialog_time">Sua rede de confiança será acionada caso você não responda em %ss.</string>
     <string name="bdg_alert_help_dialog_button">Sim</string>
+
     <string name="open">open</string>
     <string name="close">close</string>
 
