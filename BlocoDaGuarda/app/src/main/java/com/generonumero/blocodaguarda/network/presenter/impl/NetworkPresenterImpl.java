@@ -118,9 +118,13 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
         String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, userProfile.getName());
 
+        if(contacts == null)
+            return;
         for (Contact contact : contacts) {
+            if(!contact.isValid()) {
+                continue;
+            }
             String phone = contact.getPhone().replaceAll("[^\\d.]", "");
-
 //            smsManager.sendTextMessage(phone, null, msg, null, null);
         }
     }
