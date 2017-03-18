@@ -46,6 +46,7 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
         contact1 = (ContactView) view.findViewById(R.id.contact1);
         contact2 = (ContactView) view.findViewById(R.id.contact2);
         contact3 = (ContactView) view.findViewById(R.id.contact3);
+
         view.findViewById(R.id.bdg_network_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,15 +56,31 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
                 contacts.add(contact2.getContact());
                 contacts.add(contact3.getContact());
 
-                networkPresenter.saveAllContacts(contacts);
 
-                MainActivity activity = (MainActivity) getActivity();
-                activity.goToHome();
+                if(contactsAreValid(contacts)) {
+                    networkPresenter.saveAllContacts(contacts);
+
+                    MainActivity activity = (MainActivity) getActivity();
+                    activity.goToHome();
+                } else {
+                    Toast.makeText(getContext(), "Os contatos precisam ser válidos para serem salvos.", Toast.LENGTH_LONG).show();
+                }
             }
         });
         networkPresenter.loadViews();
         return view;
     }
+
+    private boolean contactsAreValid(List<Contact> contacts) {
+        for (Contact contact: contacts) {
+            if(!contact.isValid()) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
