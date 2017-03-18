@@ -90,7 +90,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     @Override
     public void sendSMS() {
         StringBuffer buffer = new StringBuffer("");
-        buffer.append("Foi mal pertubar, mas to testando um app que fiz");
+        buffer.append("Foi mal pertubar, mas to testando um app que fiz ");
         if(location == null) {
             location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         }

@@ -1,6 +1,8 @@
 package com.generonumero.blocodaguarda.network.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,15 +38,44 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     @Override
     public void onBindViewHolder(ContactViewHolder holder, final int position) {
-        Contact contact = this.contacts.get(position);
+        final Contact contact = this.contacts.get(position);
 
 
-        holder.contactLabel.setText(holder.itemView.getContext().getString(R.string.bdg_network_contact_label) + " " + (position+1));
+        holder.contactLabel.setText(holder.itemView.getContext().getString(R.string.bdg_network_contact_label) + " " + (position + 1));
 
         if (contact == null) return;
 
         holder.name.setText(contact.getName());
+        holder.name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                contact.setName(editable.toString());
+            }
+        });
         holder.phone.setText(contact.getPhone());
+        holder.phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                contact.setPhone(editable.toString());
+            }
+        });
+
         holder.addressBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,9 +106,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     static class ContactViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.bdg_network_phone)
-        TextView phone;
+        EditText phone;
         @Bind(R.id.bdg_network_contact_name)
-        TextView name;
+        EditText name;
         @Bind(R.id.bdg_network_contact_address_book)
         ImageButton addressBook;
         @Bind(R.id.bdg_network_contact_label)
