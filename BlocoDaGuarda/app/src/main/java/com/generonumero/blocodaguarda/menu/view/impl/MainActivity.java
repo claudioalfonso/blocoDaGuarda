@@ -1,7 +1,6 @@
 package com.generonumero.blocodaguarda.menu.view.impl;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -220,9 +219,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 }
                 toolbar.setTitle("  Configurações");
             case MENU_NETWORK:
-                if (getFragments().get(MENU_NETWORK) == null) {
-                    getFragments().put(MENU_NETWORK, new NetworkFragment());
-                }
+                getFragments().put(MENU_NETWORK, new NetworkFragment());
                 toolbar.setTitle("  Rede de confiança");
                 break;
         }

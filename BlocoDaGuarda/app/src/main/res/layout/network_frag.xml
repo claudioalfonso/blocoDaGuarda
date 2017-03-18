@@ -1,30 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/bdg_base_spacing_default"
-    android:background="@color/bdg_background_login_bottom"
-    android:orientation="vertical">
+    android:background="@color/bdg_background_login_bottom">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/login_bottom_text"
-        android:text="@string/bdg_network_header" />
+        android:layout_height="match_parent"
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/bdg_network_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1" />
+        android:orientation="vertical"
+        android:padding="@dimen/bdg_base_spacing_default">
 
-    <Button
-        android:id="@+id/bdg_network_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/textView"
+            style="@style/login_bottom_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bdg_network_header" />
 
-        style="@style/bdg_network_button"
-        android:text="@string/bdg_network_save" />
-</LinearLayout>
+
+        <com.generonumero.blocodaguarda.view.ContactView
+            android:id="@+id/contact1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.generonumero.blocodaguarda.view.ContactView
+            android:id="@+id/contact2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.generonumero.blocodaguarda.view.ContactView
+            android:id="@+id/contact3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/bdg_network_save"
+            style="@style/bdg_network_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/bdg_base_spacing_default"
+            android:text="@string/bdg_network_save" />
+    </LinearLayout>
+</ScrollView>

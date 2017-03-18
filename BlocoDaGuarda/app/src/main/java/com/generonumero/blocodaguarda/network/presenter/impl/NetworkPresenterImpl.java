@@ -101,7 +101,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     @Override
     public void saveAllContacts(List<Contact> contacts) {
         networkRepository.saveAll(contacts);
-        sendSMS(contacts);
+//        sendSMS(contacts);
     }
 
 
