@@ -101,7 +101,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     @Override
     public void saveAllContacts(List<Contact> contacts) {
         networkRepository.saveAll(contacts);
-//        sendSMS(contacts);
+        sendSMS(contacts);
     }
 
 
@@ -124,8 +124,8 @@ public class NetworkPresenterImpl implements NetworkPresenter {
             if(!contact.isValid()) {
                 continue;
             }
-            String phone = contact.getPhone().replaceAll("[^\\d.]", "");
-//            smsManager.sendTextMessage(phone, null, msg, null, null);
+            String phone = contact.getPhoneFormated();
+            smsManager.sendTextMessage("00000000000", null, msg, null, null);
         }
     }
 

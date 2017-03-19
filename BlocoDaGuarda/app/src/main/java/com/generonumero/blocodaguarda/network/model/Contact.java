@@ -26,6 +26,14 @@ public class Contact {
         return phone;
     }
 
+    public String getPhoneFormated() {
+        if(phone != null) {
+            return phone.replaceAll("[^\\d.]", "");
+        }
+        return phone;
+    }
+
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
