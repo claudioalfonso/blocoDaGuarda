@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         });
         builder.setNegativeButton(getString(R.string.bdg_menu_firstopen_dialog_negative), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                mainPresenter.clickDialogNotAddContacts();
                 dialog.dismiss();
             }
         });
