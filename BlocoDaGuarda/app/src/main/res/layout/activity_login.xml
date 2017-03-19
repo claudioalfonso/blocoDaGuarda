@@ -17,15 +17,6 @@
 
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/separator" />
-
-        <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="184dp"
@@ -45,6 +36,16 @@
             android:layout_marginBottom="17dp"
             android:gravity="center"
             android:text="@string/bdg_login_top" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/separator"
+            android:layout_below="@+id/imageView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
     </RelativeLayout>
