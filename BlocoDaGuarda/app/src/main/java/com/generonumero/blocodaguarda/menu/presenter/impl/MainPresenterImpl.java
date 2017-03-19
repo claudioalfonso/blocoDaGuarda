@@ -37,4 +37,9 @@ public class MainPresenterImpl implements MainPresenter {
         mainView.goToNetworkView();
         menuRepository.saveFirstOpen();
     }
+
+    @Override
+    public void clickDialogNotAddContacts() {
+        menuRepository.saveFirstOpen();
+    }
 }
