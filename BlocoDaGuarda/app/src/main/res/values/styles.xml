@@ -128,4 +128,16 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+
+    <!--login email-->
+    <style name="TextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColor">@color/colorAccent</item>
+        <!--text size 12-->
+    </style>
+
+    <style name="loginemail_label">
+        <item name="android:textColor">@color/bdg_black</item>
+        <item name="android:textSize">@dimen/bdg_textSize_micro</item>
+    </style>
+
 </resources>

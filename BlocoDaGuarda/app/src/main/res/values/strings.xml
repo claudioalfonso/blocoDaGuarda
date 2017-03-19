@@ -23,6 +23,17 @@
     </string>
     <string name="bdg_network_save">Salvar contatos</string>
 
+    <!--login email-->
+    <string name="bdg_loginemail_explanation_login">Por favor, preencha os dados abaixo para nos ajudar a conhecer melhor os usuários do aplicativo.</string>
+    <string name="bdg_loginemail_name">Nome</string>
+    <string name="bdg_loginemail_email">E-mail</string>
+    <string name="bdg_loginemail_gender">Sexo</string>
+    <string name="bdg_loginemail_gender_male">Masculino</string>
+    <string name="bdg_loginemail_gender_female">Feminino</string>
+    <string name="bdg_loginemail_gender_send">Enviar cadastro</string>
+
+
+
     <string name="bdg_login_explanation_login">Para utilizar o Braços Dados, complete o seu cadastro com o Facebook ou e-mail.</string>
     <string name="bdg_login_warning">Não se preocupe, seus dados são \ntotalmente sigilosos.</string>
     <string name="bdg_login_no_face">Conectar com Facebook</string>

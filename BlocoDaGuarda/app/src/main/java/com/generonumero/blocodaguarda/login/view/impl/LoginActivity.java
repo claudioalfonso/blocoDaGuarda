@@ -62,11 +62,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
 
+    @OnClick(R.id.bdg_email_login_bt)
+    public void loginEmail(View v) {
+        LoginEmailActivity.start(this);
+    }
+
+
     @Override
     public void onLoginSuccessful() {
         finish();
         MainActivity.start(this);
-//        Toast.makeText(this, "Bem vindo", Toast.LENGTH_SHORT).show();
     }
 
     @Override
