@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -17,9 +16,9 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.generonumero.blocodaguarda.login.event.LoginData;
 import com.generonumero.blocodaguarda.login.event.LoginFailed;
 import com.generonumero.blocodaguarda.login.event.LoginSuccessful;
+import com.generonumero.blocodaguarda.login.event.UserProfile;
 import com.squareup.otto.Bus;
 
 import org.json.JSONException;
@@ -61,9 +60,6 @@ public class FacebookLoginService {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 getUserGraphData();
-
-                bus.post(new LoginSuccessful());
-
             }
 
             @Override
@@ -111,20 +107,14 @@ public class FacebookLoginService {
                                     String email = object.getString("email");
                                     String gender = object.getString("gender");
 
-                                    LoginData loginData = new LoginData(name, email, gender);
+                                    UserProfile loginData = new UserProfile(name, email, gender);
                                     bus.post(loginData);
+                                    bus.post(new LoginSuccessful());
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                bus.post(new LoginFailed(false));
                             }
-
-
-
-
-
-                            Log.i("teste", "logou");
-                            //save User
-
                         }
                     });
             Bundle parameters = new Bundle();

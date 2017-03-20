@@ -14,9 +14,14 @@ import com.generonumero.blocodaguarda.configuration.presenter.impl.Configuration
 import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepository;
 import com.generonumero.blocodaguarda.configuration.repository.impl.ConfigurationRepositoryImpl;
 import com.generonumero.blocodaguarda.configuration.view.ConfigurationView;
-import com.generonumero.blocodaguarda.login.presenter.LoginPresenter;
-import com.generonumero.blocodaguarda.login.presenter.impl.LoginPresenterImpl;
+import com.generonumero.blocodaguarda.login.presenter.LoginEmailPresenter;
+import com.generonumero.blocodaguarda.login.presenter.LoginFacebookPresenter;
+import com.generonumero.blocodaguarda.login.presenter.impl.LoginEmailPresenterImpl;
+import com.generonumero.blocodaguarda.login.presenter.impl.LoginFacebookPresenterImpl;
+import com.generonumero.blocodaguarda.login.repository.LoginRepository;
+import com.generonumero.blocodaguarda.login.repository.impl.LoginRepositoryImpl;
 import com.generonumero.blocodaguarda.login.service.FacebookLoginService;
+import com.generonumero.blocodaguarda.login.tracker.LoginTracker;
 import com.generonumero.blocodaguarda.login.view.LoginView;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.presenter.impl.MainPresenterImpl;
@@ -38,6 +43,8 @@ public class BDGApplication extends Application {
     private static BDGApplication instance;
 
     private FacebookLoginService facebookLoginService;
+
+    private LoginRepository loginRepository;
 
     private Bus bus;
 
@@ -67,7 +74,7 @@ public class BDGApplication extends Application {
     }
 
     public MainPresenter getMainPresenter(MainView mainView) {
-        return new MainPresenterImpl(mainView, getMenuRepository());
+        return new MainPresenterImpl(mainView, getMenuRepository(), getLoginRepository());
     }
 
 
@@ -85,8 +92,19 @@ public class BDGApplication extends Application {
         return facebookLoginService;
     }
 
-    public LoginPresenter getLoginPresenter(LoginView loginView) {
-        return new LoginPresenterImpl(loginView, getFacebookLoginService(), getBus());
+    public LoginRepository getLoginRepository() {
+        if(loginRepository == null) {
+            loginRepository = new LoginRepositoryImpl(getApplicationContext());
+        }
+        return loginRepository;
+    }
+
+    public LoginFacebookPresenter getLoginFacebookPresenter(LoginView loginView) {
+        return new LoginFacebookPresenterImpl(loginView, getFacebookLoginService(), getBus(), loginRepository);
+    }
+
+    public LoginEmailPresenter getLoginEmailPresenter(LoginView loginView) {
+        return new LoginEmailPresenterImpl(getBus(), loginView, new LoginTracker(), getLoginRepository());
     }
 
     public NetworkPresenter getNetworkPresenter(NetworkView networkView) {

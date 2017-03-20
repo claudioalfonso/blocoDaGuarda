@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
-import com.generonumero.blocodaguarda.login.presenter.LoginPresenter;
+import com.generonumero.blocodaguarda.login.presenter.LoginFacebookPresenter;
 import com.generonumero.blocodaguarda.login.view.LoginView;
 import com.generonumero.blocodaguarda.menu.view.impl.MainActivity;
 
@@ -20,7 +20,7 @@ import butterknife.OnClick;
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
 
-    private LoginPresenter loginPresenter;
+    private LoginFacebookPresenter loginPresenter;
 
 
     public static void start(Activity activity) {
@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        loginPresenter = BDGApplication.getInstance().getLoginPresenter(this);
+        loginPresenter = BDGApplication.getInstance().getLoginFacebookPresenter(this);
     }
 
     @Override

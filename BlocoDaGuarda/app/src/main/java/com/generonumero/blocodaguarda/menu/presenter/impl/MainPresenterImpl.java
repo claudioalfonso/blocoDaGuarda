@@ -2,6 +2,7 @@ package com.generonumero.blocodaguarda.menu.presenter.impl;
 
 
 import com.generonumero.blocodaguarda.BDGApplication;
+import com.generonumero.blocodaguarda.login.repository.LoginRepository;
 import com.generonumero.blocodaguarda.login.service.FacebookLoginService;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.repository.MenuRepository;
@@ -11,18 +12,18 @@ public class MainPresenterImpl implements MainPresenter {
 
 
     private MainView mainView;
-    private FacebookLoginService facebookLoginService;
     private MenuRepository menuRepository;
+    private LoginRepository loginRepository;
 
-    public MainPresenterImpl(MainView mainView, MenuRepository menuRepository) {
+    public MainPresenterImpl(MainView mainView, MenuRepository menuRepository, LoginRepository loginRepository) {
         this.mainView = mainView;
         this.menuRepository = menuRepository;
-        this.facebookLoginService = BDGApplication.getInstance().getFacebookLoginService();
+        this.loginRepository = loginRepository;
     }
 
     @Override
     public void initView() {
-        if (!facebookLoginService.isLogged()) {
+        if (!loginRepository.isLogged()) {
             mainView.goToLoginView();
         } else {
             mainView.loadViews();
