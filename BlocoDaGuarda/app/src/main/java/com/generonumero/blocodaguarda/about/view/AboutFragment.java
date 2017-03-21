@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.generonumero.blocodaguarda.R;
 
@@ -16,11 +18,44 @@ import butterknife.OnClick;
 
 public class AboutFragment extends Fragment {
 
+
+    private int image;
+    private int about;
+    private int link;
+
+    public static AboutFragment getInstanceFromAbout() {
+
+        AboutFragment aboutFragment = new AboutFragment();
+        aboutFragment.image = R.drawable.logo_big;
+        aboutFragment.about = R.string.bdg_bd_about;
+        aboutFragment.link = R.string.bdg_bd_about_link;
+
+        return aboutFragment;
+    }
+
+    public static AboutFragment getInstanceFromGN() {
+        AboutFragment aboutFragment = new AboutFragment();
+        aboutFragment.image = R.drawable.logo_gn;
+        aboutFragment.about = R.string.bdg_about;
+        aboutFragment.link = R.string.bdg_about_link;
+
+        return aboutFragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.about_frag, null);
         ButterKnife.bind(this, view);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.bdg_about_image);
+        TextView about = (TextView) view.findViewById(R.id.bdg_about);
+        TextView link = (TextView) view.findViewById(R.id.bdg_about_link);
+
+        imageView.setImageDrawable(getResources().getDrawable(image));
+        about.setText(getString(this.about));
+        link.setText(getString(this.link));
+
         return view;
     }
 

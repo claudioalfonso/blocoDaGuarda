@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_menu_main"
+        android:icon="@drawable/ico_home"
         android:orderInCategory="1"
         android:title="@string/bdg_menu_main"
-        android:icon="@drawable/ico_home"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_menu_network"
+        android:icon="@drawable/ico_rede"
         android:orderInCategory="2"
         android:title="@string/bdg_menu_network"
-        android:icon="@drawable/ico_rede"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
+
     <item
-        android:id="@+id/action_menu_configuration"
-        android:orderInCategory="4"
-        android:title="@string/bdg_menu_configuration"
-        android:icon="@drawable/ico_settings"
-        app:showAsAction="never"/>
+        android:id="@+id/action_menu_gn"
+        android:icon="@drawable/ico_gn"
+        android:orderInCategory="3"
+        android:title="@string/bdg_menu_gn"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_menu_about"
-        android:orderInCategory="3"
+        android:icon="@drawable/ico_about"
+        android:orderInCategory="4"
         android:title="@string/bdg_menu_about"
-        android:icon="@drawable/ico_gn"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_menu_configuration"
+        android:icon="@drawable/ico_settings"
+        android:orderInCategory="5"
+        android:title="@string/bdg_menu_configuration"
+        app:showAsAction="never" />
 </menu>

@@ -6,7 +6,8 @@
     <string name="bdg_menu_network">Minha Rede</string>
     <string name="bdg_menu_sos">SOS</string>
     <string name="bdg_menu_configuration">Configurações</string>
-    <string name="bdg_menu_about">Gênero e número </string>
+    <string name="bdg_menu_about">Sobre o app </string>
+    <string name="bdg_menu_gn">Gênero e número </string>
 
     <string name="bdg_menu_firstopen_dialog_title">Atenção</string>
     <string name="bdg_menu_firstopen_dialog_text">
@@ -68,6 +69,19 @@
     <string name="open">open</string>
     <string name="close">close</string>
 
+
+    <!--bracos dados about-->
+    <string name="bdg_bd_about">
+        O Braços Dados é um aplicativo que busca mapear as situações em que as mulheres se sentem em risco em espaços públicos.
+        \nOferece um serviço de contato imadiato com uma rede previamente cadastrada, que recebe um SMS com a geolocalização da usuária.
+    </string>
+
+     <string name="bdg_bd_about_link">
+        Leia nossos termos de uso.
+    </string>
+
+
+    <!--genero e numero-->
     <string name="bdg_about">
         A Gênero e Número é a primeira web revista brasileira que apresenta narrativas jornalísticas guiados por dados sobre as assimetrias de gênero.
     </string>
@@ -75,6 +89,7 @@
      <string name="bdg_about_link">
         Para conhecer mais do nosso trabalho, acesse nosso site <u>www.generonumero.media</u>
     </string>
+
     <string name="bdg_config_time_title">Tempo</string>
     <string name="bdg_config_time_text">Defina o tempo de espera até que o app dispare o SMS para a sua rede de contatos</string>
 

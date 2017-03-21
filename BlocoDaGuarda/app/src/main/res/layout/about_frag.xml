@@ -4,15 +4,23 @@
     android:layout_height="match_parent"
     android:padding="@dimen/bdg_base_spacing_default"
     android:background="@color/bdg_background_default"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
 
     <ImageView
         android:src="@drawable/logo_gn"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/bdg_about_image" />
+
+    <ImageView
+        android:src="@drawable/separator_gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:id="@+id/imageView3" />
+        />
 
     <TextView
         android:text="@string/bdg_about"
@@ -20,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         style="@style/about_text"
+        android:id="@+id/bdg_about"
         />
 
     <TextView

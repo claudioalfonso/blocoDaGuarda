@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     public final int MENU_MAIN = R.id.action_menu_main;
     public final int MENU_ABOUT = R.id.action_menu_about;
+    public final int MENU_GN = R.id.action_menu_gn;
     public final int MENU_CONFIGURATION = R.id.action_menu_configuration;
     public final int MENU_NETWORK = R.id.action_menu_network;
 
@@ -206,13 +207,19 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 if (getFragments().get(MENU_MAIN) == null) {
                     getFragments().put(MENU_MAIN, new AlertFragment());
                 }
-                toolbar.setTitle("  Braços dados");
+                toolbar.setTitle("  Braços Cados");
                 break;
             case MENU_ABOUT:
                 if (getFragments().get(MENU_ABOUT) == null) {
-                    getFragments().put(MENU_ABOUT, new AboutFragment());
+                    getFragments().put(MENU_ABOUT, AboutFragment.getInstanceFromAbout());
                 }
-                toolbar.setTitle("  Gênero e número");
+                toolbar.setTitle("  Sobre o app");
+                break;
+            case MENU_GN:
+                if (getFragments().get(MENU_GN) == null) {
+                    getFragments().put(MENU_GN, AboutFragment.getInstanceFromGN());
+                }
+                toolbar.setTitle("  Gênero e Número");
                 break;
             case MENU_CONFIGURATION:
                 if (getFragments().get(MENU_CONFIGURATION) == null) {
@@ -221,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 toolbar.setTitle("  Configurações");
             case MENU_NETWORK:
                 getFragments().put(MENU_NETWORK, new NetworkFragment());
-                toolbar.setTitle("  Rede de confiança");
+                toolbar.setTitle("  Rede de Confiança");
                 break;
         }
         return getFragments().get(id);
