@@ -12,4 +12,6 @@ public interface NetworkView extends PermissionView {
     void showContactWithoutNumber();
 
     void updateList(int position, Contact contact);
+
+    void showPopupExplaningNetwork();
 }

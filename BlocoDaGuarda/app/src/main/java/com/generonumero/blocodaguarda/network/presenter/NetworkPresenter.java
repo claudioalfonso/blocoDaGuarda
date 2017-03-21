@@ -18,4 +18,6 @@ public interface NetworkPresenter extends PermissionPresenter {
 
     void saveAllContacts(List<Contact> contacts);
 
+    void showSMSPermissionIfNeeded(Fragment fragment);
+
 }

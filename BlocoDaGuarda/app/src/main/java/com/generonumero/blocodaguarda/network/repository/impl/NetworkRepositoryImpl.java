@@ -29,7 +29,9 @@ public class NetworkRepositoryImpl implements NetworkRepository {
         Gson gson = new Gson();
 
         for (String key : all.keySet()) {
-            contacts.add(Integer.parseInt(key), gson.fromJson(all.get(key), Contact.class));
+            try {
+                contacts.add(Integer.parseInt(key), gson.fromJson(all.get(key), Contact.class));
+            } catch (NumberFormatException e) {}
         }
 
         if (contacts.size() < 3) {
@@ -55,6 +57,19 @@ public class NetworkRepositoryImpl implements NetworkRepository {
 
         edit.apply();
     }
+
+    @Override
+    public void saveFirstOpen() {
+        SharedPreferences.Editor edit = getSharedPreferences().edit();
+        edit.putBoolean("first_open", false);
+        edit.commit();
+    }
+
+    @Override
+    public boolean isFirstOpen() {
+        return getSharedPreferences().getBoolean("first_open", true);
+    }
+
 
     private SharedPreferences getSharedPreferences() {
         if (sharedPreferences == null) {

@@ -11,4 +11,8 @@ public interface NetworkRepository {
     void update(String id, Contact contact);
 
     void saveAll(List<Contact> contacts);
+
+    void saveFirstOpen();
+
+    boolean isFirstOpen();
 }

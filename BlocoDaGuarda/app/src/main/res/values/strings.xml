@@ -18,10 +18,21 @@
     <string name="bdg_menu_firstopen_dialog_negative">Agora não</string>
 
 
+    <!--network-->
     <string name="bdg_network_header">Os contatos cadastrados recebem um SMS caso você ative o modo de segurança.
         <br/> Verifique se os números estão corretos e se eles podem receber mensagens de texto.
     </string>
     <string name="bdg_network_save">Salvar contatos</string>
+    <string name="bdg_network_firstopen_dialog_text">
+        É muito importante escolher pessoas em quem você confia e com quem você possa contar.
+        \n\nAlém disso, é importante se certificar de que eles estão de acordo em serem acionados.
+        \nPor isso enviaremos um sms para avisá-los de seu cadastro.
+    </string>
+    <string name="bdg_network_firstopen_dialog_positive">Entendi</string>
+    <string name="bdg_network_contact_name">Apelido</string>
+    <string name="bdg_network_contact_phone">Telefone</string>
+    <string name="bdg_network_contact_label">Contato</string>
+
 
     <!--login email-->
     <string name="bdg_loginemail_explanation_login">Por favor, preencha os dados abaixo para nos ajudar a conhecer melhor os usuários do aplicativo.</string>
@@ -40,9 +51,7 @@
     <string name="bdg_login_no_email">Conectar com e-mail</string>
     <string name="bdg_login_top" >Em situações de risco, Braços Dados permite que você envie alertas de socorro para contatos \ncadastrados que receberão sua localização e uma mensagem pedindo ajuda.</string>
 
-    <string name="bdg_network_contact_name">Apelido</string>
-    <string name="bdg_network_contact_phone">Telefone</string>
-    <string name="bdg_network_contact_label">Contato</string>
+
 
     <string name="bdg_alert_create_network_msg">Você ainda não cadastrou sua rede de confiança!</string>
     <string name="bdg_alert_network_dialog_title">Atenção</string>
