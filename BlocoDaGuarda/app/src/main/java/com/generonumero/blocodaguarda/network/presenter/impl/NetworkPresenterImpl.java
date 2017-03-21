@@ -11,10 +11,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.telephony.SmsManager;
 
-import com.facebook.Profile;
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
-import com.generonumero.blocodaguarda.login.service.FacebookLoginService;
+import com.generonumero.blocodaguarda.login.event.UserProfile;
+import com.generonumero.blocodaguarda.login.repository.LoginRepository;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.presenter.NetworkPresenter;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
@@ -29,18 +29,19 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     private static final int RESULT_CODE_PERMISSION = 123;
     private static final int RESULT_CODE_PICK = 34;
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
+    private static final String PERMISSION_SMS = Manifest.permission.SEND_SMS;
 
     private NetworkView networkView;
     private NetworkRepository networkRepository;
     private PermissionService permissionService;
-    private FacebookLoginService facebookLoginService;
     private String idContactList;
+    private LoginRepository loginRepository;
 
-    public NetworkPresenterImpl(NetworkView networkView, NetworkRepository networkRepository, PermissionService permissionService, FacebookLoginService facebookLoginService) {
+    public NetworkPresenterImpl(NetworkView networkView, NetworkRepository networkRepository, PermissionService permissionService, LoginRepository loginRepository) {
         this.networkView = networkView;
         this.networkRepository = networkRepository;
         this.permissionService = permissionService;
-        this.facebookLoginService = facebookLoginService;
+        this.loginRepository = loginRepository;
     }
 
     @Override
@@ -51,8 +52,9 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
     @Override
     public void pickContact(Fragment fragment, String idContactList) {
-        if (permissionService.hasNeedAskPermission(fragment.getContext(), PERMISSION)) {
-            permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION}, RESULT_CODE_PERMISSION);
+        if (permissionService.hasNeedAskPermission(fragment.getContext(), PERMISSION)
+                && permissionService.hasNeedAskPermission(fragment.getActivity(), PERMISSION_SMS)) {
+            permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION, PERMISSION_SMS}, RESULT_CODE_PERMISSION);
         } else {
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
             fragment.startActivityForResult(intent, RESULT_CODE_PICK);
@@ -101,27 +103,24 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     @Override
     public void saveAllContacts(List<Contact> contacts) {
         networkRepository.saveAll(contacts);
-        sendSMS(contacts);
+        if (!permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_SMS)) {
+            sendSMS(contacts);
+        }
     }
 
 
     private void sendSMS(List<Contact> contacts) {
-
-
-        if(contacts.size() < 3) {
+        if (contacts == null)
             return;
-        }
 
         SmsManager smsManager = SmsManager.getDefault();
 
-        Profile userProfile = facebookLoginService.getUserProfile();
+        UserProfile user = loginRepository.getUser();
 
-        String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, userProfile.getName());
+        String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, user.getName());
 
-        if(contacts == null)
-            return;
         for (Contact contact : contacts) {
-            if(!contact.isValid()) {
+            if (!contact.isValid()) {
                 continue;
             }
             String phone = contact.getPhoneFormated();

@@ -79,7 +79,7 @@ public class BDGApplication extends Application {
 
 
     public MenuRepository getMenuRepository() {
-        if(menuRepository == null) {
+        if (menuRepository == null) {
             menuRepository = new MenuRepositoryImpl(getApplicationContext());
         }
         return menuRepository;
@@ -93,14 +93,14 @@ public class BDGApplication extends Application {
     }
 
     public LoginRepository getLoginRepository() {
-        if(loginRepository == null) {
+        if (loginRepository == null) {
             loginRepository = new LoginRepositoryImpl(getApplicationContext());
         }
         return loginRepository;
     }
 
     public LoginFacebookPresenter getLoginFacebookPresenter(LoginView loginView) {
-        return new LoginFacebookPresenterImpl(loginView, getFacebookLoginService(), getBus(), loginRepository);
+        return new LoginFacebookPresenterImpl(loginView, getFacebookLoginService(), getBus(), getLoginRepository());
     }
 
     public LoginEmailPresenter getLoginEmailPresenter(LoginView loginView) {
@@ -108,7 +108,7 @@ public class BDGApplication extends Application {
     }
 
     public NetworkPresenter getNetworkPresenter(NetworkView networkView) {
-        return new NetworkPresenterImpl(networkView, getNetworkRepository(), getPermissionService(), getFacebookLoginService());
+        return new NetworkPresenterImpl(networkView, getNetworkRepository(), getPermissionService(), getLoginRepository());
     }
 
     public AlertPresenter getAlertPresenter(AlertView alertView) {
@@ -144,7 +144,7 @@ public class BDGApplication extends Application {
     }
 
     private ConfigurationRepository getConfigurationRepository() {
-        if(configurationRepository == null) {
+        if (configurationRepository == null) {
             configurationRepository = new ConfigurationRepositoryImpl(getApplicationContext());
         }
         return configurationRepository;
