@@ -34,6 +34,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <com.generonumero.blocodaguarda.view.ContactView
+            android:id="@+id/contact4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.generonumero.blocodaguarda.view.ContactView
+            android:id="@+id/contact5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
         <Button
             android:id="@+id/bdg_network_save"

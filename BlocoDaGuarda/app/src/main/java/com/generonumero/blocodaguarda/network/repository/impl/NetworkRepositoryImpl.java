@@ -34,8 +34,8 @@ public class NetworkRepositoryImpl implements NetworkRepository {
             } catch (NumberFormatException e) {}
         }
 
-        if (contacts.size() < 3) {
-            int size = 3 - contacts.size();
+        if (contacts.size() < 5) {
+            int size = 5 - contacts.size();
             for (int i = 0; i < size; i++) {
                 contacts.add(new Contact());
             }

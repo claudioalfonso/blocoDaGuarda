@@ -32,6 +32,8 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
     private ContactView contact1;
     private ContactView contact2;
     private ContactView contact3;
+    private ContactView contact4;
+    private ContactView contact5;
 
     private NetworkPresenter networkPresenter;
 
@@ -48,18 +50,21 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
         contact1 = (ContactView) view.findViewById(R.id.contact1);
         contact2 = (ContactView) view.findViewById(R.id.contact2);
         contact3 = (ContactView) view.findViewById(R.id.contact3);
+        contact4 = (ContactView) view.findViewById(R.id.contact4);
+        contact5 = (ContactView) view.findViewById(R.id.contact5);
 
         view.findViewById(R.id.bdg_network_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                List<Contact> contacts = new ArrayList<>(3);
+                List<Contact> contacts = new ArrayList<>(5);
                 contacts.add(contact1.getContact());
                 contacts.add(contact2.getContact());
                 contacts.add(contact3.getContact());
+                contacts.add(contact4.getContact());
+                contacts.add(contact5.getContact());
 
-
-                if(contactsAreValid(contacts)) {
+                if (contactsAreValid(contacts)) {
                     networkPresenter.saveAllContacts(contacts);
 
                     MainActivity activity = (MainActivity) getActivity();
@@ -74,8 +79,8 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
     }
 
     private boolean contactsAreValid(List<Contact> contacts) {
-        for (Contact contact: contacts) {
-            if(!contact.isValid()) {
+        for (Contact contact : contacts) {
+            if (!contact.isValid()) {
                 return false;
             }
         }
@@ -117,6 +122,8 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
         loadContact(contact1, contacts.get(0), 0);
         loadContact(contact2, contacts.get(1), 1);
         loadContact(contact3, contacts.get(2), 2);
+        loadContact(contact4, contacts.get(3), 3);
+        loadContact(contact5, contacts.get(4), 4);
     }
 
     private void loadContact(ContactView view, Contact contact, final int position) {
@@ -161,6 +168,12 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
                 break;
             case 2:
                 view = contact3;
+                break;
+            case 3:
+                view = contact4;
+                break;
+            case 4:
+                view = contact5;
                 break;
 
         }
