@@ -130,7 +130,7 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
         view.setContact(contact);
 
         view.setName(contact.getName());
-        view.setPhone(contact.getPhone());
+        view.setPhone(contact.getPhoneFormated());
         view.setContactLabel(position);
 
         view.setAddressBookClickListener(new View.OnClickListener() {
