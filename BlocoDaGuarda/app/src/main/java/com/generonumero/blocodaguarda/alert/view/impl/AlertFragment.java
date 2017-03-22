@@ -20,6 +20,7 @@ import com.generonumero.blocodaguarda.R;
 import com.generonumero.blocodaguarda.alert.presenter.AlertPresenter;
 import com.generonumero.blocodaguarda.alert.view.AlertView;
 import com.generonumero.blocodaguarda.menu.view.impl.MainActivity;
+import com.generonumero.blocodaguarda.network.view.impl.NetworkFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -150,7 +151,20 @@ public class AlertFragment extends Fragment implements AlertView {
 
     @Override
     public void disclaimerSMS() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+
+        builder.setTitle(getString(R.string.bdg_alert_smssender_dialog_title));
+        builder.setMessage(getString(R.string.bdg_alert_smssender_dialog_text));
+        builder.setPositiveButton(getString(R.string.bdg_network_firstopen_dialog_positive), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override

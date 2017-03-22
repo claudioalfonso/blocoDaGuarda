@@ -105,7 +105,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
         for (Contact contact : allContacts) {
             String phone = contact.getPhone().replaceAll("[^\\d.]", "");
 
-            smsManager.sendTextMessage(phone, null, buffer.toString(), null, null);
+//            smsManager.sendTextMessage(phone, null, buffer.toString(), null, null);
         }
         LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
     }

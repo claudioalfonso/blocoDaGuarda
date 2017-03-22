@@ -43,7 +43,7 @@ public class AlertPresenterImpl implements AlertPresenter {
         if (!alertService.isContactsRegistered()) {
             alertView.showNetworkButton();
         } else {
-
+            alertView.hideNetworkButton();
         }
 
     }
@@ -74,6 +74,7 @@ public class AlertPresenterImpl implements AlertPresenter {
     public void onCountDownFinished(CountDownFinished countDownFinished) {
         alertView.dismissSafeScreen();
         alertService.sendSMS();
+        alertView.disclaimerSMS();
     }
 
     @Override

@@ -17,4 +17,5 @@ public interface AlertView extends PermissionView {
     void dismissSafeScreen();
 
     void disclaimerSMS();
+
 }

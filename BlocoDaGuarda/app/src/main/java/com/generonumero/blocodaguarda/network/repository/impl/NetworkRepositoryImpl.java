@@ -8,6 +8,7 @@ import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,10 +29,14 @@ public class NetworkRepositoryImpl implements NetworkRepository {
         List<Contact> contacts = new ArrayList<>();
         Gson gson = new Gson();
 
-        for (String key : all.keySet()) {
+        List<String> keys = new ArrayList<>(all.keySet());
+        Collections.sort(keys);
+
+        for (String key : keys) {
             try {
                 contacts.add(Integer.parseInt(key), gson.fromJson(all.get(key), Contact.class));
-            } catch (NumberFormatException e) {}
+            } catch (NumberFormatException e) {
+            }
         }
 
         if (contacts.size() < 5) {
@@ -60,14 +65,14 @@ public class NetworkRepositoryImpl implements NetworkRepository {
 
     @Override
     public void saveFirstOpen() {
-        SharedPreferences.Editor edit = getSharedPreferences().edit();
+        SharedPreferences.Editor edit = context.getSharedPreferences("NetworkRepositoryImpl2_new", Context.MODE_PRIVATE).edit();
         edit.putBoolean("first_open", false);
         edit.commit();
     }
 
     @Override
     public boolean isFirstOpen() {
-        return getSharedPreferences().getBoolean("first_open", true);
+        return context.getSharedPreferences("NetworkRepositoryImpl2_new", Context.MODE_PRIVATE).getBoolean("first_open", true);
     }
 
 
