@@ -91,7 +91,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     @Override
     public void sendSMS() {
         StringBuffer buffer = new StringBuffer("");
-        buffer.append("Foi mal pertubar, mas to testando um app que fiz ");
+        buffer.append("Estou em uma situação de risco, por favor me ajude. Estou te enviando a minha localização aproximada pelo link  ");
         if(location == null) {
             location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         }
@@ -106,7 +106,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
         for (Contact contact : allContacts) {
             String phone = contact.getPhoneFormated();
 
-//            smsManager.sendTextMessage(phone, null, buffer.toString(), null, null);
+            smsManager.sendTextMessage(phone, null, buffer.toString(), null, null);
         }
 
 
