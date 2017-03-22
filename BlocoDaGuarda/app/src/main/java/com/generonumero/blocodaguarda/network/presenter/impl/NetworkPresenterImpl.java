@@ -136,7 +136,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
                 continue;
             }
             String phone = contact.getPhoneFormated();
-            smsManager.sendTextMessage("00000000000", null, msg, null, null);
+            smsManager.sendTextMessage(phone, null, msg, null, null);
         }
     }
 

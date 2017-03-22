@@ -55,52 +55,52 @@
             android:layout_height="2dp"
             android:background="@color/bdg_separator" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:padding="@dimen/bdg_base_spacing_default">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="@dimen/bdg_base_spacing_default">-->
 
-            <TextView
-                style="@style/config_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="@string/bdg_config_form_title" />
+            <!--<TextView-->
+                <!--style="@style/config_title"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="left"-->
+                <!--android:text="@string/bdg_config_form_title" />-->
 
-            <TextView
-                style="@style/config_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="left"
-                android:text="@string/bdg_config_form_text" />
+            <!--<TextView-->
+                <!--style="@style/config_text"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:gravity="left"-->
+                <!--android:text="@string/bdg_config_form_text" />-->
 
-            <RadioGroup
-                android:id="@+id/bdg_conf_radiogroup"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
+            <!--<RadioGroup-->
+                <!--android:id="@+id/bdg_conf_radiogroup"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:orientation="vertical">-->
 
-                <RadioButton
-                    android:id="@+id/bdg_conf_radio_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bdg_config_radio_email"
-                    android:textAppearance="@style/about_text" />
+                <!--<RadioButton-->
+                    <!--android:id="@+id/bdg_conf_radio_email"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/bdg_config_radio_email"-->
+                    <!--android:textAppearance="@style/about_text" />-->
 
-                <RadioButton
-                    android:id="@+id/bdg_conf_radio_push"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/bdg_config_radio_push"
-                    android:textAppearance="@style/about_text" />
-            </RadioGroup>
+                <!--<RadioButton-->
+                    <!--android:id="@+id/bdg_conf_radio_push"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="@string/bdg_config_radio_push"-->
+                    <!--android:textAppearance="@style/about_text" />-->
+            <!--</RadioGroup>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <View
             android:layout_width="match_parent"

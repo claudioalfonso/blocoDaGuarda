@@ -7,7 +7,7 @@
     <string name="bdg_menu_sos">SOS</string>
     <string name="bdg_menu_configuration">Configurações</string>
     <string name="bdg_menu_about">Sobre o app </string>
-    <string name="bdg_menu_gn">Gênero e número </string>
+    <string name="bdg_menu_gn">Gênero e Número </string>
 
     <string name="bdg_menu_firstopen_dialog_title">Atenção</string>
     <string name="bdg_menu_firstopen_dialog_text">
@@ -62,9 +62,9 @@
     <string name="bdg_alert_network_sms_message">Você esta cadastrado dentro da rede de contatos da %s. Quando estiver em alguma situação
         de perigo, você receberá uma mensagem de ajuda com a sua localização.</string>
 
-    <string name="bdg_alert_help_dialog_title">Você está bem?</string>
+    <string name="bdg_alert_help_dialog_title">Ativou sua rede por engano? Clique para cancelar </string>
     <string name="bdg_alert_help_dialog_time">Sua rede de confiança será acionada caso você não responda em %ss.</string>
-    <string name="bdg_alert_help_dialog_button">Sim</string>
+    <string name="bdg_alert_help_dialog_button">Desativar</string>
 
     <string name="bdg_alert_smssender_dialog_title">Atenção</string>
     <string name="bdg_alert_smssender_dialog_text">Todos os seus contatos receberam
@@ -89,7 +89,7 @@
 
     <!--genero e numero-->
     <string name="bdg_about">
-        A Gênero e Número é a primeira web revista brasileira que apresenta narrativas jornalísticas guiados por dados sobre as assimetrias de gênero.
+        A Gênero e Número é uma iniciativa independente de jornalismo que traz dados para o centro do debate sobre equidade de gênero.
     </string>
 
      <string name="bdg_about_link">
@@ -103,8 +103,8 @@
     <string name="bdg_config_form_text">Defina como prefere receber o formulário de informações após a ativação da rede de contatos.</string>
     <string name="bdg_config_radio_email">Receber via e-mail</string>
     <string name="bdg_config_radio_push">Receber via notificação no celular</string>
-    <string name="bdg_alert_msg">Sentiu que está em perigo? \n
-                                Ative a sua rede e peça ajuda!
+    <string name="bdg_alert_msg">Se sentiu insegura? \n
+                                Clique e acione sua rede para pedir ajuda.
     </string>
 
 </resources>

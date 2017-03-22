@@ -24,6 +24,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -103,10 +104,14 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
         List<Contact> allContacts = networkRepository.getAllContacts();
         for (Contact contact : allContacts) {
-            String phone = contact.getPhone().replaceAll("[^\\d.]", "");
+            String phone = contact.getPhoneFormated();
 
 //            smsManager.sendTextMessage(phone, null, buffer.toString(), null, null);
         }
+
+
+        FirebaseMessaging.getInstance().subscribeToTopic("push");
+
         LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
     }
 

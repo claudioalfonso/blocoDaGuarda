@@ -25,6 +25,7 @@ import com.generonumero.blocodaguarda.login.view.impl.LoginActivity;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.view.MainView;
 import com.generonumero.blocodaguarda.network.view.impl.NetworkFragment;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 Bundle extras = intent.getExtras();
                 for (String key : extras.keySet()) {
                     Log.i("teste", "key: " + key + " - value:  " + extras.get(key));
+
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("push");
+
                 }
             } else {
                 Log.i("teste", "no extras");
@@ -207,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 if (getFragments().get(MENU_MAIN) == null) {
                     getFragments().put(MENU_MAIN, new AlertFragment());
                 }
-                toolbar.setTitle("  Braços Cados");
+                toolbar.setTitle("  Braços Dados");
                 break;
             case MENU_ABOUT:
                 if (getFragments().get(MENU_ABOUT) == null) {
@@ -226,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                     getFragments().put(MENU_CONFIGURATION, new ConfigurationFragment());
                 }
                 toolbar.setTitle("  Configurações");
+                break;
             case MENU_NETWORK:
                 getFragments().put(MENU_NETWORK, new NetworkFragment());
                 toolbar.setTitle("  Rede de Confiança");

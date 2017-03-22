@@ -115,7 +115,7 @@
     </style>
 
     <style name="bdg_alert_ok_button" parent="MyButton">
-        <item name="android:textSize">60sp</item>
+        <item name="android:textSize">36sp</item>
         <item name="android:textColor">@color/bdg_white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/bdg_login_saveme_button</item>

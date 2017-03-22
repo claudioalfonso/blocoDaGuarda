@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
@@ -28,12 +26,12 @@ public class ConfigurationFragment extends Fragment implements ConfigurationView
 
     @Bind(R.id.bdg_conf_range_seek_bar)
     RangeSeekBar<Integer> rangeSeekBar;
-    @Bind(R.id.bdg_conf_radio_push)
-    RadioButton radioPush;
-    @Bind(R.id.bdg_conf_radio_email)
-    RadioButton radioEmail;
-    @Bind(R.id.bdg_conf_radiogroup)
-    RadioGroup radioGroup;
+//    @Bind(R.id.bdg_conf_radio_push)
+//    RadioButton radioPush;
+//    @Bind(R.id.bdg_conf_radio_email)
+//    RadioButton radioEmail;
+//    @Bind(R.id.bdg_conf_radiogroup)
+//    RadioGroup radioGroup;
 
 
     private ConfigurationPresenter configurationPresenter;
@@ -58,10 +56,10 @@ public class ConfigurationFragment extends Fragment implements ConfigurationView
 
     @OnClick(R.id.bdg_config_save)
     public void onClickSave() {
-        int type = TypeOfForm.FORM_BY_EMAIL;
-        if (radioGroup.getCheckedRadioButtonId() == radioPush.getId()) {
-            type = TypeOfForm.FORM_BY_PUSH;
-        }
+        int type = TypeOfForm.FORM_BY_PUSH;
+//        if (radioGroup.getCheckedRadioButtonId() == radioPush.getId()) {
+//            type = TypeOfForm.FORM_BY_PUSH;
+//        }
 
         configurationPresenter.clickSaveConfigs(rangeSeekBar.getSelectedMaxValue(), type);
     }
@@ -76,16 +74,13 @@ public class ConfigurationFragment extends Fragment implements ConfigurationView
     @Override
     public void onDataLoaded(int time, int typeOfForm) {
         rangeSeekBar.setSelectedMaxValue(time);
-
-        switch (typeOfForm) {
-            case TypeOfForm.FORM_BY_PUSH:
-                radioGroup.check(radioPush.getId());
-                break;
-            case TypeOfForm.FORM_BY_EMAIL:
-                radioGroup.check(radioEmail.getId());
-                break;
-        }
-
-
+//        switch (typeOfForm) {
+//            case TypeOfForm.FORM_BY_PUSH:
+//                radioGroup.check(radioPush.getId());
+//                break;
+//            case TypeOfForm.FORM_BY_EMAIL:
+//                radioGroup.check(radioEmail.getId());
+//                break;
+//        }
     }
 }
