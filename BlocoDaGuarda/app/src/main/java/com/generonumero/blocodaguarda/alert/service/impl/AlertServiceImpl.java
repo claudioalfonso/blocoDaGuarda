@@ -7,9 +7,13 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telephony.SmsManager;
+import android.util.Log;
 
 import com.generonumero.blocodaguarda.BDGApplication;
+import com.generonumero.blocodaguarda.R;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
+import com.generonumero.blocodaguarda.login.event.UserProfile;
+import com.generonumero.blocodaguarda.login.repository.LoginRepository;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.generonumero.blocodaguarda.permission.service.PermissionService;
@@ -26,6 +30,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
     private NetworkRepository networkRepository;
     private PermissionService permissionService;
+    private LoginRepository loginRepository;
 
     private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String PERMISSION_LOCATION_COARSE = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -34,9 +39,10 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     private LocationRequest locationRequest;
     private Location location;
 
-    public AlertServiceImpl(NetworkRepository networkRepository, PermissionService permissionService) {
+    public AlertServiceImpl(NetworkRepository networkRepository, PermissionService permissionService, LoginRepository loginRepository) {
         this.networkRepository = networkRepository;
         this.permissionService = permissionService;
+        this.loginRepository = loginRepository;
         locationRequest = new LocationRequest();
     }
 
@@ -74,25 +80,35 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
     @Override
     public void sendSMS() {
-        StringBuffer buffer = new StringBuffer("");
-        buffer.append("Estou em uma situação de risco, por favor me ajude. Estou te enviando a minha localização aproximada pelo link  ");
-        if (location == null
-                && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_FINE)
-                && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_COARSE)) {
-            location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        try {
+            if (location == null) {
+                location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            }
+        } catch (Exception e) {
         }
+
+        String link = "";
         if (location != null) {
-            String a = "https://maps.google.com?q=" + location.getLatitude() + "," + location.getLongitude();
-            buffer.append(a);
+            link = "https://maps.google.com?q=" + location.getLatitude() + "," + location.getLongitude();
         }
 
         SmsManager smsManager = SmsManager.getDefault();
 
+        UserProfile user = loginRepository.getUser();
+        String pronomn;
+        if (user.getGender().equals("male")) {
+            pronomn = "o";
+        } else {
+            pronomn = "a";
+        }
+
         List<Contact> allContacts = networkRepository.getAllContacts();
         for (Contact contact : allContacts) {
             if (contact.isValid()) {
+                String msg = BDGApplication.getInstance().getString(R.string.alert_sms_message, contact.getName(), pronomn, link);
+
                 String phone = contact.getPhoneFormated();
-                smsManager.sendTextMessage(phone, null, buffer.toString(), null, null);
+                smsManager.sendTextMessage(phone, null, msg, null, null);
             }
         }
         FirebaseMessaging.getInstance().subscribeToTopic("push");
@@ -102,10 +118,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         try {
-            if (!permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_FINE)
-                    && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_COARSE)) {
-                LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
-            }
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         } catch (Exception e) {
         }
     }

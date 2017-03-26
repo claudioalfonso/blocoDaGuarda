@@ -21,7 +21,7 @@
 
     <!--network-->
     <string name="bdg_network_header">Os contatos cadastrados recebem um SMS caso você ative o modo de segurança.
-        <br/> Verifique se os números estão corretos e se eles podem receber mensagens de texto.
+        <br /> Verifique se os números estão corretos e se eles podem receber mensagens de texto.
     </string>
     <string name="bdg_network_save">Salvar contatos</string>
     <string name="bdg_network_firstopen_dialog_text">
@@ -47,12 +47,11 @@
     <string name="bdg_loginemail_gender_send">Enviar cadastro</string>
 
 
-
     <string name="bdg_login_explanation_login">Para utilizar o Braços Dados, complete o seu cadastro com o Facebook ou e-mail.</string>
     <string name="bdg_login_warning">Não se preocupe, seus dados são \ntotalmente sigilosos.</string>
     <string name="bdg_login_no_face">Conectar com Facebook</string>
     <string name="bdg_login_no_email">Conectar com e-mail</string>
-    <string name="bdg_login_top" >Em situações de risco, Braços Dados permite que você envie alertas de socorro para contatos \ncadastrados que receberão sua localização e uma mensagem pedindo ajuda.</string>
+    <string name="bdg_login_top">Em situações de risco, Braços Dados permite que você envie alertas de socorro para contatos \ncadastrados que receberão sua localização e uma mensagem pedindo ajuda.</string>
 
 
     <!--alert-->
@@ -61,8 +60,10 @@
     <string name="bdg_alert_network_dialog_message">Para ativar o modo de segurança, você precisa cadastrar contatos de confiança que receberão um SMS com a sua localização caso você esteja em perigo. \nDeseja cadastrar agora?</string>
     <string name="bdg_alert_network_dialog_positive_button">Sim</string>
     <string name="bdg_alert_network_dialog_negative_button">Agora não</string>
-    <string name="bdg_alert_network_sms_message">Você esta cadastrado dentro da rede de contatos da %s. Quando estiver em alguma situação
-        de perigo, você receberá uma mensagem de ajuda com a sua localização.</string>
+    <string name="bdg_alert_network_sms_message" formatted="false">%1$s, você foi cadastrado na rede de segurança %3$s %2$s pelo aplicativo Braços Dados.
+        Essa rede serve como apoio em situações que em que ela se sentir em risco.
+        Quando a rede for acionada, você receberá uma mensagem com a localização %3$s %2$s.
+    </string>
 
     <string name="bdg_alert_help_dialog_title">Se você acionou o botão por engano, clique no botão abaixo e cancele o envio do SMS</string>
     <string name="bdg_alert_help_dialog_time">Sua rede de confiança será ativada em %ss.</string>
@@ -107,5 +108,7 @@
     <string name="bdg_alert_msg">Está se sentindo em risco? \n
                                 Clique e acione sua rede para pedir ajuda.
     </string>
+
+    <string name="alert_sms_message" formatted="false">%s, estou me sentindo insegur%s neste local: %s . Você me ligaria daqui a pouco?\"</string>
 
 </resources>

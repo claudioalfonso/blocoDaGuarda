@@ -144,12 +144,20 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
         UserProfile user = loginRepository.getUser();
 
-        String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, user.getName());
+
 
         for (Contact contact : contacts) {
             if (!contact.isValid()) {
                 continue;
             }
+            String gender;
+            if(user.getGender().equals("male")) {
+                gender = "do";
+            } else {
+                gender = "da";
+            }
+
+            String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, contact.getName(), user.getName(),gender );
             String phone = contact.getPhoneFormated();
             smsManager.sendTextMessage(phone, null, msg, null, null);
         }
