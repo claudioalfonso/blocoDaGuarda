@@ -84,8 +84,9 @@
         \nOferece um serviço de contato imadiato com uma rede previamente cadastrada, que recebe um SMS com a geolocalização da usuária.
     </string>
 
-     <string name="bdg_bd_about_link">
-        Leia nossos termos de uso.
+     <string name="bdg_bd_about_link"><![CDATA[
+        <p><u><font color="#6f4982">Leia nossos termos de uso.</font></u></p>
+        ]]>
     </string>
 
 
@@ -95,7 +96,8 @@
     </string>
 
      <string name="bdg_about_link">
-        Para conhecer mais do nosso trabalho, acesse nosso site <u>www.generonumero.media</u>
+       <![CDATA[ Para conhecer mais do nosso trabalho, acesse nosso site
+       <p><u><font color="#6f4982">www.generonumero.media</font></u></p> ]]>
     </string>
 
     <string name="bdg_config_time_title">Tempo</string>

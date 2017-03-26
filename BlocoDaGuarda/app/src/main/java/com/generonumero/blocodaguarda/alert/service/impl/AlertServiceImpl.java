@@ -108,7 +108,8 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
                 String msg = BDGApplication.getInstance().getString(R.string.alert_sms_message, contact.getName(), pronomn, link);
 
                 String phone = contact.getPhoneFormated();
-                smsManager.sendTextMessage(phone, null, msg, null, null);
+                Log.i("teste", msg);
+//                smsManager.sendTextMessage(phone, null, msg, null, null);
             }
         }
         FirebaseMessaging.getInstance().subscribeToTopic("push");
