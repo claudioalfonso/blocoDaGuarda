@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -25,6 +24,7 @@ import com.generonumero.blocodaguarda.login.view.impl.LoginActivity;
 import com.generonumero.blocodaguarda.menu.presenter.MainPresenter;
 import com.generonumero.blocodaguarda.menu.view.MainView;
 import com.generonumero.blocodaguarda.network.view.impl.NetworkFragment;
+import com.generonumero.blocodaguarda.webview.WebViewActivity;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
@@ -73,24 +73,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void verifyDeepLink() {
-        Log.i("teste", "verifyDeepLink");
         Intent intent = getIntent();
         if (intent != null) {
-            Log.i("teste", "intent != null");
             if (intent.getExtras() != null) {
-                Log.i("teste", intent.getExtras().toString());
                 Bundle extras = intent.getExtras();
                 for (String key : extras.keySet()) {
-                    Log.i("teste", "key: " + key + " - value:  " + extras.get(key));
-
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic("push");
-
+                    String string = extras.getString(key);
+                    if (string != null && string.contains("http")) {
+                        WebViewActivity.start(this, extras.getString(key));
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic("push");
+                    }
                 }
-            } else {
-                Log.i("teste", "no extras");
-
             }
-
         }
     }
 

@@ -16,24 +16,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".menu.view.impl.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".login.view.impl.LoginActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".login.view.impl.LoginEmailActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -47,7 +43,6 @@
             android:name="io.fabric.ApiKey"
             android:value="0b44a7d1c0f6f9dffab345b815de9769879472dc" />
 
-
         <service
             android:name=".push.PushMessagingService"
             android:enabled="true">
@@ -55,8 +50,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-
         <service
             android:name=".push.PushInstanceIdService"
             android:enabled="true"
@@ -72,6 +65,14 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
+
+        <activity android:name=".webview.WebViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
