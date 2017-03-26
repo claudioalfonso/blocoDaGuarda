@@ -64,28 +64,11 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
                 contacts.add(contact4.getContact());
                 contacts.add(contact5.getContact());
 
-                if (contactsAreValid(contacts)) {
-                    networkPresenter.saveAllContacts(contacts);
-
-                    MainActivity activity = (MainActivity) getActivity();
-                    activity.goToHome();
-                } else {
-                    Toast.makeText(getContext(), "Os contatos precisam ser válidos para serem salvos.", Toast.LENGTH_LONG).show();
-                }
+                networkPresenter.saveAllContacts(contacts);
             }
         });
         networkPresenter.loadViews();
         return view;
-    }
-
-    private boolean contactsAreValid(List<Contact> contacts) {
-        for (Contact contact : contacts) {
-            if (!contact.isValid()) {
-                return false;
-            }
-        }
-        return true;
-
     }
 
 
@@ -199,6 +182,17 @@ public class NetworkFragment extends Fragment implements NetworkView, PickContac
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void goHome() {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.goToHome();
+    }
+
+    @Override
+    public void showMsgInvalidContacts() {
+        Toast.makeText(getContext(), "Os contatos precisam ser válidos para serem salvos.", Toast.LENGTH_LONG).show();
     }
 
     @Override

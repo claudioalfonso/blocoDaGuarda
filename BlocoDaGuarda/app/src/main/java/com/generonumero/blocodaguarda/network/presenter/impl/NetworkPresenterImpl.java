@@ -105,15 +105,30 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
     @Override
     public void saveAllContacts(List<Contact> contacts) {
-        networkRepository.saveAll(contacts);
-        if (!permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_SMS)) {
-            sendSMS(contacts);
+        if (contactsAreValid(contacts)) {
+            networkView.goHome();
+            networkRepository.saveAll(contacts);
+            if (!permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_SMS)) {
+                sendSMS(contacts);
+            }
+        } else {
+            networkView.showMsgInvalidContacts();
         }
+    }
+
+    private boolean contactsAreValid(List<Contact> contacts) {
+        int numOfValids = 0;
+        for (Contact contact : contacts) {
+            if (contact.isValid()) {
+                numOfValids++;
+            }
+        }
+        return numOfValids > 2;
     }
 
     @Override
     public void showSMSPermissionIfNeeded(Fragment fragment) {
-        if(permissionService.hasNeedAskPermission(fragment.getContext(), PERMISSION_SMS)) {
+        if (permissionService.hasNeedAskPermission(fragment.getContext(), PERMISSION_SMS)) {
             permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION_SMS}, RESULT_CODE_PERMISSION_SMS);
         }
 

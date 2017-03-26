@@ -14,4 +14,8 @@ public interface NetworkView extends PermissionView {
     void updateList(int position, Contact contact);
 
     void showPopupExplaningNetwork();
+
+    void goHome();
+
+    void showMsgInvalidContacts();
 }
