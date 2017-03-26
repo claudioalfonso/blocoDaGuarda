@@ -138,7 +138,7 @@ public class BDGApplication extends Application {
 
     private AlertService getAlertService() {
         if (alertService == null) {
-            alertService = new AlertServiceImpl(getNetworkRepository(), getConfigurationRepository());
+            alertService = new AlertServiceImpl(getNetworkRepository(), getConfigurationRepository(), getPermissionService());
         }
         return alertService;
     }

@@ -1,5 +1,6 @@
 package com.generonumero.blocodaguarda.alert.service.impl;
 
+import android.Manifest;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,6 +14,7 @@ import com.generonumero.blocodaguarda.alert.service.AlertService;
 import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepository;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
+import com.generonumero.blocodaguarda.permission.service.PermissionService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -28,14 +30,19 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     private ConfigurationRepository configurationRepository;
     private CountDownTimer countDownTimer;
     private final int SECOND_IN_MILLIS = 1000;
+    private PermissionService permissionService;
+
+    private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String PERMISSION_LOCATION_COARSE = Manifest.permission.ACCESS_COARSE_LOCATION;
 
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private Location location;
 
-    public AlertServiceImpl(NetworkRepository networkRepository, ConfigurationRepository configurationRepository) {
+    public AlertServiceImpl(NetworkRepository networkRepository, ConfigurationRepository configurationRepository, PermissionService permissionService) {
         this.networkRepository = networkRepository;
         this.configurationRepository = configurationRepository;
+        this.permissionService = permissionService;
         locationRequest = new LocationRequest();
     }
 
@@ -86,7 +93,9 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     public void sendSMS() {
         StringBuffer buffer = new StringBuffer("");
         buffer.append("Estou em uma situação de risco, por favor me ajude. Estou te enviando a minha localização aproximada pelo link  ");
-        if (location == null) {
+        if (location == null
+                && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_FINE)
+                && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_COARSE)) {
             location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         }
         if (location != null) {
@@ -110,21 +119,18 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         try {
-            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
-        } catch (Exception e) {
-
-        }
+            if (!permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_FINE)
+                    && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_COARSE)) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+            }
+        } catch (Exception e) {}
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-
-    }
+    public void onConnectionSuspended(int i) {}
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
     @Override
     public void onLocationChanged(Location location) {
