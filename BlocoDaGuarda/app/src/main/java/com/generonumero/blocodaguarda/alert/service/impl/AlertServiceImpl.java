@@ -1,19 +1,15 @@
 package com.generonumero.blocodaguarda.alert.service.impl;
 
 import android.Manifest;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 
 import com.generonumero.blocodaguarda.BDGApplication;
-import com.generonumero.blocodaguarda.alert.event.CountDownFinished;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
-import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepository;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.generonumero.blocodaguarda.permission.service.PermissionService;
@@ -29,9 +25,6 @@ import java.util.List;
 public class AlertServiceImpl implements AlertService, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private NetworkRepository networkRepository;
-    private ConfigurationRepository configurationRepository;
-    private CountDownTimer countDownTimer;
-    private final int SECOND_IN_MILLIS = 1000;
     private PermissionService permissionService;
 
     private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -41,9 +34,8 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     private LocationRequest locationRequest;
     private Location location;
 
-    public AlertServiceImpl(NetworkRepository networkRepository, ConfigurationRepository configurationRepository, PermissionService permissionService) {
+    public AlertServiceImpl(NetworkRepository networkRepository, PermissionService permissionService) {
         this.networkRepository = networkRepository;
-        this.configurationRepository = configurationRepository;
         this.permissionService = permissionService;
         locationRequest = new LocationRequest();
     }
@@ -61,20 +53,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     }
 
     @Override
-    public void startCountDown() {
-        int time = configurationRepository.getTime() * SECOND_IN_MILLIS;
-
-        countDownTimer = new CountDownTimer(time, SECOND_IN_MILLIS) {
-            @Override
-            public void onTick(long l) {
-            }
-
-            @Override
-            public void onFinish() {
-                BDGApplication.getInstance().getBus().post(new CountDownFinished());
-            }
-        };
-        countDownTimer.start();
+    public void startCountDown(CountDownTimer countDownTimer) {
         googleApiClient = new GoogleApiClient.Builder(BDGApplication.getInstance())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -82,10 +61,11 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
                 .build();
 
         googleApiClient.connect();
+        countDownTimer.start();
     }
 
     @Override
-    public void stopCountDown() {
+    public void stopCountDown(CountDownTimer countDownTimer) {
         countDownTimer.cancel();
         if (googleApiClient != null) {
             googleApiClient.disconnect();

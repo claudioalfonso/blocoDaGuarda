@@ -41,21 +41,13 @@ import com.squareup.otto.Bus;
 public class BDGApplication extends Application {
 
     private static BDGApplication instance;
-
     private FacebookLoginService facebookLoginService;
-
     private LoginRepository loginRepository;
-
     private Bus bus;
-
     private NetworkRepository networkRepository;
-
     private PermissionService permissionService;
-
     private AlertService alertService;
-
     private ConfigurationRepository configurationRepository;
-
     private MenuRepository menuRepository;
 
     @Override
@@ -138,7 +130,7 @@ public class BDGApplication extends Application {
 
     private AlertService getAlertService() {
         if (alertService == null) {
-            alertService = new AlertServiceImpl(getNetworkRepository(), getConfigurationRepository(), getPermissionService());
+            alertService = new AlertServiceImpl(getNetworkRepository(), getPermissionService());
         }
         return alertService;
     }

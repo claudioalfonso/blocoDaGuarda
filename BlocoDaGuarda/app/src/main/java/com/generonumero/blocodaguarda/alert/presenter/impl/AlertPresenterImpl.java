@@ -4,9 +4,9 @@ package com.generonumero.blocodaguarda.alert.presenter.impl;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-
 import com.generonumero.blocodaguarda.alert.event.CountDownFinished;
 import com.generonumero.blocodaguarda.alert.presenter.AlertPresenter;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
@@ -23,12 +23,14 @@ public class AlertPresenterImpl implements AlertPresenter {
     private static final String PERMISSION_SMS = Manifest.permission.SEND_SMS;
     private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String PERMISSION_LOCATION_COARSE = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private final int SECOND_IN_MILLIS = 1000;
 
     private AlertView alertView;
     private AlertService alertService;
     private Bus bus;
     private PermissionService permissionService;
     private ConfigurationRepository configurationRepository;
+    private CountDownTimer countDownTimer;
 
     public AlertPresenterImpl(AlertView alertView, AlertService alertService, Bus bus, PermissionService permissionService, ConfigurationRepository configurationRepository) {
         this.alertView = alertView;
@@ -79,15 +81,25 @@ public class AlertPresenterImpl implements AlertPresenter {
 
     @Override
     public void onCancelClick() {
-        alertService.stopCountDown();
+        alertService.stopCountDown(countDownTimer);
         alertView.dismissSafeScreen();
     }
 
 
     private void saveMe() {
-        alertView.showSafeScreen(configurationRepository.getTime());
-        alertService.startCountDown();
+        int time = configurationRepository.getTime();
+        alertView.showSafeScreen(time);
 
+        countDownTimer = new CountDownTimer(time * SECOND_IN_MILLIS, SECOND_IN_MILLIS) {
+            @Override
+            public void onTick(long l) {}
+
+            @Override
+            public void onFinish() {
+                onCountDownFinished(new CountDownFinished());
+            }
+        };
+        alertService.startCountDown(countDownTimer);
     }
 
 
