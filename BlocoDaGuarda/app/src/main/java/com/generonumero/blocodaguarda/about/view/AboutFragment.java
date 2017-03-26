@@ -22,6 +22,7 @@ public class AboutFragment extends Fragment {
     private int image;
     private int about;
     private int link;
+    private String linkUrl;
 
     public static AboutFragment getInstanceFromAbout() {
 
@@ -29,7 +30,7 @@ public class AboutFragment extends Fragment {
         aboutFragment.image = R.drawable.logo_big;
         aboutFragment.about = R.string.bdg_bd_about;
         aboutFragment.link = R.string.bdg_bd_about_link;
-
+        aboutFragment.linkUrl = "https://docs.google.com/document/d/1bIiolpwEzPAiaIMZcW3M7_yKXQPeH57uDXMuNbowPRI/edit?usp=sharing";
         return aboutFragment;
     }
 
@@ -38,7 +39,7 @@ public class AboutFragment extends Fragment {
         aboutFragment.image = R.drawable.logo_gn;
         aboutFragment.about = R.string.bdg_about;
         aboutFragment.link = R.string.bdg_about_link;
-
+        aboutFragment.linkUrl = "http://www.generonumero.media";
         return aboutFragment;
     }
 
@@ -62,7 +63,7 @@ public class AboutFragment extends Fragment {
 
     @OnClick(R.id.bdg_about_link)
     public void sendToSite() {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.generonumero.media"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkUrl));
         startActivity(browserIntent);
     }
 }
