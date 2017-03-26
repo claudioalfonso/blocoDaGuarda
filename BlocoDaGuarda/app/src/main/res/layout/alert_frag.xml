@@ -39,7 +39,7 @@
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
             android:src="@drawable/alert_button_saveme_selector"
-            android:text="Coração" />
+            />
     </RelativeLayout>
 
 
