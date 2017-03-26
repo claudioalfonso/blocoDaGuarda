@@ -30,7 +30,7 @@
         \nPor isso enviaremos um sms para avisá-los de seu cadastro.
     </string>
     <string name="bdg_network_firstopen_dialog_positive">Entendi</string>
-    <string name="bdg_network_contact_name">Apelido</string>
+    <string name="bdg_network_contact_name">Nome</string>
     <string name="bdg_network_contact_phone">Telefone</string>
     <string name="bdg_network_contact_label">Contato</string>
 
@@ -70,7 +70,6 @@
     <string name="bdg_alert_smssender_dialog_text">Todos os seus contatos receberam
     sua mensagem de alerta e já estão com a sua geolocalização. Eles vão tentar se comunicar com você, fique atento(a). Se puder, responda.</string>
 
-    <!---->
 
     <string name="open">open</string>
     <string name="close">close</string>
@@ -103,7 +102,7 @@
     <string name="bdg_config_form_text">Defina como prefere receber o formulário de informações após a ativação da rede de contatos.</string>
     <string name="bdg_config_radio_email">Receber via e-mail</string>
     <string name="bdg_config_radio_push">Receber via notificação no celular</string>
-    <string name="bdg_alert_msg">Se sentiu insegura? \n
+    <string name="bdg_alert_msg">Está se sentindo em risco? \n
                                 Clique e acione sua rede para pedir ajuda.
     </string>
 

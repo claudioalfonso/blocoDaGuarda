@@ -1,11 +1,13 @@
 package com.generonumero.blocodaguarda.alert.service.impl;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 
 import com.generonumero.blocodaguarda.BDGApplication;
@@ -49,12 +51,13 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     @Override
     public boolean isContactsRegistered() {
         List<Contact> allContacts = networkRepository.getAllContacts();
+        int count = 0;
         for (Contact contact : allContacts) {
-            if (!contact.isValid()) {
-                return false;
+            if (contact.isValid()) {
+                count++;
             }
         }
-        return true;
+        return count > 2;
     }
 
     @Override
@@ -123,14 +126,17 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
                     && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_LOCATION_COARSE)) {
                 LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
 
     @Override
     public void onLocationChanged(Location location) {
