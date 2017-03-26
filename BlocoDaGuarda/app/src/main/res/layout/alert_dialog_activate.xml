@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:padding="@dimen/bdg_base_spacing_default"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/background_saveme"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:padding="@dimen/bdg_base_spacing_default">
+
 
     <TextView
-        android:text="@string/bdg_alert_help_dialog_title"
+        android:id="@+id/bdg_alert_save_me"
+        style="@style/alert_dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bdg_alert_help_dialog_button"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/contact_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bdg_alert_save_me"
         android:layout_marginBottom="60dp"
-        style="@style/alert_dialog_title"
-        android:id="@+id/textView3" />
+        android:layout_marginTop="20dp"
+        android:text="@string/bdg_alert_help_dialog_title" />
 
     <Button
-        android:text="@string/bdg_alert_help_dialog_button"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
+        android:id="@+id/bdg_alert_help_dialog_button"
         style="@style/bdg_alert_ok_button"
-        android:id="@+id/bdg_alert_help_dialog_button" />
-
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bdg_alert_help_dialog_button"
-        android:layout_marginTop="60dp"
-        style="@style/contact_text"
-        android:id="@+id/bdg_alert_save_me" />
+        android:layout_margin="40dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerInParent="true"
+        android:text="@string/bdg_alert_help_dialog_button" />
+
+
 </RelativeLayout>

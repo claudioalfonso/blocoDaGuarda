@@ -55,7 +55,7 @@ public class LoginEmailPresenterImpl implements LoginEmailPresenter {
     }
 
     @Override
-    public void clickLogin(String name, String email, int gender) {
+    public void clickLogin(String name, String email, String city,String neighborhood, int gender) {
         String strGender = "";
         if (UserProfile.MALE == gender) {
             strGender = "male";
@@ -63,7 +63,7 @@ public class LoginEmailPresenterImpl implements LoginEmailPresenter {
         if (UserProfile.FEMALE == gender) {
             strGender = "female";
         }
-        UserProfile user = new UserProfile(name, email, strGender, false);
+        UserProfile user = new UserProfile(name, email, strGender, city, neighborhood, false);
 
         if(user.isValid()) {
             onLoginSuccesful(new LoginSuccessful(user));

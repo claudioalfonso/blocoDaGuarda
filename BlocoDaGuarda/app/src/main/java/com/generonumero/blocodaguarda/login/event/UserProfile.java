@@ -8,6 +8,8 @@ public class UserProfile {
     private String name;
     private String email;
     private String gender;
+    private String city;
+    private String neighborhood;
     private boolean facebook;
 
 
@@ -23,6 +25,15 @@ public class UserProfile {
         this.email = email;
         this.gender = gender;
         this.facebook = facebook;
+    }
+
+    public UserProfile(String name, String email, String gender, String city, String neighborhood, boolean facebook) {
+        this.facebook = facebook;
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+        this.city = city;
+        this.neighborhood = neighborhood;
     }
 
     public String getName() {
@@ -41,6 +52,13 @@ public class UserProfile {
         return facebook;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
 
     public boolean isValid() {
         return isValidName() && isValidGender() && isValidEmailAddress();

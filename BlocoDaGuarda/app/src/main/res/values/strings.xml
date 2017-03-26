@@ -39,6 +39,8 @@
     <string name="bdg_loginemail_explanation_login">Por favor, preencha os dados abaixo para nos ajudar a conhecer melhor os usuários do aplicativo.</string>
     <string name="bdg_loginemail_name">Nome</string>
     <string name="bdg_loginemail_email">E-mail</string>
+    <string name="bdg_loginemail_city">Cidade</string>
+    <string name="bdg_loginemail_neighborhood">Bairro</string>
     <string name="bdg_loginemail_gender">Sexo</string>
     <string name="bdg_loginemail_gender_male">Masculino</string>
     <string name="bdg_loginemail_gender_female">Feminino</string>
@@ -62,8 +64,8 @@
     <string name="bdg_alert_network_sms_message">Você esta cadastrado dentro da rede de contatos da %s. Quando estiver em alguma situação
         de perigo, você receberá uma mensagem de ajuda com a sua localização.</string>
 
-    <string name="bdg_alert_help_dialog_title">Ativou sua rede por engano? Clique para cancelar </string>
-    <string name="bdg_alert_help_dialog_time">Sua rede de confiança será acionada caso você não responda em %ss.</string>
+    <string name="bdg_alert_help_dialog_title">Se você acionou o botão por engano, clique no botão abaixo e cancele o envio do SMS</string>
+    <string name="bdg_alert_help_dialog_time">Sua rede de confiança será ativada em %ss.</string>
     <string name="bdg_alert_help_dialog_button">Desativar</string>
 
     <string name="bdg_alert_smssender_dialog_title">Atenção</string>

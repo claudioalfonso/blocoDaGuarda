@@ -7,10 +7,6 @@ import com.generonumero.blocodaguarda.login.event.UserProfile;
 import com.generonumero.blocodaguarda.login.repository.LoginRepository;
 import com.google.gson.Gson;
 
-/**
- * Created by Pedro on 3/19/17.
- */
-
 public class LoginRepositoryImpl implements LoginRepository {
 
     private Context context;

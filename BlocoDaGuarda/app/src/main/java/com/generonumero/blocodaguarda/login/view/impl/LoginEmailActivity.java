@@ -33,6 +33,10 @@ public class LoginEmailActivity extends AppCompatActivity implements LoginView {
     EditText name;
     @Bind(R.id.bdg_loginemail_email)
     EditText email;
+    @Bind(R.id.bdg_loginemail_city)
+    EditText city;
+    @Bind(R.id.bdg_loginemail_neighborhood)
+    EditText neighborhood;
     @Bind(R.id.bdg_login_radiogroup)
     RadioGroup radioGroup;
     @Bind(R.id.bdg_loginemail_gender_male)
@@ -77,8 +81,10 @@ public class LoginEmailActivity extends AppCompatActivity implements LoginView {
 
         String nameText = name.getText().toString();
         String emailText = email.getText().toString();
+        String cityText = city.getText().toString();
+        String neighborhoodText = neighborhood.getText().toString();
 
-        loginEmailPresenter.clickLogin(nameText, emailText, type);
+        loginEmailPresenter.clickLogin(nameText, emailText,cityText, neighborhoodText, type);
     }
 
 
