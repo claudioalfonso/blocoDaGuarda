@@ -30,21 +30,18 @@ import java.util.List;
 public class AlertServiceImpl implements AlertService, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private NetworkRepository networkRepository;
-    private PermissionService permissionService;
     private LoginRepository loginRepository;
-
-    private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String PERMISSION_LOCATION_COARSE = Manifest.permission.ACCESS_COARSE_LOCATION;
-
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private Location location;
 
     public AlertServiceImpl(NetworkRepository networkRepository, PermissionService permissionService, LoginRepository loginRepository) {
         this.networkRepository = networkRepository;
-        this.permissionService = permissionService;
+//        this.permissionService = permissionService;
         this.loginRepository = loginRepository;
-        locationRequest = new LocationRequest();
+        locationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setFastestInterval(1000);
     }
 
     @Override
@@ -110,7 +107,8 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
                 String phone = contact.getPhoneFormated();
                 ArrayList<String> parts = smsManager.divideMessage(msg);
-                smsManager.sendMultipartTextMessage(phone, null, parts, null, null);
+                Log.i("teste", msg);
+//                smsManager.sendMultipartTextMessage(phone, null, parts, null, null);
             }
         }
         FirebaseMessaging.getInstance().subscribeToTopic("push");
@@ -120,21 +118,27 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         try {
-            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, this.locationRequest, this);
         } catch (Exception e) {
+            Log.i("teste", "excecao: " + e.getMessage());
         }
     }
 
     @Override
     public void onConnectionSuspended(int i) {
+        Log.i("teste", "excecao: onConnectionSuspended");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.i("teste", "excecao: onConnectionFailed");
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.i("teste", "location.getAccuracy()"+ location.getAccuracy());
+        Log.i("teste", "location.getProvider" + location.getProvider());
+        Log.i("teste", "location." + location);
         this.location = location;
     }
 }
