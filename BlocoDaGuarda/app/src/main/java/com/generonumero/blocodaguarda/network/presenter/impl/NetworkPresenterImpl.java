@@ -142,11 +142,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
             return;
 
         SmsManager smsManager = SmsManager.getDefault();
-
         UserProfile user = loginRepository.getUser();
-
-
-
         for (Contact contact : contacts) {
             if (!contact.isValid()) {
                 continue;

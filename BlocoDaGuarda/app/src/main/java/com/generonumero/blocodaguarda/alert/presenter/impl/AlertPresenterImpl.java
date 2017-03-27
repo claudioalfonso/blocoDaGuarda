@@ -121,6 +121,12 @@ public class AlertPresenterImpl implements AlertPresenter {
             } else {
                 alertView.showAlertPermissionDenied();
             }
+        } else if(grantResults.length >2 && grantResults[1] != PackageManager.PERMISSION_GRANTED) {
+            if (permissionService.getPermissionStatus(activity, PERMISSION_LOCATION_FINE) == PermissionService.BLOCKED_OR_NEVER_ASKED) {
+                alertView.showAlertLocationPermissionDisable();
+            } else {
+                alertView.showAlertLocationPermissionDenied();
+            }
         } else {
             switch (requestCode) {
                 case RESULT_CODE_PERMISSION_FROM_SAVEME:

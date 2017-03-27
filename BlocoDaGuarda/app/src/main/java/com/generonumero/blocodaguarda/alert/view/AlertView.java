@@ -18,4 +18,7 @@ public interface AlertView extends PermissionView {
 
     void disclaimerSMS();
 
+    void showAlertLocationPermissionDisable();
+
+    void showAlertLocationPermissionDenied();
 }

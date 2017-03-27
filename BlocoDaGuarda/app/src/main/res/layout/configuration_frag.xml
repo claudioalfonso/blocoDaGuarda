@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 rsb:absoluteMaxValue="60"
-                rsb:absoluteMinValue="10"
+                rsb:absoluteMinValue="15"
                 rsb:activateOnDefaultValues="true"
                 rsb:activeColor="@color/colorAccent"
                 rsb:defaultColor="@color/bdg_black"

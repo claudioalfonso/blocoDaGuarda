@@ -107,8 +107,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
                 String phone = contact.getPhoneFormated();
                 ArrayList<String> parts = smsManager.divideMessage(msg);
-                Log.i("teste", msg);
-//                smsManager.sendMultipartTextMessage(phone, null, parts, null, null);
+                smsManager.sendMultipartTextMessage(phone, null, parts, null, null);
             }
         }
         FirebaseMessaging.getInstance().subscribeToTopic("push");

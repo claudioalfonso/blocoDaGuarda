@@ -168,6 +168,17 @@ public class AlertFragment extends Fragment implements AlertView {
     }
 
     @Override
+    public void showAlertLocationPermissionDisable() {
+        Toast.makeText(getContext(), "Precisamos da permissão de localização, para poder enviar o local para sua rede quando for avisar que você está em uma situação de risco." +
+                "\nPor favor, vá em configurações e habilite para conseguir enviar o alerta. ", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showAlertLocationPermissionDenied() {
+        Toast.makeText(getContext(), "Precisamos da permissão de localização, para poder enviar o local para sua rede quando for avisar que você está em uma situação de risco.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showAlertPermissionDenied() {
         Toast.makeText(getContext(), "Precisamos da permissão de enviar sms, para poder contactar sua rede quando for avisar que você está em uma situação de risco.", Toast.LENGTH_LONG).show();
     }
