@@ -21,6 +21,7 @@ import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.generonumero.blocodaguarda.network.view.NetworkView;
 import com.generonumero.blocodaguarda.permission.service.PermissionService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -159,7 +160,9 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
             String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, contact.getName(), user.getName(),gender );
             String phone = contact.getPhoneFormated();
-            smsManager.sendTextMessage(phone, null, msg, null, null);
+
+            ArrayList<String> parts = smsManager.divideMessage(msg);
+            smsManager.sendMultipartTextMessage(phone, null, parts, null, null);
         }
     }
 

@@ -24,6 +24,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlertServiceImpl implements AlertService, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -89,7 +90,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
 
         String link = "";
         if (location != null) {
-            link = "https://maps.google.com?q=" + location.getLatitude() + "," + location.getLongitude();
+            link = "https://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
         }
 
         SmsManager smsManager = SmsManager.getDefault();
@@ -108,8 +109,8 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
                 String msg = BDGApplication.getInstance().getString(R.string.alert_sms_message, contact.getName(), pronomn, link);
 
                 String phone = contact.getPhoneFormated();
-                Log.i("teste", msg);
-//                smsManager.sendTextMessage(phone, null, msg, null, null);
+                ArrayList<String> parts = smsManager.divideMessage(msg);
+                smsManager.sendMultipartTextMessage(phone, null, parts, null, null);
             }
         }
         FirebaseMessaging.getInstance().subscribeToTopic("push");
