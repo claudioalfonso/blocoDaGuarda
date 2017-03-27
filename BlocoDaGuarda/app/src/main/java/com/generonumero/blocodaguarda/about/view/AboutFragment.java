@@ -31,7 +31,7 @@ public class AboutFragment extends Fragment {
         aboutFragment.image = R.drawable.logo_big;
         aboutFragment.about = R.string.bdg_bd_about;
         aboutFragment.link = R.string.bdg_bd_about_link;
-        aboutFragment.linkUrl = "https://docs.google.com/document/d/1bIiolpwEzPAiaIMZcW3M7_yKXQPeH57uDXMuNbowPRI/edit?usp=sharing";
+        aboutFragment.linkUrl = "http://bracosdados.generonumero.media/termosdeuso/Termosdeuso-BracosDados.pdf";
         return aboutFragment;
     }
 
