@@ -36,6 +36,7 @@ public class LoginFacebookPresenterImpl implements LoginFacebookPresenter {
 
     @Override
     public void login(Activity activity) {
+        loginTracker.clickLoginFacebook();
         facebookLoginService.login(activity);
     }
 

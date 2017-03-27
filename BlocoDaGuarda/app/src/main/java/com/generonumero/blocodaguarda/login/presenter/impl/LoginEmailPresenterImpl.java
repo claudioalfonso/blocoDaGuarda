@@ -30,6 +30,7 @@ public class LoginEmailPresenterImpl implements LoginEmailPresenter {
 
     @Override
     public void onLoginSuccesful(LoginSuccessful loginSuccessful) {
+        loginTracker.clickLoginEmail();
         loginRepository.saveUserData(loginSuccessful.getUserProfile());
         loginView.onLoginSuccessful();
     }
