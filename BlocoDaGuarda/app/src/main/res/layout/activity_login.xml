@@ -1,88 +1,98 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context="com.generonumero.blocodaguarda.login.view.impl.LoginActivity">
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:background="@color/bdg_background_login_top"
-        android:orientation="vertical"
-        android:padding="@dimen/bdg_base_spacing_default">
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="184dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/logo_big" />
-
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/login_top_text"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imageView2"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:text="@string/bdg_login_top" />
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="@color/bdg_background_login_bottom"
+            tools:context="com.generonumero.blocodaguarda.login.view.impl.LoginActivity">
 
-        <ImageView
-            android:id="@+id/imageView2"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center_horizontal"
+                  android:orientation="vertical"
+                  tools:context="com.generonumero.blocodaguarda.login.view.impl.LoginActivity">
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/separator"
-            android:layout_below="@+id/imageView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/bdg_background_login_top"
+            android:orientation="vertical"
+            android:padding="@dimen/bdg_base_spacing_default">
 
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="184dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/logo_big"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:background="@color/bdg_background_login_bottom"
-        android:orientation="vertical"
-        android:padding="@dimen/bdg_base_spacing_default">
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/login_top_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imageView2"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/bdg_login_top"/>
 
-        <TextView
-            style="@style/login_bottom_text"
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imageView"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/separator"/>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bdg_login_explanation_login" />
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/bdg_background_login_bottom"
+            android:orientation="vertical"
+            android:padding="@dimen/bdg_base_spacing_default">
+
+            <TextView
+                style="@style/login_bottom_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bdg_login_explanation_login"/>
 
 
-        <Button
-            android:id="@+id/bdg_facebook_login_bt"
-            style="@style/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bdg_login_rounded_button"
-            android:text="@string/bdg_login_no_face" />
+            <Button
+                android:id="@+id/bdg_facebook_login_bt"
+                style="@style/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bdg_login_rounded_button"
+                android:text="@string/bdg_login_no_face"/>
 
-        <Button
-            android:id="@+id/bdg_email_login_bt"
-            style="@style/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bdg_login_email_rounded_button"
-            android:text="@string/bdg_login_no_email" />
+            <Button
+                android:id="@+id/bdg_email_login_bt"
+                style="@style/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bdg_login_email_rounded_button"
+                android:text="@string/bdg_login_no_email"/>
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
