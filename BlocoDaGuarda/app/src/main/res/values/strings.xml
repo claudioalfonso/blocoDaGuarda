@@ -51,7 +51,7 @@
     <string name="bdg_login_warning">Não se preocupe, seus dados são \ntotalmente sigilosos.</string>
     <string name="bdg_login_no_face">Conectar com Facebook</string>
     <string name="bdg_login_no_email">Conectar com e-mail</string>
-    <string name="bdg_login_top">Em situações de risco, Braços Dados permite que você envie alertas de socorro para contatos \ncadastrados que receberão sua localização e uma mensagem pedindo ajuda.</string>
+    <string name="bdg_login_top">Quando você se sentir em risco, Braços Dados envia alertas para uma rede de confiança que receberá sua localização e poderá verificar se está tudo bem ou pedir ajuda.</string>
 
 
     <!--alert-->
@@ -61,7 +61,7 @@
     <string name="bdg_alert_network_dialog_positive_button">Sim</string>
     <string name="bdg_alert_network_dialog_negative_button">Agora não</string>
     <string name="bdg_alert_network_sms_message" formatted="false">%1$s, você foi cadastrado na rede de segurança %3$s %2$s pelo aplicativo Braços Dados.
-        Essa rede serve como apoio em situações que em que ela se sentir em risco.
+        Essa rede serve como apoio em situações em que ela se sentir em risco.
         Quando a rede for acionada, você receberá uma mensagem com a localização %3$s %2$s.
     </string>
 

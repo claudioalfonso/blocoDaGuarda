@@ -119,25 +119,19 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
         try {
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, this.locationRequest, this);
         } catch (Exception e) {
-            Log.i("teste", "excecao: " + e.getMessage());
         }
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.i("teste", "excecao: onConnectionSuspended");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.i("teste", "excecao: onConnectionFailed");
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.i("teste", "location.getAccuracy()"+ location.getAccuracy());
-        Log.i("teste", "location.getProvider" + location.getProvider());
-        Log.i("teste", "location." + location);
         this.location = location;
     }
 }

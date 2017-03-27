@@ -26,7 +26,6 @@ public class PushMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String msgBody, Map<String, String> data) {
-
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setAction(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -34,12 +33,8 @@ public class PushMessagingService extends FirebaseMessagingService {
         for (String key: data.keySet()) {
             intent.putExtra(key, data.get(key));
         }
-
-
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_ONE_SHOT);
-
         Bitmap rawBitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
-
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon_push)
                 .setLargeIcon(rawBitmap)
@@ -54,46 +49,4 @@ public class PushMessagingService extends FirebaseMessagingService {
         notificationManager.notify(0, notificationBuilder.build());
     }
 
-    public PushMessagingService() {
-        super();
-        Log.i(TAG, "PushMessagingService");
-    }
-
-    @Override
-    public void onDeletedMessages() {
-        super.onDeletedMessages();
-        Log.i(TAG, "onDeletedMessages");
-    }
-
-    @Override
-    public void onMessageSent(String s) {
-        super.onMessageSent(s);
-        Log.i(TAG, "onMessageSent");
-        Log.i(TAG, s);
-    }
-
-    @Override
-    public void onSendError(String s, Exception e) {
-        super.onSendError(s, e);
-        Log.i(TAG, "onSendError");
-        Log.i(TAG, s);
-        Log.i(TAG, "exce " +e.getMessage());
-    }
-
-    @Override
-    protected Intent zzF(Intent intent) {
-        Log.i(TAG, "zzF");
-        return super.zzF(intent);
-    }
-
-    @Override
-    public boolean zzH(Intent intent) {
-        Log.i(TAG, "zzH");
-        return super.zzH(intent);
-    }
-
-    @Override
-    public void zzm(Intent intent) {
-        super.zzm(intent);
-    }
 }
