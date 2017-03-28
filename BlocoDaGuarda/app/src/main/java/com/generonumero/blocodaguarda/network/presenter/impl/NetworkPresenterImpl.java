@@ -32,6 +32,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     private static final int RESULT_CODE_PICK = 34;
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
     private static final String PERMISSION_SMS = Manifest.permission.SEND_SMS;
+    private static final String PERMISSION_PHONESTATE = Manifest.permission.READ_PHONE_STATE;
 
     private NetworkView networkView;
     private NetworkRepository networkRepository;
@@ -58,8 +59,9 @@ public class NetworkPresenterImpl implements NetworkPresenter {
 
     @Override
     public void pickContact(Fragment fragment, String idContactList) {
-        if (permissionService.hasNeedAskPermission(fragment.getContext(), PERMISSION)) {
-            permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION}, RESULT_CODE_PERMISSION);
+        if (permissionService.hasNeedAskPermission(fragment.getContext(), PERMISSION) ||
+                permissionService.hasNeedAskPermission(fragment.getContext(), PERMISSION_PHONESTATE)) {
+            permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION, PERMISSION_PHONESTATE}, RESULT_CODE_PERMISSION);
         } else {
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
             fragment.startActivityForResult(intent, RESULT_CODE_PICK);
@@ -109,7 +111,8 @@ public class NetworkPresenterImpl implements NetworkPresenter {
         if (contactsAreValid(contacts)) {
             networkView.goHome();
             networkRepository.saveAll(contacts);
-            if (!permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_SMS)) {
+            if (!permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_SMS)
+                    && !permissionService.hasNeedAskPermission(BDGApplication.getInstance(), PERMISSION_PHONESTATE)) {
                 sendSMS(contacts);
             }
         } else {

@@ -23,6 +23,7 @@ public class AlertPresenterImpl implements AlertPresenter {
     private static final String PERMISSION_SMS = Manifest.permission.SEND_SMS;
     private static final String PERMISSION_LOCATION_FINE = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String PERMISSION_LOCATION_COARSE = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final String PERMISSION_PHONESTATE = Manifest.permission.READ_PHONE_STATE;
     private final int SECOND_IN_MILLIS = 1000;
 
     private AlertView alertView;
@@ -61,10 +62,11 @@ public class AlertPresenterImpl implements AlertPresenter {
 
             if (permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_SMS) == PermissionService.GRANTED
                     && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_FINE) == PermissionService.GRANTED
-                    && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_COARSE) == PermissionService.GRANTED) {
+                    && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_COARSE) == PermissionService.GRANTED
+                    && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_PHONESTATE) == PermissionService.GRANTED) {
                 saveMe();
             } else {
-                permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION_SMS, PERMISSION_LOCATION_FINE, PERMISSION_LOCATION_COARSE}, RESULT_CODE_PERMISSION_FROM_SAVEME);
+                permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION_SMS, PERMISSION_LOCATION_FINE, PERMISSION_LOCATION_COARSE, PERMISSION_PHONESTATE}, RESULT_CODE_PERMISSION_FROM_SAVEME);
             }
         } else {
             alertView.showNetworkPopup();
