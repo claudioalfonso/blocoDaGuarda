@@ -1,10 +1,12 @@
 package com.generonumero.blocodaguarda.about.view;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +56,7 @@ public class AboutFragment extends Fragment {
         TextView about = (TextView) view.findViewById(R.id.bdg_about);
         TextView link = (TextView) view.findViewById(R.id.bdg_about_link);
 
-        imageView.setImageDrawable(getResources().getDrawable(image));
+        imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), image));
         about.setText(getString(this.about));
         link.setText(Html.fromHtml(getString(this.link)));
 
