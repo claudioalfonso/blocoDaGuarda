@@ -57,7 +57,7 @@ public class BDGApplication extends Application {
         MultiDex.install(this);
         instance = this;
 
-        TrackerBDG.initialize(getApplicationContext());
+        TrackerBDG.getInstance().initialize(getApplicationContext());
         FacebookSdk.sdkInitialize(getApplicationContext());
     }
 

@@ -17,33 +17,34 @@ import io.fabric.sdk.android.InitializationException;
 
 public class TrackerBDG {
 
-    private List<Tracker> trackers;
+    private Context context;
     private static TrackerBDG instance;
 
-    private TrackerBDG(Context context) {
+    private TrackerBDG() {}
 
-        trackers = new ArrayList<>();
-        trackers.add(new FirebaseTracker(context));
-        trackers.add(new AnswersTracker());
+    public static TrackerBDG getInstance() {
+        if(instance == null) {
+            instance = new TrackerBDG();
+        }
+        return instance;
     }
 
-    public static void initialize(Context context) {
+    public void initialize(Context context) {
+        instance.context = context;
+
         FirebaseAnalytics.getInstance(context);
 
         Fabric.with(context, new Crashlytics());
         Fabric.with(context, new Answers());
-
-        instance = new TrackerBDG(context);
     }
 
-    public static void sendEvent(String name, Bundle bundle) {
-        if(instance == null) {
-            throw new InitializationException("Must initialize trackers");
-        }
-
-        for (Tracker tracker: instance.trackers) {
-            tracker.sendEvent(name, bundle);
-        }
+    public FirebaseTracker provideFirebase() {
+        return new FirebaseTracker(context);
     }
+
+    public AnswersTracker provideFabric() {
+        return new AnswersTracker();
+    }
+
 
 }

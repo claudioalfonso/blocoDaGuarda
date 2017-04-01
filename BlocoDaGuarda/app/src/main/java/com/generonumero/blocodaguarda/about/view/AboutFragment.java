@@ -1,7 +1,6 @@
 package com.generonumero.blocodaguarda.about.view;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.generonumero.blocodaguarda.R;
+import com.generonumero.blocodaguarda.about.view.tracking.AboutTracking;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,6 +26,8 @@ public class AboutFragment extends Fragment {
     private int about;
     private int link;
     private String linkUrl;
+    private String contentType;
+    private AboutTracking aboutTracking;
 
     public static AboutFragment getInstanceFromAbout() {
 
@@ -33,6 +35,7 @@ public class AboutFragment extends Fragment {
         aboutFragment.image = R.drawable.logo_big;
         aboutFragment.about = R.string.bdg_bd_about;
         aboutFragment.link = R.string.bdg_bd_about_link;
+        aboutFragment.contentType = "app";
         aboutFragment.linkUrl = "http://bracosdados.generonumero.media/termosdeuso/Termosdeuso-BracosDados.pdf";
         return aboutFragment;
     }
@@ -42,8 +45,15 @@ public class AboutFragment extends Fragment {
         aboutFragment.image = R.drawable.logo_gn;
         aboutFragment.about = R.string.bdg_about;
         aboutFragment.link = R.string.bdg_about_link;
+        aboutFragment.contentType = "generoNumero";
         aboutFragment.linkUrl = "http://www.generonumero.media";
         return aboutFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        aboutTracking = new AboutTracking();
     }
 
     @Nullable
@@ -60,12 +70,17 @@ public class AboutFragment extends Fragment {
         about.setText(getString(this.about));
         link.setText(Html.fromHtml(getString(this.link)));
 
+        aboutTracking.onContentView(contentType);
+
         return view;
     }
 
 
     @OnClick(R.id.bdg_about_link)
     public void sendToSite() {
+
+        aboutTracking.clickLink(contentType);
+
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkUrl));
         startActivity(browserIntent);
     }
