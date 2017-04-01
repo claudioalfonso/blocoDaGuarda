@@ -154,13 +154,13 @@ public class NetworkPresenterImpl implements NetworkPresenter {
                 continue;
             }
             String gender;
-            if(user.getGender().equals("male")) {
+            if (user.getGender().equals("male")) {
                 gender = "do";
             } else {
                 gender = "da";
             }
 
-            String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, contact.getName(), user.getName(),gender );
+            String msg = BDGApplication.getInstance().getString(R.string.bdg_alert_network_sms_message, contact.getName(), user.getName(), gender);
             String phone = contact.getPhoneFormated();
 
             ArrayList<String> parts = smsManager.divideMessage(msg);
@@ -169,24 +169,34 @@ public class NetworkPresenterImpl implements NetworkPresenter {
     }
 
     private Contact getContact(Fragment fragment, Intent data, Integer idContactList) {
-        Uri contactData = data.getData();
-        Cursor c = fragment.getActivity().managedQuery(contactData, null, null, null, null);
-        if (c.moveToFirst()) {
-            String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+        try {
+            Uri contactData = data.getData();
+            Cursor c = fragment.getActivity().managedQuery(contactData, null, null, null, null);
+            if (c.moveToFirst()) {
+                String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
 
-            String hasPhone =
-                    c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                String hasPhone =
+                        c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
 
-            if (hasPhone.equalsIgnoreCase("1")) {
-                Cursor phones = fragment.getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-                if (phones != null) {
-                    phones.moveToFirst();
-                    String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                    String cNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    return new Contact(idContactList, name, cNumber);
+                if (hasPhone.equalsIgnoreCase("1")) {
+                    Cursor phones = fragment.getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
+                    if (phones != null) {
+                        phones.moveToFirst();
+
+                        int nameIndex = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                        int numberIndex = phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+
+                        if (nameIndex > -1 && numberIndex > -1) {
+                            String name = phones.getString(nameIndex);
+                            String cNumber = phones.getString(numberIndex);
+                            return new Contact(idContactList, name, cNumber);
+                        }
+                    }
                 }
             }
+        } catch (Exception e) {
+            return null;
         }
         return null;
     }

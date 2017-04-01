@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     public void goToNetworkView() {
-        changeFragment(getFragment(MENU_NETWORK));
+        changeFragmentWithoutBackStack(getFragment(MENU_NETWORK));
     }
 
     public void goToHome() {
@@ -231,15 +231,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 break;
         }
         return getFragments().get(id);
-    }
-
-
-    private void changeFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null)
-                .commit();
     }
 
     private void changeFragmentWithoutBackStack(Fragment fragment) {
