@@ -1,13 +1,11 @@
 package com.generonumero.blocodaguarda.alert.service.impl;
 
-import android.Manifest;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telephony.SmsManager;
-import android.util.Log;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
@@ -16,7 +14,6 @@ import com.generonumero.blocodaguarda.login.event.UserProfile;
 import com.generonumero.blocodaguarda.login.repository.LoginRepository;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
-import com.generonumero.blocodaguarda.permission.service.PermissionService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -35,9 +32,8 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
     private LocationRequest locationRequest;
     private Location location;
 
-    public AlertServiceImpl(NetworkRepository networkRepository, PermissionService permissionService, LoginRepository loginRepository) {
+    public AlertServiceImpl(NetworkRepository networkRepository, LoginRepository loginRepository) {
         this.networkRepository = networkRepository;
-//        this.permissionService = permissionService;
         this.loginRepository = loginRepository;
         locationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
