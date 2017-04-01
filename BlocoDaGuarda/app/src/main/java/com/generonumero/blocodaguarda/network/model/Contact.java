@@ -10,6 +10,10 @@ public class Contact implements Comparable<Contact> {
     public Contact() {
     }
 
+    public Contact(Integer id) {
+        this.id = id;
+    }
+
     public Contact(Integer id, String name, String phone) {
         this.id = id;
         this.name = name;

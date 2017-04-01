@@ -91,13 +91,16 @@ public class NetworkPresenterImpl implements NetworkPresenter {
             case RESULT_CODE_PICK:
                 if (resultCode == Activity.RESULT_OK) {
 
-                    Contact contact = getContact(fragment, data);
+
                     if (this.idContactList == null) {
                         this.idContactList = "0";
                     }
+
+                    Integer id = Integer.parseInt(idContactList);
+                    Contact contact = getContact(fragment, data, id);
                     if (contact != null) {
                         networkRepository.update(idContactList, contact);
-                        networkView.updateList(Integer.parseInt(idContactList), contact);
+                        networkView.updateList(id, contact);
                     } else {
                         networkView.showContactWithoutNumber();
                     }
@@ -165,7 +168,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
         }
     }
 
-    private Contact getContact(Fragment fragment, Intent data) {
+    private Contact getContact(Fragment fragment, Intent data, Integer idContactList) {
         Uri contactData = data.getData();
         Cursor c = fragment.getActivity().managedQuery(contactData, null, null, null, null);
         if (c.moveToFirst()) {
@@ -181,7 +184,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
                     phones.moveToFirst();
                     String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     String cNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    return new Contact(id, name, cNumber);
+                    return new Contact(idContactList, name, cNumber);
                 }
             }
         }

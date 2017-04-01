@@ -43,7 +43,7 @@ public class NetworkRepositoryImpl implements NetworkRepository {
         if (contacts.size() < 5) {
             int size = 5 - contacts.size();
             for (int i = 0; i < size; i++) {
-                contacts.add(new Contact());
+                contacts.add(new Contact(i));
             }
         }
         Collections.sort(contacts);
