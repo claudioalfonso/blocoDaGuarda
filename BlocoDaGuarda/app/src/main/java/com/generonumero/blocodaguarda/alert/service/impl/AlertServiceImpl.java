@@ -107,7 +107,9 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
             }
         }
         FirebaseMessaging.getInstance().subscribeToTopic("push");
-        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+        if(googleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+        }
     }
 
     @Override
