@@ -3,6 +3,7 @@ package com.generonumero.blocodaguarda.network.repository.impl;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.crashlytics.android.Crashlytics;
 import com.generonumero.blocodaguarda.network.model.Contact;
 import com.generonumero.blocodaguarda.network.repository.NetworkRepository;
 import com.google.gson.Gson;
@@ -34,17 +35,18 @@ public class NetworkRepositoryImpl implements NetworkRepository {
 
         for (String key : keys) {
             try {
-                contacts.add(Integer.parseInt(key), gson.fromJson(all.get(key), Contact.class));
-            } catch (NumberFormatException e) {
+                contacts.add(gson.fromJson(all.get(key), Contact.class));
+            } catch (Exception e) {
+                Crashlytics.logException(e);
             }
         }
-
         if (contacts.size() < 5) {
             int size = 5 - contacts.size();
             for (int i = 0; i < size; i++) {
                 contacts.add(new Contact());
             }
         }
+        Collections.sort(contacts);
         return contacts;
     }
 

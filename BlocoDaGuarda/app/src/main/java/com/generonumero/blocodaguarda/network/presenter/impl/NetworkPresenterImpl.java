@@ -181,7 +181,7 @@ public class NetworkPresenterImpl implements NetworkPresenter {
                     phones.moveToFirst();
                     String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     String cNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    return new Contact(name, cNumber);
+                    return new Contact(id, name, cNumber);
                 }
             }
         }
