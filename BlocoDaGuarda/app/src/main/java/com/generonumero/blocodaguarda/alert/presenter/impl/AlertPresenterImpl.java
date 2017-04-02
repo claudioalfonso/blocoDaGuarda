@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import com.generonumero.blocodaguarda.alert.event.CountDownFinished;
 import com.generonumero.blocodaguarda.alert.presenter.AlertPresenter;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
+import com.generonumero.blocodaguarda.alert.tracking.AlertTracking;
 import com.generonumero.blocodaguarda.alert.view.AlertView;
 import com.generonumero.blocodaguarda.configuration.repository.ConfigurationRepository;
 import com.generonumero.blocodaguarda.permission.service.PermissionService;
@@ -32,13 +33,15 @@ public class AlertPresenterImpl implements AlertPresenter {
     private PermissionService permissionService;
     private ConfigurationRepository configurationRepository;
     private CountDownTimer countDownTimer;
+    private AlertTracking alertTracking;
 
-    public AlertPresenterImpl(AlertView alertView, AlertService alertService, Bus bus, PermissionService permissionService, ConfigurationRepository configurationRepository) {
+    public AlertPresenterImpl(AlertView alertView, AlertService alertService, Bus bus, PermissionService permissionService, ConfigurationRepository configurationRepository, AlertTracking alertTracking) {
         this.alertView = alertView;
         this.alertService = alertService;
         this.bus = bus;
         this.permissionService = permissionService;
         this.configurationRepository = configurationRepository;
+        this.alertTracking = alertTracking;
     }
 
     @Override
@@ -48,22 +51,28 @@ public class AlertPresenterImpl implements AlertPresenter {
         } else {
             alertView.hideNetworkButton();
         }
-
+        alertTracking.onContentView();
     }
 
     @Override
     public void onClickNetwork() {
+        alertTracking.clickNetwork();
+
         alertView.goToNetworkScreen();
     }
 
     @Override
     public void onClickSaveMe(Fragment fragment) {
-        if (alertService.isContactsRegistered()) {
+        boolean isContactsRegistered = alertService.isContactsRegistered();
+        boolean hasAllPermissions = false;
+
+        if (isContactsRegistered) {
 
             if (permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_SMS) == PermissionService.GRANTED
                     && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_FINE) == PermissionService.GRANTED
                     && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_LOCATION_COARSE) == PermissionService.GRANTED
                     && permissionService.getPermissionStatus(fragment.getActivity(), PERMISSION_PHONESTATE) == PermissionService.GRANTED) {
+                hasAllPermissions = true;
                 saveMe();
             } else {
                 permissionService.askPermissionFromFragment(fragment, new String[]{PERMISSION_SMS, PERMISSION_LOCATION_FINE, PERMISSION_LOCATION_COARSE, PERMISSION_PHONESTATE}, RESULT_CODE_PERMISSION_FROM_SAVEME);
@@ -71,11 +80,14 @@ public class AlertPresenterImpl implements AlertPresenter {
         } else {
             alertView.showNetworkPopup();
         }
+
+        alertTracking.sendAlert(hasAllPermissions, isContactsRegistered);
     }
 
     @Subscribe
     @Override
     public void onCountDownFinished(CountDownFinished countDownFinished) {
+        alertTracking.alertFinishCountdown(countDownFinished.getTime());
         alertView.dismissSafeScreen();
         alertService.sendSMS();
         alertView.disclaimerSMS();
@@ -83,13 +95,16 @@ public class AlertPresenterImpl implements AlertPresenter {
 
     @Override
     public void onCancelClick() {
+        alertTracking.alertCanceled();
+
         alertService.stopCountDown(countDownTimer);
         alertView.dismissSafeScreen();
+
     }
 
 
     private void saveMe() {
-        int time = configurationRepository.getTime();
+        final int time = configurationRepository.getTime();
         alertView.showSafeScreen(time);
 
         countDownTimer = new CountDownTimer(time * SECOND_IN_MILLIS, SECOND_IN_MILLIS) {
@@ -98,10 +113,12 @@ public class AlertPresenterImpl implements AlertPresenter {
 
             @Override
             public void onFinish() {
-                onCountDownFinished(new CountDownFinished());
+                onCountDownFinished(new CountDownFinished(time));
             }
         };
         alertService.startCountDown(countDownTimer);
+
+        alertTracking.alertOpen(time);
     }
 
 

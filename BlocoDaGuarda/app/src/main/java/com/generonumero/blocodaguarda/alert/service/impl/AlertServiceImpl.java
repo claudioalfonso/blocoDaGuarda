@@ -9,6 +9,7 @@ import android.telephony.SmsManager;
 
 import com.generonumero.blocodaguarda.BDGApplication;
 import com.generonumero.blocodaguarda.R;
+import com.generonumero.blocodaguarda.alert.intentService.LocationIntentService;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
 import com.generonumero.blocodaguarda.login.event.UserProfile;
 import com.generonumero.blocodaguarda.login.repository.LoginRepository;
@@ -84,7 +85,11 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
         String link = "";
         if (location != null) {
             link = "https://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+            LocationIntentService.start(BDGApplication.getInstance(), location.getLatitude(), location.getLongitude());
+        } else {
+
         }
+
 
         SmsManager smsManager = SmsManager.getDefault();
 
@@ -110,6 +115,7 @@ public class AlertServiceImpl implements AlertService, GoogleApiClient.Connectio
         if(googleApiClient.isConnected()) {
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
         }
+
     }
 
     @Override

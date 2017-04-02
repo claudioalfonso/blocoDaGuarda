@@ -3,5 +3,6 @@ package com.generonumero.blocodaguarda.tracking;
 
 public interface ObjectName {
 
-    String ABOUT = "about";
+    String ABOUT_SCREEN = "about";
+    String ALERT_SCREEN = "alert";
 }

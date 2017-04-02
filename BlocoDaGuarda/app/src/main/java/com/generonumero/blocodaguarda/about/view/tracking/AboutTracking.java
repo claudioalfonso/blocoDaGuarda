@@ -9,7 +9,7 @@ import com.generonumero.blocodaguarda.tracking.TrackerBDG;
 public class AboutTracking {
 
     public void onContentView(String contentType) {
-        String objectName = ObjectName.ABOUT;
+        String objectName = ObjectName.ABOUT_SCREEN;
         String eventType = EventType.VIEW;
 
         Bundle bundle = new Bundle();
@@ -23,7 +23,7 @@ public class AboutTracking {
 
 
     public void clickLink(String contentType) {
-        String objectName = ObjectName.ABOUT;
+        String objectName = ObjectName.ABOUT_SCREEN;
         String eventType = EventType.CLICK;
 
         Bundle bundle = new Bundle();
@@ -32,5 +32,7 @@ public class AboutTracking {
 
 
         TrackerBDG.getInstance().provideFabric().sendEvent(eventType, bundle);
+        TrackerBDG.getInstance().provideFirebase().sendEvent(eventType, bundle);
+
     }
 }

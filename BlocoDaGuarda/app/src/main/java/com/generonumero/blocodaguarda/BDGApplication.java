@@ -8,6 +8,7 @@ import com.generonumero.blocodaguarda.alert.presenter.AlertPresenter;
 import com.generonumero.blocodaguarda.alert.presenter.impl.AlertPresenterImpl;
 import com.generonumero.blocodaguarda.alert.service.AlertService;
 import com.generonumero.blocodaguarda.alert.service.impl.AlertServiceImpl;
+import com.generonumero.blocodaguarda.alert.tracking.AlertTracking;
 import com.generonumero.blocodaguarda.alert.view.AlertView;
 import com.generonumero.blocodaguarda.configuration.presenter.ConfigurationPresenter;
 import com.generonumero.blocodaguarda.configuration.presenter.impl.ConfigurationPresenterImpl;
@@ -104,7 +105,7 @@ public class BDGApplication extends Application {
     }
 
     public AlertPresenter getAlertPresenter(AlertView alertView) {
-        return new AlertPresenterImpl(alertView, getAlertService(), getBus(), getPermissionService(), getConfigurationRepository());
+        return new AlertPresenterImpl(alertView, getAlertService(), getBus(), getPermissionService(), getConfigurationRepository(), new AlertTracking());
     }
 
     private NetworkRepository getNetworkRepository() {
