@@ -18,7 +18,7 @@ public class AlertTracking {
         Bundle bundle = new Bundle();
         bundle.putString("screenView", objectName);
 
-        TrackerBDG.getInstance().provideFabric().sendView(objectName, null);
+        TrackerBDG.getInstance().provideFabric().sendView(objectName, eventType);
 
         TrackerBDG.getInstance().provideFirebase().sendEvent(eventType, bundle);
     }

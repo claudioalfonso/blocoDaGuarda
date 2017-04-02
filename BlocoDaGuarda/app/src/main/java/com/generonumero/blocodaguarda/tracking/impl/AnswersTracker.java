@@ -50,7 +50,7 @@ public class AnswersTracker {
 
 
     private void putCustomContent(AnswersEvent answersEvent, Bundle bundle) {
-        if (bundle != null) {
+        if (bundle != null && bundle.size() > 0) {
             Set<String> keys = bundle.keySet();
             for (String key : keys) {
                 answersEvent.putCustomAttribute(key, bundle.get(key).toString());
