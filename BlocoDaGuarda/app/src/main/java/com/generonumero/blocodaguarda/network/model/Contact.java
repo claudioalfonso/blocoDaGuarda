@@ -1,7 +1,7 @@
 package com.generonumero.blocodaguarda.network.model;
 
 
-public class Contact implements Comparable<Contact> {
+public class Contact {
 
     private Integer id;
     private String name;
@@ -85,8 +85,5 @@ public class Contact implements Comparable<Contact> {
                 '}';
     }
 
-    @Override
-    public int compareTo(Contact o) {
-        return this.id.compareTo(o.getId());
-    }
+
 }

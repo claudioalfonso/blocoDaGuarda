@@ -152,6 +152,10 @@ public class AlertFragment extends Fragment implements AlertView {
     @Override
     public void disclaimerSMS() {
 
+        if(getActivity() == null && getActivity().getTheme() == null) {
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         builder.setTitle(getString(R.string.bdg_alert_smssender_dialog_title));

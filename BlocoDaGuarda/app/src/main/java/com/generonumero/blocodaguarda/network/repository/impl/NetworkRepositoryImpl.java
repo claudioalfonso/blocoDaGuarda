@@ -46,7 +46,6 @@ public class NetworkRepositoryImpl implements NetworkRepository {
                 contacts.add(new Contact(i));
             }
         }
-        Collections.sort(contacts);
         return contacts;
     }
 
