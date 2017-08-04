@@ -139,8 +139,4 @@ public class BDGApplication extends Application {
         }
         return configurationRepository;
     }
-
-    public ConfigurationPresenter getConfigurationPresenter(ConfigurationView configurationView) {
-        return new ConfigurationPresenterImpl(configurationView, getConfigurationRepository());
-    }
 }
